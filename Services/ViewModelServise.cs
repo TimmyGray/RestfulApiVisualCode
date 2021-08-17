@@ -51,7 +51,7 @@ namespace RestfulApiVisualCode.Services
         }
         static void DeleteAll()
         {
-            if(Warningevents!=null)
+            
             Warningevents.Clear();
         }
         
