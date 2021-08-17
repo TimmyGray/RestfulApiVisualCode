@@ -36,9 +36,18 @@ namespace RestfulApiVisualCode.Services
             }
            
         }
-        static void Update(int id)
+        static void Update(WarningEvents warningevents)
         {
-            
+          try
+          {
+             var id = Warningevents.FindIndex(p => p.Id==warningevents.Id);
+
+             Warningevents[id] = warningevents;
+          } 
+          catch(Exception e)
+          {
+            write(e.Message);
+          }
         }
         
     
