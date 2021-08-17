@@ -49,6 +49,10 @@ namespace RestfulApiVisualCode.Services
             write(e.Message);
           }
         }
+        static void DeleteAll()
+        {
+            Warningevents.Clear();
+        }
         
     
 
