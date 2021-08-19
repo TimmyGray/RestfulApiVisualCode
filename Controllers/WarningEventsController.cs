@@ -17,7 +17,7 @@ namespace RestfulApiVisualCode.Controllers
         }
 
        [HttpGet]
-       public ActionResult<List<WarningEvents>> GetAll() => WarningEvents.
+       public ActionResult<List<WarningEvents>> GetAll()=> ViewModelService.GetAll();
 
     }
 

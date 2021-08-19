@@ -7,16 +7,16 @@ namespace RestfulApiVisualCode.Services
 {
     static class ViewModelService
     {
+        static  List<WarningEvents> Warningevents{get;}
         static WriteLineDelegate write;
         static int currentid = 0;
-        static List<WarningEvents> Warningevents{get;}
         static ViewModelService()
         {
             Warningevents = new List<WarningEvents>();
         }
-        static List<WarningEvents> GetAll()=>Warningevents;
-        static WarningEvents GetById(int Id)=>Warningevents.FirstOrDefault(p => p.Id==Id);
-        static void AddWarningEvent(WarningEvents warningevent)
+        static internal List<WarningEvents> GetAll()=>Warningevents;
+        static internal WarningEvents GetById(int Id)=>Warningevents.FirstOrDefault(p => p.Id==Id);
+        static internal void AddWarningEvent(WarningEvents warningevent)
         {
             if(currentid!=0)
             currentid++;

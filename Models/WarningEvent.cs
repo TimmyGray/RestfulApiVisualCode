@@ -2,9 +2,9 @@ using System;
 
 namespace RestfulApiVisualCode.Models
 {
-    class WarningEvents
+    public class WarningEvents
     {
-       internal int Id{get;set;}
+        internal int Id{get;set;}
         DateTime DateOfEvent{get;set;}
         string NameOfDevice{get;set;}
         string EventDescribe{get;set;}
