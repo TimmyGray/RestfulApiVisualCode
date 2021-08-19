@@ -24,7 +24,7 @@ namespace RestfulApiVisualCode.Services
             Warningevents.Add(warningevent);
             
         }
-        static void Delete(int id)
+        static internal void Delete(int id)
         {
             try
            {
@@ -36,7 +36,7 @@ namespace RestfulApiVisualCode.Services
             }
            
         }
-        static void Update(WarningEvents warningevents)
+        static internal void Update(WarningEvents warningevents)
         {
           try
           {
@@ -49,7 +49,7 @@ namespace RestfulApiVisualCode.Services
             write?.Invoke(e.Message);
           }
         }
-        static void DeleteAll()
+        static internal void DeleteAll()
         {
             
             Warningevents.Clear();
