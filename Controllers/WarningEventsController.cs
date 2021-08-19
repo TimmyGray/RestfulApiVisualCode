@@ -7,5 +7,18 @@ using RestfulApiVisualCode.Delegates;
 
 namespace RestfulApiVisualCode.Controllers
 {
-    
+    [ApiController]
+    [Route("[controller]")]
+    public class WarningEventsController:ControllerBase
+    {
+        public WarningEventsController()
+        {
+
+        }
+
+       [HttpGet]
+       public ActionResult<List<WarningEvents>> GetAll() => WarningEvents.
+
+    }
+
 }
