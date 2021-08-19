@@ -32,7 +32,7 @@ namespace RestfulApiVisualCode.Services
             }
             catch (Exception e)
             {
-                write(e.Message);
+                write?.Invoke(e.Message);
             }
            
         }
@@ -46,7 +46,7 @@ namespace RestfulApiVisualCode.Services
           } 
           catch(Exception e)
           {
-            write(e.Message);
+            write?.Invoke(e.Message);
           }
         }
         static void DeleteAll()
