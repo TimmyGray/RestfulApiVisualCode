@@ -17,14 +17,15 @@ namespace RestfulApiVisualCode.Controllers
         }
 
        [HttpGet]
-       public ActionResult<List<WarningEvents>> GetAll()=> ViewModelService.GetAll();
+       public ActionResult<List<WarningEvent>> GetAll()=> ViewModelService.GetAll();
+       
        [HttpGet("{id}")]
-       public ActionResult<WarningEvents> GetById(int id)
+       public ActionResult<WarningEvent> GetById(int id)
        {
-           var warningevents = ViewModelService.GetById(id);
-           if(warningevents==null)
+           var warningevent = ViewModelService.GetById(id);
+           if(warningevent==null)
            NotFound();
-           return warningevents;
+           return warningevent;
        }
 
        [HttpDelete("{id}")]
@@ -43,11 +44,25 @@ namespace RestfulApiVisualCode.Controllers
            return NoContent();
        }
        [HttpPost]
-       public IActionResult Create(WarningEvents warningevents)
+       public IActionResult Create(WarningEvent warningevent)
        {
-           ViewModelService.AddWarningEvent(warningevents);
-           return CreatedAtAction("Create",warningevents);
+           ViewModelService.Add(warningevent);
+           return CreatedAtAction(nameof(Create),new {id=warningevent.Id},warningevent);
        }
+
+       [HttpPut("{id}")]
+       public IActionResult Update(int id, WarningEvent warningivent)
+       {
+           if(id!=warningivent.Id)
+           BadRequest();
+           var warningevent = ViewModelService.GetById(id);
+           if(warningevent==null)
+           NotFound();
+           ViewModelService.Update(warningivent);
+           return NoContent();
+           
+       }
+
 
        
         

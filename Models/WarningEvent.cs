@@ -2,15 +2,15 @@ using System;
 
 namespace RestfulApiVisualCode.Models
 {
-    public class WarningEvents
+    public class WarningEvent
     {
-        internal int Id{get;set;}
-        DateTime DateOfEvent{get;set;}
-        string NameOfDevice{get;set;}
-        string EventDescribe{get;set;}
-        string NameOfASB{get;set;}
-        string DiscribeOfFix{get;set;}
-        bool IsSerios{get;set;}
+        public int Id{get;set;}
+       public DateTime DateOfEvent{get;set;}
+       public string NameOfDevice{get;set;}
+       public string EventDescribe{get;set;}
+       public string NameOfASB{get;set;}
+       public string DiscribeOfFix{get;set;}
+       public bool IsSerios{get;set;}
 
     }
 }

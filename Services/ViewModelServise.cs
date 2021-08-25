@@ -5,26 +5,30 @@ using RestfulApiVisualCode.Delegates;
 using System;
 namespace RestfulApiVisualCode.Services
 {
-    static class ViewModelService
+    public static class ViewModelService
     {
-        static  List<WarningEvents> Warningevents{get;}
+        static  List<WarningEvent> Warningevents{get;}
         static WriteLineDelegate write;
-        static int currentid = 0;
+        static int currentid = 1;
         static ViewModelService()
         {
-            Warningevents = new List<WarningEvents>();
+            Warningevents = new List<WarningEvent>
+            {
+                new WarningEvent{Id = 1,IsSerios = false,NameOfDevice = "ssl"}
+        
+            };
         }
-        static internal List<WarningEvents> GetAll()=>Warningevents;
-        static internal WarningEvents GetById(int Id)=>Warningevents.FirstOrDefault(p => p.Id==Id);
-        static internal void AddWarningEvent(WarningEvents warningevent)
+        static public List<WarningEvent> GetAll()=>Warningevents;
+        static public WarningEvent GetById(int Id)=>Warningevents.FirstOrDefault(p => p.Id==Id);
+        static public void Add(WarningEvent warningevent)
         {
-            if(currentid!=0)
-            currentid++;
-            warningevent.Id=currentid;
+            /* if(currentid!=0)
+            currentid++; */
+            warningevent.Id=currentid++;
             Warningevents.Add(warningevent);
             
         }
-        static internal void Delete(int id)
+        static public void Delete(int id)
         {
             try
            {
@@ -36,20 +40,20 @@ namespace RestfulApiVisualCode.Services
             }
            
         }
-        static internal void Update(WarningEvents warningevents)
+        static public void Update(WarningEvent warningevent)
         {
           try
           {
-             var id = Warningevents.FindIndex(p => p.Id==warningevents.Id);
+             var id = Warningevents.FindIndex(p => p.Id==warningevent.Id);
 
-             Warningevents[id] = warningevents;
+             Warningevents[id] = warningevent;
           } 
           catch(Exception e)
           {
             write?.Invoke(e.Message);
           }
         }
-        static internal void DeleteAll()
+        static public void DeleteAll()
         {
             
             Warningevents.Clear();
