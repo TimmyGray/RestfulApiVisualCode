@@ -10,6 +10,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using Microsoft.EntityFrameworkCore;
+using RestfulApiVisualCode.DataBaseContext;
+using RestfulApiVisualCode.Models;
 
 namespace RestfulApiVisualCode
 {
@@ -26,11 +29,11 @@ namespace RestfulApiVisualCode
         public void ConfigureServices(IServiceCollection services)
         {
 
-            services.AddControllers();
-            services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "RestfulApiVisualCode", Version = "v1" });
-            });
+             string con = "Server=(localdb)\\mssqllocaldb;Database=usersdbstore;Trusted_Connection=True;";
+            // устанавливаем контекст данных
+            services.AddDbContext<WarningEventContext>(options => options.UseSqlServer(con));
+ 
+            services.AddControllers(); // используем контроллеры без представлений
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -39,13 +42,13 @@ namespace RestfulApiVisualCode
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "RestfulApiVisualCode v1"));
+              //  app.UseSwagger();
+              //  app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "RestfulApiVisualCode v1"));
             }
 
             app.UseRouting();
 
-            app.UseAuthorization();
+          //  app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
