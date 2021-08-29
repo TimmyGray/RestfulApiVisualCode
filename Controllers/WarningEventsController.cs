@@ -29,34 +29,34 @@ namespace RestfulApiVisualCode.Controllers
         }
 
        [HttpGet]
-       public async Task<ActionResult<List<WarningEvent>>> GetAll()=> await db.warningevents.ToListAsync();
+       public async Task<ActionResult<IEnumerable<WarningEvent>>> GetAll()=> await db.warningevents.ToListAsync();
        
        [HttpGet("{id}")]
         public async Task<ActionResult<WarningEvent>> GetById(int id)
        {
            var warningevent =await db.warningevents.FirstOrDefaultAsync(p=>p.Id==id);
            if(warningevent==null)
-           return NotFound();
-           return warningevent;
+            return NotFound();
+           return new ObjectResult(warningevent);
        }
 
        [HttpDelete("{id}")]
-       public async Task<IActionResult> DeleteById(int id)
+       public async Task<ActionResult<WarningEvent>> DeleteById(int id)
        {
            var warningevent = await db.warningevents.FirstOrDefaultAsync(p=>p.Id==id);
            if(warningevent==null)
-           return NotFound();
+                return NotFound();
            db.warningevents.Remove(warningevent);
            await db.SaveChangesAsync();
            return Ok(warningevent);
        }
        [HttpDelete]
-       public async Task<IActionResult> DeleteAll()
+       public async Task<ActionResult> DeleteAll()
        {
            var warningevents =await db.warningevents.ToListAsync();
            if(warningevents==null)
            return NoContent();
-           for(int i=0;i<warningevents.Capacity-1;i++)
+           for(int i=1;i<warningevents.Capacity+1;i++)
            {
                db.warningevents.Remove(warningevents[i]);
                await db.SaveChangesAsync();
@@ -64,24 +64,26 @@ namespace RestfulApiVisualCode.Controllers
            return NoContent();
        } 
        [HttpPost]
-       public async Task<IActionResult> Create(WarningEvent warningevent)
+       public async Task<ActionResult<WarningEvent>> Create(WarningEvent warningevent)
        {
            if(warningevent==null)
-           return BadRequest();
+                return BadRequest();
             db.warningevents.Add(warningevent);
            await db.SaveChangesAsync();
-           return CreatedAtAction(nameof(Create),new {id=warningevent.Id},warningevent);
+           return Ok(warningevent);
        }
 
-       [HttpPut("{id}")]
-       public async Task<IActionResult> Update(int id, WarningEvent warningivent)
+       [HttpPut]
+       public async Task<ActionResult<WarningEvent>> Update(WarningEvent warningevent)
        {
-           if(id!=warningivent.Id)
-            return BadRequest();
-           var warningevent = await db.warningevents.FirstOrDefaultAsync(p=>p.Id==id);
+           
            if(warningevent==null)
-           return NotFound();
-           db.warningevents.Update(warningivent);
+                return BadRequest();
+
+           if(!db.warningevents.Any(p=>p.Id==warningevent.Id))
+                return NotFound();
+
+           db.Update(warningevent);
            await db.SaveChangesAsync();
            return Ok(warningevent);
            
