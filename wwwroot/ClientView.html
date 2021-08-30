@@ -2,40 +2,67 @@
 <html>
     <head>
         <meta charset="utf-8"/>
-        <meta name="clientview" content="width=device-width"/>
-        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.0/css/bootstrap.min.css" rel="stylesheet" />
-        <title> Происшествия </title>
+        <meta name="clientview" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <link rel="stylesheet" href="Styles/mystyles.css">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">        <title> Происшествия </title>
     </head>
     <body>
-        <div class="alert alert-success" role="alert">
+        <div class="alert alert-info" role="alert">
             <h4 class="alert-heading">Карточка происшествия</h4>       
           </div>
         <form name="Incidents">
             <input type="hidden" name="Id" value="0">
-            <div class="form-group col-md-5">
-                <label><input class="form-control" name="NameOfDevice">Название устройства:</label>
+            <div class="btn-group dropdown col-md-3">
+                <button type="button" class="btn btn-danger">Название устройства</button>
+                <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown">
+                    <span class="caret"></span>
+                    <span class="sr-only">Toggle Dropdown</span>
+                    <ul class="dropdown-menu" role="menu">                     
+                        <li>Karrera</li>
+                        <li>SSL</li>
+                        <li>SoundCraft</li>
+                        <li>Platinum</li>
+                    </ul>
+                </button>
             </div>
-            <div class="form-group col-md-5">
-                <label><input class="form-control" name="NameOfASB">Номер АСБ:</label>
+
+            <div class="btn-group dropdown col-md-2">
+                <button type="button" class="btn btn-danger">Номер АСБ</button>
+                <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown">
+                    <span class="caret"></span>
+                    <span class="sr-only">Toggle Dropdown</span>
+                    <ul class="dropdown-menu" role="menu">                     
+                        <li>1</li>
+                        <li>3</li>
+                        <li>4</li>
+                        <li>6</li>
+                        <li>7</li>
+                        <li>8</li>
+                    </ul>
+                </button>
             </div>
-            <div class="form-group col-md-5">
+
+            <div class="form-group col-md-4">
                 <label><input class="form-control" name="DateOfEvent">Дата происшествия:</label>
             </div>
-            <div class="form-group col-md-5">
+
+            <div class="form-group col-md-4">
                 <label><input class="form-control" name="EventDiscribe">Описание происшествия:</label>
             </div>
-            <div class="form-group col-md-5">
+
+            <div class="form-group col-md-4">
                 <label><input class="form-control" name="IsSerios" type="text">Серьезность происшествия:</label>
             </div>
-            <div class="form-group col-md-5">
+
+            <div class="form-group col-md-4">
                 <label><input class="form-control" name="FixDiscribe">Описание восстановления работоспособности:</label>
             </div>
-            <div class="panel-body">
-                <button class="btn btn-primary" type="submit" id="submit">Создать происшествие</button>
-                <a id="reset" class="btn btn-primary"  role="reset">Сброс</a>
-            </div>
+
+            <div class="panel-body col-md-4">
+                <button class="btn custom-btn" type="submit" id="submit">Создать происшествие</button>
+                <a id="reset" class="btn btn-primary"  role="reset">Сброс</a>           
+            </div>           
         </form>
-        
 
     </body>
 
