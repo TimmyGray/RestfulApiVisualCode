@@ -88,11 +88,7 @@ namespace RestfulApiVisualCode.Controllers
            return Ok(warningevent);
            
        }
-
-
-       
         
-
     }
 
 }
