@@ -4,67 +4,182 @@
         <meta charset="utf-8"/>
         <meta name="clientview" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <link rel="stylesheet" href="Styles/mystyles.css">
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">        <title> Происшествия </title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">        
+        <title> Происшествия </title>
+        <link rel="stylesheet" href="https://bootstraptema.ru/plugins/2015/bootstrap3/bootstrap.min.css" />
+        <script src="https://bootstraptema.ru/plugins/jquery/jquery-1.11.3.min.js"></script>
+        <script type="text/javascript" src="https://bootstraptema.ru/plugins/2015/b-v3-3-6/bootstrap.min.js"></script>
+        <script src="https://bootstraptema.ru/_sf/3/393.js"></script>
+        <link rel="stylesheet" href="Styles/calendar.css">
     </head>
-    <body>
-        <div class="alert alert-info" role="alert">
-            <h4 class="alert-heading">Карточка происшествия</h4>       
-          </div>
-        <form name="Incidents">
-            <input type="hidden" name="Id" value="0">
-            <div class="btn-group dropdown col-md-3">
-                <button type="button" class="btn btn-danger">Название устройства</button>
-                <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown">
-                    <span class="caret"></span>
-                    <span class="sr-only">Toggle Dropdown</span>
-                    <ul class="dropdown-menu" role="menu">                     
-                        <li>Karrera</li>
-                        <li>SSL</li>
-                        <li>SoundCraft</li>
-                        <li>Platinum</li>
-                    </ul>
-                </button>
+    <body class="bg-light">
+        <div class=" container">
+            <div class="text">
+                <img src="Resources/warning-sign.svg" class="d-block mx-auto" alt width="96" height="96">
+                <h1>Карточка происшествия</h1>
             </div>
+            <div>
+                <form class="was-validated">
+                    <input type="hidden" name="Id" value="0">
+                    <div class="row">
+                        <div class="col-md-6 col-lg-4 col-sm-6 col-12 mb-3"> 
+                            <label for="NameOfDevice">Устройство</label>
+                            <select class="custom-select d-block w-100 d-done" id="NameOfDevice" required>
+                            <option value>Выбрать...</option>
+                            <option>SSL</option>
+                            <option>Karrera</option>
+                            <option>SoundCraft</option>
+                            <option>Dalet</option>
+                            <option>Микрофон, мониторинг, приемопередатчик</option>
+                            <option>Platinum</option>
+                            <option>Свет и оборудование</option>
+                            <option>Декорации</option>
+                            <option>Камеры и камерные каналы</option>
+                            <option>Графические станции</option>
+                            <option>Компьютер</option>
+                            <option>Другое</option>
+                            </select>
+                            <div class="invalid-feedback">Необходимо указать устройство</div>
+                        </div>
+                        <div class="col-auto mb-3">
+                            <label for="NameOfASB">Номер АСБ</label>
+                            <select class="custom-select d-block w-100 d-done" id="NameOfASB" required>
+                                <option value>Выбрать...</option>
+                                <option>1</option>
+                                <option>3</option>
+                                <option>4</option>
+                                <option>5</option>
+                                <option>6</option>
+                                <option>7</option>
+                                <option>8</option>
+                            </select>
+                            <div class="invalid-feedback">Необхоимо указать номер АСБ</div>
+                        </div>
+    
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 col-lg-4 col-sm-6 col-12 mb-3">
+                            <div class="form-group">
+                                <label for="discribeincidents">Описание проблемы</label>
+                                <textarea class="form-control" id="discribeincidents" rows="3" required></textarea>
+                            </div>
+                            <div class="invalid-feedback">Заполните описание</div>
 
-            <div class="btn-group dropdown col-md-2">
-                <button type="button" class="btn btn-danger">Номер АСБ</button>
-                <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown">
-                    <span class="caret"></span>
-                    <span class="sr-only">Toggle Dropdown</span>
-                    <ul class="dropdown-menu" role="menu">                     
-                        <li>1</li>
-                        <li>3</li>
-                        <li>4</li>
-                        <li>6</li>
-                        <li>7</li>
-                        <li>8</li>
-                    </ul>
-                </button>
+                        </div>
+                        <div class="col-auto mb-3">
+                            <div class="form-group">
+                                <label for="fixincidents">Как исправили(если исправили)</label>
+                                <textarea class="form-control" id="fixincidents" rows="3"></textarea>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 col-lg-4 col-sm-6 col-12 mb-3">
+                            
+                           <label for="DateOfEvent">Дата происшествия</label>
+                            <input id="DateOfEvent" class="datepicker custom-select" type="text" required/>
+                            <div class="invalid-feedback">Укажите дату происшествия</div>
+                        </div>
+                        <div class="col-auto mb-3">
+                            <label for="IsSerios">Серьезность</label>
+                            <select id="IsSerios" class="custom-select d-block w-100 d-done" required>
+                                <option value>Выбрать...</option>
+                                <option>Серьезное происшествие</option>
+                                <option>Несерьезное происшествие</option>
+                            </select>
+                            <div class="invalid-feedback">Укажите серьезность</div>
+
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 col-lg-4 col-sm-6 col-12 mb-3">
+                            <label for="fileinput">Фотография поломки</label>
+                            <div class="custom-file"> 
+                                <input type="file" class="custom-file-input" id="fileinput">
+                                <label class="custom-file-label" for="fileinput">Загрузить файл...</label>
+                            </div>
+                        </div>
+                        
+                    </div>
+                    <hr color="red">
+                    <div class="row">
+                        <div class="col-auto order-2 mb-3">                           
+                            <button type="submit" class="btn btn-danger">Создать карточку</button>
+                        </div>
+                        
+                        <div class="col-6 order-1 col-lg-4">
+                            <button type="reset" class="btn btn-danger">Сброс</button>
+                        </div>   
+                    </div>
+    
+                </form>
+                
             </div>
+            
 
-            <div class="form-group col-md-4">
-                <label><input class="form-control" name="DateOfEvent">Дата происшествия:</label>
-            </div>
-
-            <div class="form-group col-md-4">
-                <label><input class="form-control" name="EventDiscribe">Описание происшествия:</label>
-            </div>
-
-            <div class="form-group col-md-4">
-                <label><input class="form-control" name="IsSerios" type="text">Серьезность происшествия:</label>
-            </div>
-
-            <div class="form-group col-md-4">
-                <label><input class="form-control" name="FixDiscribe">Описание восстановления работоспособности:</label>
-            </div>
-
-            <div class="panel-body col-md-4">
-                <button class="btn custom-btn" type="submit" id="submit">Создать происшествие</button>
-                <a id="reset" class="btn btn-primary"  role="reset">Сброс</a>           
-            </div>           
-        </form>
+        </div>  
+        <script>
+            $('.datepicker').datepicker({
+            weekStart:1,
+            color: 'red'
+            });
+            </script>
+            
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
     </body>
 
 
 </html>
+
+
+<!-- <div class="container text-center">
+    <img src="Resources/warning-sign.svg" class="d-block mx-auto mb-4" alt width="96" height="96">
+    <h1>Карточка происшествия</h1>
+</div>
+    <div class="row">
+        <div class="col-md-8 mb-4">
+            <form name="Incedents card">
+                
+                <div class="row">
+                    <div class="col-md-5 col-mb-3"> 
+                        <label for="NameOfDevice">Устройство</label>
+                        <select class="custom-select d-block w-100" id="NameOfDevice" required>
+                        <option value>Выбрать...</option>
+                        <option>SSL</option>
+                        <option>Karrera</option>
+                        <option>SoundCraft</option>
+                        <option>Dalet</option>
+                        <option>Микрофон, мониторинг, приемопередатчик</option>
+                        <option>Platinum</option>
+                        <option>Свет и оборудование</option>
+                        <option>Декорации</option>
+                        <option>Камеры и камерные каналы</option>
+                        <option>Графические станции</option>
+                        <option>Компьютер</option>
+                        <option>Другое</option>
+                        </select>
+                        <div class="invalid-feedback">Необходимо указать устройство</div>
+                    </div>
+                    <div class="col-md-3 col-mb-2">
+                        <label for="NameOfASB">Номер АСБ</label>
+                        <select class="custom-select d-block w-100" id="NameOfASB" required>
+                            <option value>Выбрать...</option>
+                            <option>1</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5</option>
+                            <option>6</option>
+                            <option>7</option>
+                            <option>8</option>
+                        </select>
+                        <div class="invalid-feedback">Необхоимо указать номер АСБ</div>
+                    </div>
+                </div>
+            </form>
+        </div>                  
+    </div>
+</div> -->
