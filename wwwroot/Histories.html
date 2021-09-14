@@ -5,7 +5,7 @@
         <meta name="clientview" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <link rel="stylesheet" href="Styles/mystyles.css">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">        
-        <title>Карточка происшествия</title>
+        <title>История</title>
         <link rel="stylesheet" href="https://bootstraptema.ru/plugins/2015/bootstrap3/bootstrap.min.css" />
         <script src="https://bootstraptema.ru/plugins/jquery/jquery-1.11.3.min.js"></script>
         <script type="text/javascript" src="https://bootstraptema.ru/plugins/2015/b-v3-3-6/bootstrap.min.js"></script>
@@ -18,19 +18,18 @@
             <img src="Resources/warning-sign.svg" class="d-block mx-auto" alt width="96" height="96">         
             <nav class="navbar navbar-expand navbar-light bg-light">
                 <div class="collapse navbar-collapse" id="navbarNav">
-                  <ul class="nav nav-pills col-12" style="justify-content: flex-start;">
-                    <li class="nav-item active col-md-6 col-lg-4 col-sm-6 col-12 mb-3" id="item1">
-                      <a class="nav-link" href="ClientView.html" id="changetocard" style="font-size: smaller;background-color: lightcoral; align-content: center;">Карточкa происшествия</a>
+                  <ul class="nav nav-pills" style="justify-content: flex-start;">
+                    <li class="nav-item col-md-3 col-6">
+                      <a class="nav-link" href="ClientView.html" style="font-size: small;color: crimson;">Карточка происшествия<span class="sr-only">(current)</span></a>
                     </li>
-                    <li class="nav-item col-md-6 col-lg-4 col-sm-6 col-12 mb-3" id="item2">
-                      <a class="nav-link" id="changetohistory" href="#" style="font-size: smaller;color: crimson; background-color: rgb(247, 229, 226);">История происшествий</a>
+                    <li class="nav-item active col-md-3 col-4">
+                      <a class="nav-link" href="Histories.html" style="font-size: small;background-color: lightcoral;">История происшествий</a>
                     </li> 
                   </ul>
                 </div>
-            </nav> 
-            <div id="main">
-                <h1>Карточка происшествия</h1>
-            <form name="eventForm" class="was was-validated" id="cardevent">
+            </nav>      
+            <h1>Происшествия</h1>
+           <!--  <form name="eventForm" class="was was-validated">
                 <input type="hidden" name="id" value="0" />
                 <div class="row">
                     <div class="col-md-6 col-lg-4 col-sm-6 col-12 mb-3"> 
@@ -119,74 +118,124 @@
                     </div>
                     
                 </div>
-            </form>
-            </div>     
+            </form> -->
+            <div class="table-responsive"> 
+                <table class="table table-striped table-hover">
+                    <thead style="background-color: lightcoral;">
+                        <tr>
+                            <th>#</th>
+                            <th>Дата события</th>
+                            <th>Номер АСБ</th>
+                            <th>Устройство</th>
+                            <th>Серезность</th>
+                            
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+            
+            
             <script>
-                function changetohistories(){
-                    const newcont = document.createElement("div");
-                    newcont.className = "table-responsive";
+                GetEvents();
+         
+                async function GetEvents() {
+                    // отправляет запрос и получаем ответ
+                    const response = await fetch("/api/events", {
+                        method: "GET",
+                        headers: { "Accept": "application/json" }
+                    });
+                    // если запрос прошел нормально
+                    if (response.ok === true) {
+                        // получаем данные
+                        const events = await response.json();
+                        let rows = document.querySelector("tbody"); 
+                        events.forEach(event => {
+                            // добавляем полученные элементы в таблицу
+                            rows.append(row(event));
+                        });
+                    }
+                }
+                // Получение одного пользователя
+                async function GetEvent(id) {
+                const response = await fetch("/api/events/" + id, {
+                    method: "GET",
+                    headers: { "Accept": "application/json" }
+                });
+                if (response.ok === true) {
+                    const event = await response.json();
+                    const form = document.forms["eventForm"];
+                    form.elements["id"].value = event.id;
+                    form.elements["dateofevent"].value = event.dateofevent;
+                    form.elements["nameofasb"].value = event.nameofasb;
+                    form.elements["nameofdevice"].value = event.nameofdevice;
+                    form.elements["isserios"].value = event.isserios;
+                }
+            }
+                // Добавление пользователя
+                async function CreateEvent(eventDateofevent,eventNameofasb, eventNameofdevice, eventIsserios) {
+         
+                    const response = await fetch("api/events", {
+                        method: "POST",
+                        headers: { "Accept": "application/json", "Content-Type": "application/json" },
+                        body: JSON.stringify({
+                            dateofevent: eventDateofevent,
+                            nameofasb: parseInt(eventNameofasb, 10),
+                            nameofdevice: eventNameofdevice,
+                            isserios: eventIsserios
+                            
 
-                    const newtable = document.createElement("table");
-                    newtable.className = "table table-striped table-hover";
-
-                    const newthead = document.createElement("thead");
-                    newthead.style = "background-color: lightcoral;";
-
-                    const newtr = document.createElement("tr");
-
-                    const newth1 = document.createElement("th");
-                    newth1.textContent = "#";
-
-                    const newth2 = document.createElement("th");
-                    newth2.textContent = "Дата происшествия";
-
-                    const newth3 = document.createElement("th");
-                    newth3.textContent = "Номер АСБ";
-
-                    const newth4 = document.createElement("th");
-                    newth4.textContent = "Название устройства";
-
-                    const newth5 = document.createElement("th");
-                    newth5.textContent = "Серьезность";
-
-                    const newtbody = document.createElement("tbody");
-
-                    newtr.appendChild(newth1);
-                    newtr.appendChild(newth2);
-                    newtr.appendChild(newth3);
-                    newtr.appendChild(newth4);
-                    newtr.appendChild(newth5);
-
-                    newthead.appendChild(newtr);
-
-                    newtable.appendChild(newthead);
-
-                    newtable.appendChild(newtbody);
-
-                    newcont.appendChild(newtable);
-
-                    const main = document.getElementById("main");
-
-                    const child = document.getElementById("cardevent");
-
-                    main.replaceChild(newcont,child);
-
-                    const newh1 = document.querySelector("h1");
-                    newh1.textContent = "Происшествия";
-
-                    const newnav1 = document.getElementById("item1");
-                    newnav1.className = "nav-item col-md-3 col-6"
-                    const newlink1 = document.getElementById("changetocard");
-                    newlink1.style = "font-size: smaller;color: crimson; background-color: rgb(247, 229, 226)";
-
-                    const newnav2 = document.getElementById("item2");
-                    newnav2.className = "nav-item active col-md-3 col-6";
-                    const newlink2 = document.getElementById("changetohistory");
-                    newlink2.style = "font-size: smaller;background-color: lightcoral;";
-
-                    GetEvents();
+                        })
+                    });
+                    if (response.ok === true) {
+                        const event = await response.json();                  
+                        reset();
+                        document.querySelector("tbody").append(row(event));
+                    }
+                }
+                // Изменение пользователя
+                async function EditEvent(eventId, eventDateofevent, eventNameofasb, eventNameofdevice, eventIsserios) {
+                    const response = await fetch("api/events", {
+                        method: "PUT",
+                        headers: { "Accept": "application/json", "Content-Type": "application/json" },
+                        body: JSON.stringify({
+                            id: parseInt(eventId, 10),
+                            dateofevent: eventDateofevent,
+                            nameofasb: parseInt(eventNameofasb, 10),
+                            nameofdevice: eventNameofdevice,
+                            isserios: eventIsserios
+                            
+                        })
+                    });
+                    if (response.ok === true) {
+                        const event = await response.json();
+                        
+                        reset();
+                        document.querySelector("tr[data-rowid='" + event.id + "']").replaceWith(row(event));
+                    }
+                }
+                // Удаление пользователя
+                async function DeleteEvent(id) {
+                    const response = await fetch("/api/events/" + id, {
+                        method: "DELETE",
+                        headers: { "Accept": "application/json" }
+                    });
+                    if (response.ok === true) {
+                        const event = await response.json();
+                        document.querySelector("tr[data-rowid='" + event.id + "']").remove();
+                    }
+                }
+         
+                // сброс формы
+                 function reset() {
+                    const form = document.forms["eventForm"];
+                    form.reset();
+                    form.elements["id"].value = 0;
+                    
                 } 
-                 function row(event) {
+                // создание строки для таблицы
+                function row(event) {
      
                     const tr = document.createElement("tr");
                     tr.setAttribute("data-rowid", event.id);
@@ -210,46 +259,44 @@
                     const isseriosTd = document.createElement("td");
                     isseriosTd.append(event.isserios);
                     tr.append(isseriosTd);
-                    return tr;
-                }
+      
+                    /* const linksTd = document.createElement("td");
 
-                         
-               const changebut = document.getElementById("changetohistory");
-               changebut.addEventListener("click",changetohistories)
+                    const editLink = document.createElement("a");
+                    editLink.setAttribute("data-id", event.id);
+                    editLink.setAttribute("style", "cursor:pointer;padding:15px;");
+                    editLink.append("Изменить");
+                    editLink.addEventListener("click", e => {
 
-               async function CreateEvent(eventDateofevent,eventNameofasb, eventNameofdevice, eventIsserios) {
-                    const response = await fetch("api/events", {
-                        method: "POST",
-                        headers: { "Accept": "application/json", "Content-Type": "application/json" },
-                        body: JSON.stringify({
-                            dateofevent: eventDateofevent,
-                            nameofasb: parseInt(eventNameofasb, 10),
-                            nameofdevice: eventNameofdevice,
-                            isserios: eventIsserios
-                            
-
-                        })
+                        e.preventDefault();
+                        GetEvent(event.id);
                     });
-                    if (response.ok === true) {
-                        const event = await response.json();                  
-                        reset();
-                        document.querySelector("tbody").append(row(event));
-                    }
+                    linksTd.append(editLink);
+
+                    const removeLink = document.createElement("a");
+                    removeLink.setAttribute("data-id", event.id);
+                    removeLink.setAttribute("style", "cursor:pointer;padding:15px;");
+                    removeLink.append("Удалить");
+                    removeLink.addEventListener("click", e => {
+
+                        e.preventDefault();
+                        DeleteEvent(event.id);
+                    });
+
+                    linksTd.append(removeLink);
+                    tr.appendChild(linksTd); */
+
+                     return tr;
                 }
-
-                function reset() {
-                    const form = document.forms["eventForm"];
-                    form.reset();
-                    form.elements["id"].value = 0;
-                    
-                } 
-
+                // сброс значений формы
                 const resetbut = document.getElementById("reset");
                 resetbut.onclick = function(e){
                     e.preventDefault();
                     reset();
                 }
 
+               
+                // отправка формы
                 document.forms["eventForm"].addEventListener("submit", e => {
                     e.preventDefault();
                     const form = document.forms["eventForm"];
@@ -258,47 +305,15 @@
                     const nameofasb = form.elements["nameofasb"].value;
                     const nameofdevice = form.elements["nameofdevice"].value;
                     const isserios = form.elements["isserios"].value;
-                    CreateEvent(dateofevent, nameofasb, nameofdevice, isserios);
-                    alert("Происшествие создано");   
+                    
+                    if (id == 0)
+                        CreateEvent(dateofevent, nameofasb, nameofdevice, isserios);
+                    else
+                        EditEvent(id, dateofevent, nameofasb, nameofdevice, isserios);
                 });
-
-                GetEvents();
          
-                async function GetEvents() {
-                    
-                    const response = await fetch("/api/events", {
-                        method: "GET",
-                        headers: { "Accept": "application/json" }
-                    });
-                    
-                    if (response.ok === true) {
-                        
-                        const events = await response.json();
-                        let rows = document.querySelector("tbody"); 
-                        events.forEach(event => {
-                            
-                            rows.append(row(event));
-                        });
-                    }
-                }
                 
-                async function GetEvent(id) {
-                const response = await fetch("/api/events/" + id, {
-                    method: "GET",
-                    headers: { "Accept": "application/json" }
-                });
-                if (response.ok === true) {
-                    const event = await response.json();
-                    const form = document.forms["eventForm"];
-                    form.elements["id"].value = event.id;
-                    form.elements["dateofevent"].value = event.dateofevent;
-                    form.elements["nameofasb"].value = event.nameofasb;
-                    form.elements["nameofdevice"].value = event.nameofdevice;
-                    form.elements["isserios"].value = event.isserios;
-                }
-            }
-            
-         
+                
             </script>
 
         </div>

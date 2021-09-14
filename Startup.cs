@@ -14,6 +14,7 @@ using Microsoft.EntityFrameworkCore;
 using RestfulApiVisualCode.DataBaseContext;
 using RestfulApiVisualCode.Models;
 
+
 namespace RestfulApiVisualCode
 {
     public class Startup
@@ -29,29 +30,23 @@ namespace RestfulApiVisualCode
         public void ConfigureServices(IServiceCollection services)
         {
 
-             string con = "Server=(localdb)\\mssqllocaldb;Database=warningeventsdbstore;Trusted_Connection=True;";
+             string con = "Server=(localdb)\\mssqllocaldb;Database=usersdbstore;Trusted_Connection=True;";
             // устанавливаем контекст данных
-            services.AddDbContext<WarningEventContext>(options => options.UseSqlServer(con));
+            services.AddDbContext<EventsContext>(options => options.UseSqlServer(con));
  
             services.AddControllers(); // используем контроллеры без представлений
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+         public void Configure(IApplicationBuilder app)
         {
-           /*  if (env.IsDevelopment())
-            {
-              //  app.UseSwagger();
-              //  app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "RestfulApiVisualCode v1"));
-            } */
             app.UseDeveloperExceptionPage();
+ 
             app.UseDefaultFiles();
             app.UseStaticFiles();
-
+ 
             app.UseRouting();
-
-          //  app.UseAuthorization();
-
+ 
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();

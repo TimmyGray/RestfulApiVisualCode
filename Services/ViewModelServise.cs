@@ -14,7 +14,7 @@ namespace RestfulApiVisualCode.Services
         {
             Warningevents = new List<WarningEvent>
             {
-                new WarningEvent{Id = 1,IsSerios = false,NameOfDevice = "ssl"}
+                new WarningEvent{Id = 1,IsSerios = "false",NameOfDevice = "ssl"}
         
             };
         }

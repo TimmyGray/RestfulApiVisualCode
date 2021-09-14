@@ -22,7 +22,7 @@ namespace RestfulApiVisualCode.Controllers
             this.db = db;
             if(!db.warningevents.Any())
             {
-                db.warningevents.Add(new WarningEvent{NameOfASB = "7",NameOfDevice = "SSL",DateOfEvent = DateTime.Now});
+                db.warningevents.Add(new WarningEvent{NameOfASB = "7",NameOfDevice = "SSL",DateOfEvent = DateTime.Now, IsSerios="no", DiscribeOfFix="koko", EventDiscribe="kaka"});
                 db.SaveChanges();
             }
             

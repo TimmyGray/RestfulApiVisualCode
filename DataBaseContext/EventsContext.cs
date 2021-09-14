@@ -1,14 +1,15 @@
 using Microsoft.EntityFrameworkCore;
 using RestfulApiVisualCode.Models;
+ 
 namespace RestfulApiVisualCode.DataBaseContext
 {
-     public class WarningEventContext : DbContext
+    public class EventsContext : DbContext
     {
-        public DbSet<WarningEvent> warningevents { get; set; }
-        public WarningEventContext(DbContextOptions<WarningEventContext> options)
+        public DbSet<Event> Events { get; set; }
+        public EventsContext(DbContextOptions<EventsContext> options)
             : base(options)
         { 
-            
+            //Database.EnsureDeleted();
             Database.EnsureCreated();
         }
     }
