@@ -16,17 +16,27 @@
         
         <div class=" container">  
             <img src="Resources/warning-sign.svg" class="d-block mx-auto" alt width="96" height="96">         
-            <nav class="navbar navbar-expand navbar-light bg-light">
-                <div class="collapse navbar-collapse" id="navbarNav">
-                  <ul class="nav nav-pills col-12" style="justify-content: flex-start;">
-                    <li class="nav-item active col-md-6 col-lg-4 col-sm-6 col-12 mb-3" id="item1">
-                      <a class="nav-link" href="ClientView.html" id="changetocard" style="font-size: smaller;background-color: lightcoral; align-content: center;">Карточкa происшествия</a>
-                    </li>
-                    <li class="nav-item col-md-6 col-lg-4 col-sm-6 col-12 mb-3" id="item2">
-                      <a class="nav-link" id="changetohistory" href="#" style="font-size: smaller;color: crimson; background-color: rgb(247, 229, 226);">История происшествий</a>
-                    </li> 
-                  </ul>
-                </div>
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                
+                    <div class="collapse navbar-collapse" id="navbarNav">
+                        <ul class="nav nav-pills mr-auto">
+                          <li class="nav-item active mb-3" id="item1">
+                            <a class="nav-link" href="ClientView.html" id="changetocard" style="font-size: smaller;background-color: lightcoral; align-content: center;">Карточкa происшествия</a>
+                          </li>
+                          <li class="nav-item mb-3" id="item2">
+                            <a class="nav-link" id="changetohistory" href="#" style="font-size: smaller;color: crimson; background-color: rgb(247, 229, 226);">История происшествий</a>
+                          </li> 
+                        </ul>
+                        
+                    </div>
+                    <nav class="navbar navbar-light bg-light">
+                        <form class="form-inline col-4">
+                          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                        </form>
+                      </nav>
+                
+               
             </nav> 
             <div id="main">
                 <h1>Карточка происшествия</h1>
@@ -175,14 +185,31 @@
                     newh1.textContent = "Происшествия";
 
                     const newnav1 = document.getElementById("item1");
-                    newnav1.className = "nav-item col-md-3 col-6"
+                    newnav1.className = "nav-item"
                     const newlink1 = document.getElementById("changetocard");
                     newlink1.style = "font-size: smaller;color: crimson; background-color: rgb(247, 229, 226)";
 
                     const newnav2 = document.getElementById("item2");
-                    newnav2.className = "nav-item active col-md-3 col-6";
+                    newnav2.className = "nav-item active";
                     const newlink2 = document.getElementById("changetohistory");
                     newlink2.style = "font-size: smaller;background-color: lightcoral;";
+
+                    const newsearch = document.createElement("form");
+                    newsearch.className = "form-inline my-2 my-lg-0"
+                    const newinput = document.createElement("input");
+                    newinput.className = "form-control mr-sm-2";
+                    newinput.style = "search";
+                    newinput.placeholder = "Найти";
+                    newinput.ariaLabel = "Найти";
+                    const newsearchbut = document.createElement("button");
+                    newsearchbut.className = "btn btn-outline-success my-2 my-sm-0";
+                    newsearchbut.type = "submit";
+                    newsearchbut.textContent = "Поиск";
+                    newsearch.appendChild(newinput);
+                    newsearch.appendChild(newsearchbut);
+                    const newnavbarnav = document.getElementById("navbarNav");
+                    newnavbarnav.appendChild(newsearch);
+
 
                     GetEvents();
                 } 
