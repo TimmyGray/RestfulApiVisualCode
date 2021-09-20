@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8"/>
+        <meta name="clientview" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <link rel="stylesheet" href="Styles/mystyles.css">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">        
+        <title>Карточка происшествия</title>
+        <link rel="stylesheet" href="https://bootstraptema.ru/plugins/2015/bootstrap3/bootstrap.min.css" />
+        <script src="https://bootstraptema.ru/plugins/jquery/jquery-1.11.3.min.js"></script>
+        <script type="text/javascript" src="https://bootstraptema.ru/plugins/2015/b-v3-3-6/bootstrap.min.js"></script>
+        <script src="https://bootstraptema.ru/_sf/3/393.js"></script>
+        <link rel="stylesheet" href="Styles/calendar.css">
+    </head>
+    <body class="bg-light">
+        
+        <div class=" container">  
+            <img src="Resources/warning-sign.svg" class="d-block mx-auto" alt width="96" height="96">         
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                
+                    <div class="collapse navbar-collapse" id="navbarNav">
+                        <ul class="nav nav-pills mr-auto">
+                          <li class="nav-item active mb-3" id="item1">
+                            <a class="nav-link" href="ClientView.html" id="changetocard" style="font-size: smaller;background-color: lightcoral; align-content: center;">Карточкa происшествия</a>
+                          </li>
+                          <li class="nav-item mb-3" id="item2">
+                            <a class="nav-link" id="changetohistory" href="#" style="font-size: smaller;color: crimson; background-color: rgb(247, 229, 226);">История происшествий</a>
+                          </li> 
+                        </ul>
+                        
+                    </div>
+                    <nav class="navbar navbar-light bg-light">
+                        <form class="form-inline col-4">
+                          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                        </form>
+                      </nav>
+                
+               
+            </nav> 
+            <div id="main">
+                <h1>Карточка происшествия</h1>
+            <form name="eventForm" class="was was-validated" id="cardevent">
+                <input type="hidden" name="id" value="0" />
+                <div class="row">
+                    <div class="col-md-6 col-lg-4 col-sm-6 col-12 mb-3"> 
+                        <label for="nameofdevice">Устройство</label>
+                        <select class="custom-select d-block w-100 d-done" name="nameofdevice" required>
+                            <option value>Выбрать...</option>
+                            <option>SSL</option>
+                            <option>Karrera</option>
+                            <option>SoundCraft</option>
+                            <option>Dalet</option>
+                            <option>Микрофон, мониторинг, приемопередатчик</option>
+                            <option>Platinum</option>
+                            <option>Свет и оборудование</option>
+                            <option>Декорации</option>
+                            <option>Камеры и камерные каналы</option>
+                            <option>Графические станции</option>
+                            <option>Компьютер</option>
+                            <option>Другое</option>
+                        </select>
+                        <div class="invalid-feedback">Необходимо указать устройство</div>
+                    </div>
+                    <div class="col-auto mb-3">
+                        <label for="nameofasb">Номер АСБ</label>
+                        <select class="custom-select d-block w-100 d-done" name="nameofasb" required>
+                                <option value>Выбрать...</option>
+                                <option>1</option>
+                                <option>3</option>
+                                <option>4</option>
+                                <option>5</option>
+                                <option>6</option>
+                                <option>7</option>
+                                <option>8</option>
+                        </select>
+                        <div class="invalid-feedback">Необхоимо указать номер АСБ</div>
+                    </div>            
+                </div>
+                <div class="row">
+                    <div class="col-md-6 col-lg-4 col-sm-6 col-12 mb-3">
+                        <div class="form-group">
+                            <label for="eventdiscribe">Описание проблемы</label>
+                            <textarea class="form-control" name="eventdiscribe" rows="3" required></textarea>
+                        </div>
+                        <div class="invalid-feedback">Заполните описание</div>
+
+                    </div>
+                    <div class="col-auto mb-3">
+                        <div class="form-group">
+                            <label for="fixdiscribe">Как исправили(если исправили)</label>
+                            <textarea class="form-control" name="fixdiscribe" rows="3"></textarea>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 col-lg-4 col-sm-6 col-12 mb-3">                            
+                        <label for="dateofevent">Дата происшествия</label>
+                        <div class="w-100"></div>
+                        <input name="dateofevent" class="custom day" type="date" required/>
+                        <div class="invalid-feedback">Укажите дату происшествия</div>
+                    </div>
+                    <div class="col-auto mb-3">
+                        <label for="isserios">Серьезность</label>
+                        <select name="isserios" class="custom-select d-block w-100 d-done" required>
+                                <option value>Выбрать...</option>
+                                <option>Серьезное происшествие</option>
+                                <option>Несерьезное происшествие</option>
+                        </select>
+                        <div class="invalid-feedback">Укажите серьезность</div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 col-lg-4 col-sm-6 col-12 mb-3">
+                        <label for="fileinput">Фотография поломки</label>
+                        <div class="custom-file"> 
+                            <input type="file" class="custom-file-input" name="fileinput">
+                            <label class="custom-file-label" for="fileinput">Загрузить файл...</label>
+                        </div>
+                    </div>   
+                </div>
+                <div class="row">
+                    <div class="col-md-6 col-lg-4 col-sm-6 col-12 mb-3">
+                        <button id="submit" type="submit" class="btn btn-danger">Создать</button>
+                    </div>
+                    <div class="col-auto mb-3">
+                        <a id="reset" class="btn btn-danger">Сброс</a>
+                    </div>
+                    
+                </div>
+            </form>
+            </div>     
+            <script>
+                function changetohistories(){
+                    const newcont = document.createElement("div");
+                    newcont.className = "table-responsive";
+
+                    const newtable = document.createElement("table");
+                    newtable.className = "table table-striped table-hover";
+
+                    const newthead = document.createElement("thead");
+                    newthead.style = "background-color: lightcoral;";
+
+                    const newtr = document.createElement("tr");
+
+                    const newth1 = document.createElement("th");
+                    newth1.textContent = "#";
+
+                    const newth2 = document.createElement("th");
+                    newth2.textContent = "Дата происшествия";
+
+                    const newth3 = document.createElement("th");
+                    newth3.textContent = "Номер АСБ";
+
+                    const newth4 = document.createElement("th");
+                    newth4.textContent = "Название устройства";
+
+                    const newth5 = document.createElement("th");
+                    newth5.textContent = "Серьезность";
+
+                    const newtbody = document.createElement("tbody");
+
+                    newtr.appendChild(newth1);
+                    newtr.appendChild(newth2);
+                    newtr.appendChild(newth3);
+                    newtr.appendChild(newth4);
+                    newtr.appendChild(newth5);
+
+                    newthead.appendChild(newtr);
+
+                    newtable.appendChild(newthead);
+
+                    newtable.appendChild(newtbody);
+
+                    newcont.appendChild(newtable);
+
+                    const main = document.getElementById("main");
+
+                    const child = document.getElementById("cardevent");
+
+                    main.replaceChild(newcont,child);
+
+                    const newh1 = document.querySelector("h1");
+                    newh1.textContent = "Происшествия";
+
+                    const newnav1 = document.getElementById("item1");
+                    newnav1.className = "nav-item"
+                    const newlink1 = document.getElementById("changetocard");
+                    newlink1.style = "font-size: smaller;color: crimson; background-color: rgb(247, 229, 226)";
+
+                    const newnav2 = document.getElementById("item2");
+                    newnav2.className = "nav-item active";
+                    const newlink2 = document.getElementById("changetohistory");
+                    newlink2.style = "font-size: smaller;background-color: lightcoral;";
+
+                    const newsearch = document.createElement("form");
+                    newsearch.className = "form-inline my-2 my-lg-0"
+                    const newinput = document.createElement("input");
+                    newinput.className = "form-control mr-sm-2";
+                    newinput.style = "search";
+                    newinput.placeholder = "Найти";
+                    newinput.ariaLabel = "Найти";
+                    const newsearchbut = document.createElement("button");
+                    newsearchbut.className = "btn btn-outline-success my-2 my-sm-0";
+                    newsearchbut.type = "submit";
+                    newsearchbut.textContent = "Поиск";
+                    newsearch.appendChild(newinput);
+                    newsearch.appendChild(newsearchbut);
+                    const newnavbarnav = document.getElementById("navbarNav");
+                    newnavbarnav.appendChild(newsearch);
+
+
+                    GetEvents();
+                } 
+                 function row(event) {
+     
+                    const tr = document.createElement("tr");
+                    tr.setAttribute("data-rowid", event.id);
+
+                    const idTd = document.createElement("td");
+                    idTd.append(event.id);
+                    tr.append(idTd);
+
+                    const dateofeventTd = document.createElement("td");
+                    dateofeventTd.append(event.dateofevent);
+                    tr.append(dateofeventTd);
+
+                    const nameofasbTd = document.createElement("td");
+                    nameofasbTd.append(event.nameofasb);
+                    tr.append(nameofasbTd);
+
+                    const nameofdeviceTd = document.createElement("td");
+                    nameofdeviceTd.append(event.nameofdevice);
+                    tr.append(nameofdeviceTd);
+
+                    const isseriosTd = document.createElement("td");
+                    isseriosTd.append(event.isserios);
+                    tr.append(isseriosTd);
+                    return tr;
+                }
+
+                         
+               const changebut = document.getElementById("changetohistory");
+               changebut.addEventListener("click",changetohistories)
+
+               async function CreateEvent(eventDateofevent,eventNameofasb, eventNameofdevice, eventIsserios) {
+                    const response = await fetch("api/events", {
+                        method: "POST",
+                        headers: { "Accept": "application/json", "Content-Type": "application/json" },
+                        body: JSON.stringify({
+                            dateofevent: eventDateofevent,
+                            nameofasb: parseInt(eventNameofasb, 10),
+                            nameofdevice: eventNameofdevice,
+                            isserios: eventIsserios
+                            
+
+                        })
+                    });
+                    if (response.ok === true) {
+                        const event = await response.json();                  
+                        reset();
+                        document.querySelector("tbody").append(row(event));
+                    }
+                }
+
+                function reset() {
+                    const form = document.forms["eventForm"];
+                    form.reset();
+                    form.elements["id"].value = 0;
+                    
+                } 
+
+                const resetbut = document.getElementById("reset");
+                resetbut.onclick = function(e){
+                    e.preventDefault();
+                    reset();
+                }
+
+                document.forms["eventForm"].addEventListener("submit", e => {
+                    e.preventDefault();
+                    const form = document.forms["eventForm"];
+                    const id = form.elements["id"].value;
+                    const dateofevent = form.elements["dateofevent"].value;
+                    const nameofasb = form.elements["nameofasb"].value;
+                    const nameofdevice = form.elements["nameofdevice"].value;
+                    const isserios = form.elements["isserios"].value;
+                    CreateEvent(dateofevent, nameofasb, nameofdevice, isserios);
+                    alert("Происшествие создано");   
+                });
+
+                GetEvents();
+         
+                async function GetEvents() {
+                    
+                    const response = await fetch("/api/events", {
+                        method: "GET",
+                        headers: { "Accept": "application/json" }
+                    });
+                    
+                    if (response.ok === true) {
+                        
+                        const events = await response.json();
+                        let rows = document.querySelector("tbody"); 
+                        events.forEach(event => {
+                            
+                            rows.append(row(event));
+                        });
+                    }
+                }
+                
+                async function GetEvent(id) {
+                const response = await fetch("/api/events/" + id, {
+                    method: "GET",
+                    headers: { "Accept": "application/json" }
+                });
+                if (response.ok === true) {
+                    const event = await response.json();
+                    const form = document.forms["eventForm"];
+                    form.elements["id"].value = event.id;
+                    form.elements["dateofevent"].value = event.dateofevent;
+                    form.elements["nameofasb"].value = event.nameofasb;
+                    form.elements["nameofdevice"].value = event.nameofdevice;
+                    form.elements["isserios"].value = event.isserios;
+                }
+            }
+            
+         
+            </script>
+
+        </div>
+    </body>
+</html>
