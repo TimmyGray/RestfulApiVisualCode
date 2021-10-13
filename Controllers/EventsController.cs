@@ -19,8 +19,8 @@ namespace RestfulApiVisualCode.Controllers
             db = context;
             if (!db.Events.Any())
             {
-                db.Events.Add(new Event { Nameofdevice = "SSL", Nameofasb = 4,Dateofevent = DateTime.Now.Date.ToShortDateString(), Isserios="no"});
-                db.Events.Add(new Event { Nameofdevice = "Karrera", Nameofasb = 7,Dateofevent = DateTime.Now.Date.ToShortDateString(), Isserios="yes" });
+                db.Events.Add(new Event { Nameofdevice = "SSL", Nameofasb = 4,Dateofevent = DateTime.Now.Date.ToShortDateString(), Isserios="no", Discribeevent = "ваще коллапс", Fixevent = "все пофиксили"});
+                db.Events.Add(new Event { Nameofdevice = "Karrera", Nameofasb = 7,Dateofevent = DateTime.Now.Date.ToShortDateString(), Isserios="yes", Discribeevent = "произошел пиздец", Fixevent = "это не" });
                 db.SaveChanges();
             }
         }

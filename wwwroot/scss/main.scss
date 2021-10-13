@@ -1,0 +1,60 @@
+@import "../bootstrap/scss/functions";
+@import "../bootstrap/scss/variables";
+@import "../bootstrap/scss/mixins";
+@import "../bootstrap/scss/root";
+@import "../bootstrap/scss/bootstrap.scss";
+
+$darkred: rgb(71, 10, 10);
+$softbrown:rgb(90, 45, 17);
+$creambrule:rgb(240,220,150);
+$softyellow:rgb(250,160,60);
+
+$mycolors:(
+  "darkred":    $darkred,
+  "softbrown":  $softbrown,
+  "creambrule": $creambrule,
+  "softyellow": $softyellow 
+);
+
+$theme-colors: map-merge($theme-colors , $mycolors);
+
+
+
+$link-color:$softyellow;
+$link-hover-color:$softbrown;
+$nav-link-color:$link-color;
+$nav-link-hover-color:$link-hover-color;
+
+
+
+header{
+  background:$darkred;
+};
+
+
+body{
+    height: 100%;
+    background: linear-gradient($creambrule,rgb(255, 244, 204)) no-repeat;
+    background-attachment: fixed;
+};
+
+
+
+h1{
+  color: $softbrown;
+};
+
+
+.disactivetab{
+  display: none;
+};
+
+
+
+@import "../bootstrap/scss/functions";
+@import "../bootstrap/scss/variables";
+@import "../bootstrap/scss/mixins";
+@import "../bootstrap/scss/root";
+@import "../bootstrap/scss/reboot";
+@import "../bootstrap/scss/type";
+@import "../bootstrap/scss/bootstrap.scss";

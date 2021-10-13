@@ -1,222 +1,232 @@
-<!DOCTYPE html>
-<html>
+<!DOCTYPE html> 
+<html style="height: 100%;">
     <head>
         <meta charset="utf-8"/>
         <meta name="clientview" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <link rel="stylesheet" href="Styles/mystyles.css">
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">        
-        <title>Карточка происшествия</title>
-        <link rel="stylesheet" href="https://bootstraptema.ru/plugins/2015/bootstrap3/bootstrap.min.css" />
-        <script src="https://bootstraptema.ru/plugins/jquery/jquery-1.11.3.min.js"></script>
-        <script type="text/javascript" src="https://bootstraptema.ru/plugins/2015/b-v3-3-6/bootstrap.min.js"></script>
-        <script src="https://bootstraptema.ru/_sf/3/393.js"></script>
-        <link rel="stylesheet" href="Styles/calendar.css">
+        <title>Происшествия</title>
+        <link rel="stylesheet" type="text/css" href="bootstrap/dist/css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="css/main.css">
+      
     </head>
-    <body class="bg-light">
+    <body id="body">
         
-        <div class=" container">  
-            <img src="Resources/warning-sign.svg" class="d-block mx-auto" alt width="96" height="96">         
-            <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                
-                    <div class="collapse navbar-collapse" id="navbarNav">
-                        <ul class="nav nav-pills mr-auto">
-                          <li class="nav-item active mb-3" id="item1">
-                            <a class="nav-link" href="ClientView.html" id="changetocard" style="font-size: smaller;background-color: lightcoral; align-content: center;">Карточкa происшествия</a>
-                          </li>
-                          <li class="nav-item mb-3" id="item2">
-                            <a class="nav-link" id="changetohistory" href="#" style="font-size: smaller;color: crimson; background-color: rgb(247, 229, 226);">История происшествий</a>
-                          </li> 
-                        </ul>
+        <header class="p-3 text-white">
+            <div class="container">
+                <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+                    <a href="#" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
+                    <img src="Resources/warning-sign.svg" alt="" height="50" width="50">
+                    </a>
+
+                    <ul id = "nav" class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+                        <li><a href="#" name="Create" class="nav-link px-2"  id="CreateClick">Создать</a></li>
+                        <li><a href="#" name="Histories" class="nav-link px-2" id="HistoryClick" >История</a></li>
+                        <li><a href="#" name="Faq" class="nav-link px-2" id="FaqClick" >Бестиарий</a></li>
+                    </ul>
+        
+                    <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
+                        <input type="search" class="form-control form-control-dark" placeholder="Искать..." aria-label="Search">
+                    </form>
+        
+                    <div class="text-end">
+                        <button type="button" class="btn btn-softyellow me-2">Войти</button>
+                        <button type="button" class="btn btn-softbrown">Регистрация</button>
+                    </div>
+              </div>
+            </div>
+        </header>
+          
+        <main id = "Create" name = "Create">
+              <div class="container justify-content-center">
+                <h1 id="FirstPage" style="text-align: center;">Карточка происшествия</h1>
+              </div>
+              <form name="eventForm" class="was was-validated" id="cardevent">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-6 col-lg-4 col-sm-6 col-12 mb-3"> 
+                            <label for="nameofdevice">Устройство</label>
+                            <select class="form-select d-block w-100 d-done" name="nameofdevice" required>
+                                <option value>Выбрать...</option>
+                                <option>SSL</option>
+                                <option>Karrera</option>
+                                <option>SoundCraft</option>
+                                <option>Dalet</option>
+                                <option>Микрофон, мониторинг, приемопередатчик</option>
+                                <option>Platinum</option>
+                                <option>Свет и оборудование</option>
+                                <option>Декорации</option>
+                                <option>Камеры и камерные каналы</option>
+                                <option>Графические станции</option>
+                                <option>Компьютер</option>
+                                <option>Другое</option>
+                            </select>
+                            <div class="invalid-feedback">Необходимо указать устройство</div>
+                        </div>
+                        <div class="col-auto mb-3">
+                            <label for="nameofasb">Номер АСБ</label>
+                            <select class="form-select d-block w-100 d-done" name="nameofasb" required>
+                                    <option value>Выбрать...</option>
+                                    <option>1</option>
+                                    <option>3</option>
+                                    <option>4</option>
+                                    <option>5</option>
+                                    <option>6</option>
+                                    <option>7</option>
+                                    <option>8</option>
+                            </select>
+                            <div class="invalid-feedback">Необхоимо указать номер АСБ</div>
+                        </div>            
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 col-lg-4 col-sm-6 col-12 mb-3">
+                            <div class="form-group">
+                                <label for="eventdiscribe">Описание проблемы</label>
+                                <textarea class="form-control" name="eventdiscribe" rows="3" required></textarea>
+                            </div>
+                            <div class="invalid-feedback">Заполните описание</div>
+    
+                        </div>
+                        <div class="col-auto mb-3">
+                            <div class="form-group">
+                                <label for="fixdiscribe">Как исправили(если исправили)</label>
+                                <textarea class="form-control" name="fixdiscribe" rows="3"></textarea>
+                            </div>
+    
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 col-lg-4 col-sm-6 col-12 mb-3">                            
+                            <label for="dateofevent">Дата происшествия</label>
+                            <div class="w-100"></div>
+                            <input name="dateofevent" class="form-control" type="date" required/>
+                            <div class="invalid-feedback">Укажите дату происшествия</div>
+                        </div>
+                        <div class="col-auto mb-3">
+                            <label for="isserios">Серьезность</label>
+                            <select name="isserios" class="form-select d-block w-100 d-done" required>
+                                    <option value>Выбрать...</option>
+                                    <option>Серьезное происшествие</option>
+                                    <option>Несерьезное происшествие</option>
+                            </select>
+                            <div class="invalid-feedback">Укажите серьезность</div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-7 col-lg-7 col-sm-12 col-12">
+                            <div class="input-group mb-3">
+                                <label for="inputGroupFile">Фотография поломки</label>
+                                <div class="w-100"></div>
+                                <input type="file" class="form-control" id="inputGroupFile" aria-describedby="inputGroupFileAddon" aria-label="Загрузить">
+                                <button class="btn btn-outline-softbrown" type="button" id="inputGroupFileAddon">Загрузить</button>
+                            </div>
+                        </div>
                         
                     </div>
-                    <nav class="navbar navbar-light bg-light">
-                        <form class="form-inline col-4">
-                          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-                        </form>
-                      </nav>
-                
-               
-            </nav> 
-            <div id="main">
-                <h1>Карточка происшествия</h1>
-            <form name="eventForm" class="was was-validated" id="cardevent">
-                <input type="hidden" name="id" value="0" />
-                <div class="row">
-                    <div class="col-md-6 col-lg-4 col-sm-6 col-12 mb-3"> 
-                        <label for="nameofdevice">Устройство</label>
-                        <select class="custom-select d-block w-100 d-done" name="nameofdevice" required>
-                            <option value>Выбрать...</option>
-                            <option>SSL</option>
-                            <option>Karrera</option>
-                            <option>SoundCraft</option>
-                            <option>Dalet</option>
-                            <option>Микрофон, мониторинг, приемопередатчик</option>
-                            <option>Platinum</option>
-                            <option>Свет и оборудование</option>
-                            <option>Декорации</option>
-                            <option>Камеры и камерные каналы</option>
-                            <option>Графические станции</option>
-                            <option>Компьютер</option>
-                            <option>Другое</option>
-                        </select>
-                        <div class="invalid-feedback">Необходимо указать устройство</div>
-                    </div>
-                    <div class="col-auto mb-3">
-                        <label for="nameofasb">Номер АСБ</label>
-                        <select class="custom-select d-block w-100 d-done" name="nameofasb" required>
-                                <option value>Выбрать...</option>
-                                <option>1</option>
-                                <option>3</option>
-                                <option>4</option>
-                                <option>5</option>
-                                <option>6</option>
-                                <option>7</option>
-                                <option>8</option>
-                        </select>
-                        <div class="invalid-feedback">Необхоимо указать номер АСБ</div>
-                    </div>            
-                </div>
-                <div class="row">
-                    <div class="col-md-6 col-lg-4 col-sm-6 col-12 mb-3">
-                        <div class="form-group">
-                            <label for="eventdiscribe">Описание проблемы</label>
-                            <textarea class="form-control" name="eventdiscribe" rows="3" required></textarea>
-                        </div>
-                        <div class="invalid-feedback">Заполните описание</div>
 
-                    </div>
-                    <div class="col-auto mb-3">
-                        <div class="form-group">
-                            <label for="fixdiscribe">Как исправили(если исправили)</label>
-                            <textarea class="form-control" name="fixdiscribe" rows="3"></textarea>
+                    <div class="row">
+                        <div class="col-md-6 col-lg-4 col-sm-6 col-6 mb-3">
+                            <button id="submit" type="submit" class="btn btn-softyellow">Создать</button>
                         </div>
+                        <div class="col-auto mb-3">
+                            <a id="reset" class="btn btn-softyellow">Сброс</a>
+                        </div>
+                        
+                    </div>
 
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6 col-lg-4 col-sm-6 col-12 mb-3">                            
-                        <label for="dateofevent">Дата происшествия</label>
-                        <div class="w-100"></div>
-                        <input name="dateofevent" class="custom day" type="date" required/>
-                        <div class="invalid-feedback">Укажите дату происшествия</div>
-                    </div>
-                    <div class="col-auto mb-3">
-                        <label for="isserios">Серьезность</label>
-                        <select name="isserios" class="custom-select d-block w-100 d-done" required>
-                                <option value>Выбрать...</option>
-                                <option>Серьезное происшествие</option>
-                                <option>Несерьезное происшествие</option>
-                        </select>
-                        <div class="invalid-feedback">Укажите серьезность</div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6 col-lg-4 col-sm-6 col-12 mb-3">
-                        <label for="fileinput">Фотография поломки</label>
-                        <div class="custom-file"> 
-                            <input type="file" class="custom-file-input" name="fileinput">
-                            <label class="custom-file-label" for="fileinput">Загрузить файл...</label>
-                        </div>
-                    </div>   
-                </div>
-                <div class="row">
-                    <div class="col-md-6 col-lg-4 col-sm-6 col-12 mb-3">
-                        <button id="submit" type="submit" class="btn btn-danger">Создать</button>
-                    </div>
-                    <div class="col-auto mb-3">
-                        <a id="reset" class="btn btn-danger">Сброс</a>
-                    </div>
                     
                 </div>
-            </form>
-            </div>     
-            <script>
-                function changetohistories(){
-                    const newcont = document.createElement("div");
-                    newcont.className = "table-responsive";
+              </form>
+              
+            
+        </main>
 
-                    const newtable = document.createElement("table");
-                    newtable.className = "table table-striped table-hover";
+        <main id="Histories" name = "Histories" class="disactivetab">
+            <div class="container justify-content-center">
+                <h1 id="SecondPage" style="text-align: center;">История происшествий</h1>
+            </div>
+            <div class="container-fluid">
+                <div class="table-responsive"> 
+                    <table class="table table-striped table-hover">
+                        <thead style="background-color: lightcoral;">
+                            <tr>
+                                <th>#</th>
+                                <th>Дата события</th>
+                                <th>Номер АСБ</th>
+                                <th>Устройство</th>
+                                <th>Серезность</th>   
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="modal fade" id="Modal" tabindex="-1" aria-labelledby="ModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="ModalLabel">Происшествие такое-то</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 
-                    const newthead = document.createElement("thead");
-                    newthead.style = "background-color: lightcoral;";
+                            </div>
+                            <div class="modal-body">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <p id="discribe">Здесь должно быть написано, что случилось</p>
+                                    </div>
+                                    <div class="col-6">
+                                        <p id="fix">Здесь должно быть написано, как починили</p>
+                                    </div>
+                                </div>
 
-                    const newtr = document.createElement("tr");
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-softyellow">Сохранить изменения</button>
+                                <button type="button" class="btn btn-softyellow" data-bs-dismiss="modal">Закрыть</button>
 
-                    const newth1 = document.createElement("th");
-                    newth1.textContent = "#";
+                            </div>
 
-                    const newth2 = document.createElement("th");
-                    newth2.textContent = "Дата происшествия";
+                        </div>
 
-                    const newth3 = document.createElement("th");
-                    newth3.textContent = "Номер АСБ";
+                    </div>
 
-                    const newth4 = document.createElement("th");
-                    newth4.textContent = "Название устройства";
+                </div>
+            </div>
+ 
+        </main>
+            
+        <main id="Faq" name = "Faq" class="disactivetab">
 
-                    const newth5 = document.createElement("th");
-                    newth5.textContent = "Серьезность";
+        </main>
+        <script src="bootstrap/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>    
+        <script>
+            const tablinks = document.getElementsByClassName("nav-link px-2");
 
-                    const newtbody = document.createElement("tbody");
+            function change(event){
+                const maintabs = document.getElementsByTagName("main");
 
-                    newtr.appendChild(newth1);
-                    newtr.appendChild(newth2);
-                    newtr.appendChild(newth3);
-                    newtr.appendChild(newth4);
-                    newtr.appendChild(newth5);
+                for(var i = 0;i<maintabs.length;i++){
+                    maintabs[i].className = "disactivetab";  
+                }
 
-                    newthead.appendChild(newtr);
+                document.getElementById(event.currentTarget.name).className = "";
+                if(event.currentTarget.name===Histories)
+                {
+                    row();
+                }
+                         
+            };
 
-                    newtable.appendChild(newthead);
-
-                    newtable.appendChild(newtbody);
-
-                    newcont.appendChild(newtable);
-
-                    const main = document.getElementById("main");
-
-                    const child = document.getElementById("cardevent");
-
-                    main.replaceChild(newcont,child);
-
-                    const newh1 = document.querySelector("h1");
-                    newh1.textContent = "Происшествия";
-
-                    const newnav1 = document.getElementById("item1");
-                    newnav1.className = "nav-item"
-                    const newlink1 = document.getElementById("changetocard");
-                    newlink1.style = "font-size: smaller;color: crimson; background-color: rgb(247, 229, 226)";
-
-                    const newnav2 = document.getElementById("item2");
-                    newnav2.className = "nav-item active";
-                    const newlink2 = document.getElementById("changetohistory");
-                    newlink2.style = "font-size: smaller;background-color: lightcoral;";
-
-                    const newsearch = document.createElement("form");
-                    newsearch.className = "form-inline my-2 my-lg-0"
-                    const newinput = document.createElement("input");
-                    newinput.className = "form-control mr-sm-2";
-                    newinput.style = "search";
-                    newinput.placeholder = "Найти";
-                    newinput.ariaLabel = "Найти";
-                    const newsearchbut = document.createElement("button");
-                    newsearchbut.className = "btn btn-outline-success my-2 my-sm-0";
-                    newsearchbut.type = "submit";
-                    newsearchbut.textContent = "Поиск";
-                    newsearch.appendChild(newinput);
-                    newsearch.appendChild(newsearchbut);
-                    const newnavbarnav = document.getElementById("navbarNav");
-                    newnavbarnav.appendChild(newsearch);
-
-
-                    GetEvents();
-                } 
-                 function row(event) {
+            for (var i = 0;i<tablinks.length;i++){
+               tablinks[i].onclick = change;
+            }
+           
+            function row(event) {
      
                     const tr = document.createElement("tr");
                     tr.setAttribute("data-rowid", event.id);
+                    
 
                     const idTd = document.createElement("td");
                     idTd.append(event.id);
@@ -237,14 +247,13 @@
                     const isseriosTd = document.createElement("td");
                     isseriosTd.append(event.isserios);
                     tr.append(isseriosTd);
+                    
+                    tr.setAttribute("data-bs-toggle","modal");
+                    tr.setAttribute("data-bs-target","#Modal");
                     return tr;
                 }
 
-                         
-               const changebut = document.getElementById("changetohistory");
-               changebut.addEventListener("click",changetohistories)
-
-               async function CreateEvent(eventDateofevent,eventNameofasb, eventNameofdevice, eventIsserios) {
+            async function CreateEvent(eventDateofevent,eventNameofasb, eventNameofdevice, eventIsserios) {
                     const response = await fetch("api/events", {
                         method: "POST",
                         headers: { "Accept": "application/json", "Content-Type": "application/json" },
@@ -264,20 +273,20 @@
                     }
                 }
 
-                function reset() {
+            function reset() {
                     const form = document.forms["eventForm"];
                     form.reset();
                     form.elements["id"].value = 0;
                     
                 } 
 
-                const resetbut = document.getElementById("reset");
-                resetbut.onclick = function(e){
+            const resetbut = document.getElementById("reset");
+            resetbut.onclick = function(e){
                     e.preventDefault();
                     reset();
                 }
 
-                document.forms["eventForm"].addEventListener("submit", e => {
+            document.forms["eventForm"].addEventListener("submit", e => {
                     e.preventDefault();
                     const form = document.forms["eventForm"];
                     const id = form.elements["id"].value;
@@ -289,31 +298,29 @@
                     alert("Происшествие создано");   
                 });
 
-                GetEvents();
-         
-                async function GetEvents() {
+            async function GetEvents() {
                     
-                    const response = await fetch("/api/events", {
-                        method: "GET",
-                        headers: { "Accept": "application/json" }
+                const response = await fetch("/api/events", {
+                    method: "GET",
+                    headers: { "Accept": "application/json" }
                     });
                     
-                    if (response.ok === true) {
+                if (response.ok === true) {
                         
-                        const events = await response.json();
-                        let rows = document.querySelector("tbody"); 
-                        events.forEach(event => {
+                    const events = await response.json();
+                    let rows = document.querySelector("tbody"); 
+                    events.forEach(event => {
                             
-                            rows.append(row(event));
-                        });
-                    }
+                    rows.append(row(event));
+                    });
                 }
+            }
                 
-                async function GetEvent(id) {
+            async function GetEvent(id) {
                 const response = await fetch("/api/events/" + id, {
                     method: "GET",
                     headers: { "Accept": "application/json" }
-                });
+                    });
                 if (response.ok === true) {
                     const event = await response.json();
                     const form = document.forms["eventForm"];
@@ -324,10 +331,11 @@
                     form.elements["isserios"].value = event.isserios;
                 }
             }
-            
-         
-            </script>
 
-        </div>
+            GetEvents();
+
+         
+        </script>
+        
     </body>
 </html>
