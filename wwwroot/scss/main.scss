@@ -25,6 +25,8 @@ $link-hover-color:$softbrown;
 $nav-link-color:$link-color;
 $nav-link-hover-color:$link-hover-color;
 
+
+
 header{
   background:$darkred;
 };
@@ -42,12 +44,15 @@ h1{
   color: $softbrown;
 };
 
-.maintab{
+.activetab{
   display: none;
-  padding: 6px 12px;
-  border: 1px solid #4CAF50;
-  border-top: none;
-}
+};
+
+.disactivetab{
+  display: none;
+};
+
+
 
 @import "../bootstrap/scss/functions";
 @import "../bootstrap/scss/variables";

@@ -22,6 +22,7 @@ namespace RestfulApiVisualCode.Controllers
                 db.Events.Add(new Event { Nameofdevice = "SSL", Nameofasb = 4,Dateofevent = DateTime.Now.Date.ToShortDateString(), Isserios="no"});
                 db.Events.Add(new Event { Nameofdevice = "Karrera", Nameofasb = 7,Dateofevent = DateTime.Now.Date.ToShortDateString(), Isserios="yes" });
                 db.SaveChanges();
+                
             }
         }
  

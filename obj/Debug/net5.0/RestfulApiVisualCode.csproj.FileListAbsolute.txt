@@ -111,8 +111,9 @@ G:\Visual studio\RestfulApiVisualCode\obj\Debug\net5.0\staticwebassets\RestfulAp
 G:\Visual studio\RestfulApiVisualCode\obj\Debug\net5.0\staticwebassets\RestfulApiVisualCode.StaticWebAssets.xml
 G:\Visual studio\RestfulApiVisualCode\obj\Debug\net5.0\scopedcss\bundle\RestfulApiVisualCode.styles.css
 G:\Visual studio\RestfulApiVisualCode\obj\Debug\net5.0\RestfulApiVisualCode.RazorTargetAssemblyInfo.cache
-G:\Visual studio\RestfulApiVisualCode\obj\Debug\net5.0\RestfulApiVisualCode.csproj.CopyComplete
 G:\Visual studio\RestfulApiVisualCode\obj\Debug\net5.0\RestfulApiVisualCode.dll
 G:\Visual studio\RestfulApiVisualCode\obj\Debug\net5.0\ref\RestfulApiVisualCode.dll
 G:\Visual studio\RestfulApiVisualCode\obj\Debug\net5.0\RestfulApiVisualCode.pdb
 G:\Visual studio\RestfulApiVisualCode\obj\Debug\net5.0\RestfulApiVisualCode.genruntimeconfig.cache
+G:\Visual studio\RestfulApiVisualCode\bin\Debug\net5.0\Humanizer.dll
+G:\Visual studio\RestfulApiVisualCode\bin\Debug\net5.0\Microsoft.EntityFrameworkCore.Design.dll

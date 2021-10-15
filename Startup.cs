@@ -30,10 +30,10 @@ namespace RestfulApiVisualCode
         public void ConfigureServices(IServiceCollection services)
         {
 
-             string con = "Server=(localdb)\\mssqllocaldb;Database=usersdbstore;Trusted_Connection=True;";
+             string con = "Server=(localdb)\\mssqllocaldb;Database=eventsdbstore;Trusted_Connection=True;";
             // устанавливаем контекст данных
             services.AddDbContext<EventsContext>(options => options.UseSqlServer(con));
- 
+            
             services.AddControllers(); // используем контроллеры без представлений
         }
 

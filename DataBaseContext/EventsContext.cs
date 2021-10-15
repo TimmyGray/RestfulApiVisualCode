@@ -1,5 +1,7 @@
-using Microsoft.EntityFrameworkCore;
+
 using RestfulApiVisualCode.Models;
+using Microsoft.EntityFrameworkCore;
+
  
 namespace RestfulApiVisualCode.DataBaseContext
 {
@@ -11,6 +13,7 @@ namespace RestfulApiVisualCode.DataBaseContext
         { 
             //Database.EnsureDeleted();
             Database.EnsureCreated();
+            
         }
     }
 }
