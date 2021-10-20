@@ -10,8 +10,7 @@ namespace RestfulApiVisualCode.DataBaseContext
         public DbSet<Event> Events { get; set; }
         public EventsContext(DbContextOptions<EventsContext> options)
             : base(options)
-        { 
-            //Database.EnsureDeleted();
+        {   
             Database.EnsureCreated();
             
         }

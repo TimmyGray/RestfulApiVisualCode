@@ -9,6 +9,7 @@
       
     </head>
     <body id="body">
+        
         <header class="p-3 text-white">
             <div class="container">
                 <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
@@ -80,7 +81,7 @@
                         <div class="col-md-6 col-lg-4 col-sm-6 col-12 mb-3">
                             <div class="form-group">
                                 <label for="eventdiscribe">Описание проблемы</label>
-                                <textarea class="form-control" name="eventdiscribe" rows="3" required></textarea>
+                                <textarea class="form-control" name="discribeevent" rows="3" required></textarea>
                             </div>
                             <div class="invalid-feedback">Заполните описание</div>
     
@@ -88,7 +89,7 @@
                         <div class="col-auto mb-3">
                             <div class="form-group">
                                 <label for="fixdiscribe">Как исправили(если исправили)</label>
-                                <textarea class="form-control" name="fixdiscribe" rows="3"></textarea>
+                                <textarea class="form-control" name="fixevent" rows="3"></textarea>
                             </div>
     
                         </div>
@@ -137,12 +138,16 @@
                     
                 </div>
               </form>
+              
             
         </main>
 
         <main id="Histories" name = "Histories" class="disactivetab">
-
-               <div class="table-responsive"> 
+            <div class="container justify-content-center">
+                <h1 id="SecondPage" style="text-align: center;">История происшествий</h1>
+            </div>
+            <div class="container-fluid">
+                <div class="table-responsive"> 
                     <table class="table table-striped table-hover">
                         <thead style="background-color: lightcoral;">
                             <tr>
@@ -150,39 +155,51 @@
                                 <th>Дата события</th>
                                 <th>Номер АСБ</th>
                                 <th>Устройство</th>
-                                <th>Серезность</th>
-                                
+                                <th>Серезность</th>   
                             </tr>
                         </thead>
                         <tbody>
                         </tbody>
                     </table>
-               </div>
-               <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                   <div class="modal-dialog">
-                       <div class="modal-content">
-                           <div class="modal-header">
-                               <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                           </div>
-                           <div class="modal-body">
-                               ...
-                           </div>
-                           <div class="modal-footer">
-                               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                               <button type="button" class="btn btn-primary">Save changes</button>
-                           </div>
-                       </div>
-                   </div>
-               </div>
+                </div>
+                <div class="modal fade" id="Modal" tabindex="-1" aria-labelledby="ModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="ModalLabel"></h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 
+                            </div>
+                            <div class="modal-body">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <textarea class="form-control" rows="3" id="discribe"></textarea>
+                                    </div>
+                                    <div class="col-6">
+                                        <textarea class="form-control" rows="3" id="fix"></textarea>
+                                    </div>
+                                </div>
 
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-softyellow">Сохранить изменения</button>
+                                <button type="button" class="btn btn-softyellow" data-bs-dismiss="modal">Закрыть</button>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+ 
         </main>
             
         <main id="Faq" name = "Faq" class="disactivetab">
 
         </main>
-        <script src="Styles/bootstrap/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>    
+        <script src="bootstrap/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>    
         <script>
             const tablinks = document.getElementsByClassName("nav-link px-2");
 
@@ -199,41 +216,50 @@
                     row();
                 }
                          
-            };
+            }
+
+            function showevent(target) {
+                const curevent = target.currentTarget;
+                GetEvent(curevent.id);
+            }
 
             for (var i = 0;i<tablinks.length;i++){
                tablinks[i].onclick = change;
             }
            
-            
             function row(event) {
      
-                    const tr = document.createElement("tr");
-                    tr.setAttribute("data-rowid", event.id);
+                const tr = document.createElement("tr");
+                tr.id = event.id;
+                tr.setAttribute("data-rowid", event.id);
 
-                    const idTd = document.createElement("td");
-                    idTd.append(event.id);
-                    tr.append(idTd);
+                const idTd = document.createElement("td");
+                idTd.append(event.id);
+                tr.append(idTd);
 
-                    const dateofeventTd = document.createElement("td");
-                    dateofeventTd.append(event.dateofevent);
-                    tr.append(dateofeventTd);
+                const dateofeventTd = document.createElement("td");
+                dateofeventTd.append(event.dateofevent);
+                tr.append(dateofeventTd);
 
-                    const nameofasbTd = document.createElement("td");
-                    nameofasbTd.append(event.nameofasb);
-                    tr.append(nameofasbTd);
+                const nameofasbTd = document.createElement("td");
+                nameofasbTd.append(event.nameofasb);
+                tr.append(nameofasbTd);
 
-                    const nameofdeviceTd = document.createElement("td");
-                    nameofdeviceTd.append(event.nameofdevice);
-                    tr.append(nameofdeviceTd);
+                const nameofdeviceTd = document.createElement("td");
+                nameofdeviceTd.append(event.nameofdevice);
+                tr.append(nameofdeviceTd);
 
-                    const isseriosTd = document.createElement("td");
-                    isseriosTd.append(event.isserios);
-                    tr.append(isseriosTd);
-                    return tr;
-                }
+                const isseriosTd = document.createElement("td");
+                isseriosTd.append(event.isserios);
+                tr.append(isseriosTd);
+                    
+                tr.setAttribute("data-bs-toggle", "modal");
+                tr.setAttribute("data-bs-target", "#Modal");
+                tr.onclick = showevent;
+                return tr;
+            }
 
-            async function CreateEvent(eventDateofevent,eventNameofasb, eventNameofdevice, eventIsserios) {
+            async function CreateEvent(eventDateofevent, eventNameofasb, eventNameofdevice, eventIsserios, eventDiscribeevent, eventFixevent) {
                     const response = await fetch("api/events", {
                         method: "POST",
                         headers: { "Accept": "application/json", "Content-Type": "application/json" },
@@ -241,80 +267,96 @@
                             dateofevent: eventDateofevent,
                             nameofasb: parseInt(eventNameofasb, 10),
                             nameofdevice: eventNameofdevice,
-                            isserios: eventIsserios
-                            
+                            isserios: eventIsserios,
+                            discribeevent: eventDiscribeevent,
+                            fixevent: eventFixevent
 
                         })
                     });
                     if (response.ok === true) {
                         const event = await response.json();                  
-                        reset();
+                     //   reset();
                         document.querySelector("tbody").append(row(event));
                     }
-                }
+            }
 
             function reset() {
                     const form = document.forms["eventForm"];
                     form.reset();
                     form.elements["id"].value = 0;
                     
-                } 
+            } 
 
             const resetbut = document.getElementById("reset");
             resetbut.onclick = function(e){
                     e.preventDefault();
                     reset();
-                }
+            }
 
             document.forms["eventForm"].addEventListener("submit", e => {
-                    e.preventDefault();
-                    const form = document.forms["eventForm"];
-                    const id = form.elements["id"].value;
-                    const dateofevent = form.elements["dateofevent"].value;
-                    const nameofasb = form.elements["nameofasb"].value;
-                    const nameofdevice = form.elements["nameofdevice"].value;
-                    const isserios = form.elements["isserios"].value;
-                    CreateEvent(dateofevent, nameofasb, nameofdevice, isserios);
-                    alert("Происшествие создано");   
+                e.preventDefault();
+                alert("начало");
+                const form = document.forms["eventForm"];
+                alert("форма");
+               // const id = form.elements["id"].value;
+               // alert("айди");
+                const dateofevent = form.elements["dateofevent"].value;
+                alert("дата");
+                const nameofasb = form.elements["nameofasb"].value;
+                alert("асбо");
+                const nameofdevice = form.elements["nameofdevice"].value;
+                alert("устройства");
+                const isserios = form.elements["isserios"].value;
+                alert("серьезно");
+                const discribeevent = form.elements["discribeevent"].value;
+                alert("описание");
+                const fixevent = form.elements["fixevent"].value;
+                alert("испрвление");
+                CreateEvent(dateofevent, nameofasb, nameofdevice, isserios, discribeevent, fixevent);
+                alert("метод");
+                      
                 });
 
-            async function GetEvents() {
-                    
-                    const response = await fetch("/api/events", {
-                        method: "GET",
-                        headers: { "Accept": "application/json" }
-                    });
-                    
-                    if (response.ok === true) {
-                        
-                        const events = await response.json();
-                        let rows = document.querySelector("tbody"); 
-                        events.forEach(event => {
-                            
-                            rows.append(row(event));
-                        });
-                    }
-                }
-                
             async function GetEvent(id) {
-                const response = await fetch("/api/events/" + id, {
+                 const response = await fetch("/api/events/" + id, {
                     method: "GET",
                     headers: { "Accept": "application/json" }
                 });
                 if (response.ok === true) {
                     const event = await response.json();
-                    const form = document.forms["eventForm"];
-                    form.elements["id"].value = event.id;
-                    form.elements["dateofevent"].value = event.dateofevent;
-                    form.elements["nameofasb"].value = event.nameofasb;
-                    form.elements["nameofdevice"].value = event.nameofdevice;
-                    form.elements["isserios"].value = event.isserios;
+                    const Label = document.getElementById("ModalLabel");
+                    const discribe = document.getElementById("discribe");
+                    const fix = document.getElementById("fix");
+                    Label.textContent = event.nameofdevice;
+                    discribe.textContent = event.discribeevent;
+                    fix.textContent = event.fixevent;
+
+                    return event;
+                    
+                }
+            }
+
+            async function GetEvents() {
+                    
+                const response = await fetch("/api/events", {
+                    method: "GET",
+                    headers: { "Accept": "application/json" }
+                    });
+                    
+                if (response.ok === true) {
+                        
+                    const events = await response.json();
+                    let rows = document.querySelector("tbody"); 
+                    events.forEach(event => {
+                            
+                    rows.append(row(event));
+                    });
                 }
             }
             GetEvents();
+
          
         </script>
-
         
     </body>
 </html>

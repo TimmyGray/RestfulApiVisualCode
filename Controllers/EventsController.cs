@@ -19,8 +19,8 @@ namespace RestfulApiVisualCode.Controllers
             db = context;
             if (!db.Events.Any())
             {
-                db.Events.Add(new Event { Nameofdevice = "SSL", Nameofasb = 4,Dateofevent = DateTime.Now.Date.ToShortDateString(), Isserios="no"});
-                db.Events.Add(new Event { Nameofdevice = "Karrera", Nameofasb = 7,Dateofevent = DateTime.Now.Date.ToShortDateString(), Isserios="yes" });
+                db.Events.Add(new Event { Nameofdevice = "SSL", Nameofasb = 4,Dateofevent = DateTime.Now.Date.ToShortDateString(), Isserios="no", Discribeevent = "ваще коллапс", Fixevent = "все пофиксили"});
+                db.Events.Add(new Event { Nameofdevice = "Karrera", Nameofasb = 7,Dateofevent = DateTime.Now.Date.ToShortDateString(), Isserios="yes", Discribeevent = "произошел пиздец", Fixevent = "это не" });
                 db.SaveChanges();
                 
             }
@@ -32,7 +32,7 @@ namespace RestfulApiVisualCode.Controllers
             return await db.Events.ToListAsync();
         }
  
-        // GET api/users/5
+        
         [HttpGet("{id}")]
         public async Task<ActionResult<Event>> Get(int id)
         {
@@ -42,7 +42,7 @@ namespace RestfulApiVisualCode.Controllers
             return new ObjectResult(evnt);
         }
  
-        // POST api/users
+       
         [HttpPost]
         public async Task<ActionResult<Event>> Post(Event evnt)
         {
@@ -56,7 +56,7 @@ namespace RestfulApiVisualCode.Controllers
             return Ok(evnt);
         }
  
-        // PUT api/users/
+        
         [HttpPut]
         public async Task<ActionResult<Event>> Put(Event evnt)
         {
@@ -74,7 +74,7 @@ namespace RestfulApiVisualCode.Controllers
             return Ok(evnt);
         }
  
-        // DELETE api/users/5
+        
         [HttpDelete("{id}")]
         public async Task<ActionResult<Event>> Delete(int id)
         {
