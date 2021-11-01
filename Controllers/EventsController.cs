@@ -64,7 +64,7 @@ namespace RestfulApiVisualCode.Controllers
             {
                 return BadRequest();
             }
-            if (!db.Events.Any(x => x.Id ==evnt.Id))
+            if (!db.Events.Any(x => x.Id == evnt.Id))
             {
                 return NotFound();
             }

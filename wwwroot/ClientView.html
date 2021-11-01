@@ -130,7 +130,7 @@
                             <button id="submit" type="submit" class="btn btn-softyellow">Создать</button>
                         </div>
                         <div class="col-auto mb-3">
-                            <a id="reset" class="btn btn-softyellow">Сброс</a>
+                            <button id="reset" type="reset" class="btn btn-softyellow">Сброс</button>
                         </div>
                         
                     </div>
@@ -166,6 +166,7 @@
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
+                                <h6 id ="idh" hidden></h6>
                                 <h5 class="modal-title" id="ModalLabel"></h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 
@@ -182,8 +183,8 @@
 
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-softyellow">Сохранить изменения</button>
-                                <button type="button" class="btn btn-softyellow" data-bs-dismiss="modal">Закрыть</button>
+                                <button type="button" id="savechanges" class="btn btn-softyellow">Сохранить изменения</button>
+                                <button type="button" id="closechanges" class="btn btn-softyellow" data-bs-dismiss="modal">Закрыть</button>
 
                             </div>
 
@@ -201,6 +202,30 @@
         </main>
         <script src="bootstrap/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>    
         <script>
+            const idh = document.getElementById("idh");
+            const Label = document.getElementById("ModalLabel");
+            const discribe = document.getElementById("discribe");
+            const fix = document.getElementById("fix");
+            var tempevent;
+
+            const editbut = document.getElementById("savechanges");
+            editbut.addEventListener("click", function (e) {
+                tempevent.discribeevent = discribe.value;
+                tempevent.fixevent = fix.value;
+                tempevent.id = idh.textContent;
+                EditEvent(tempevent.id, tempevent.dateofevent, tempevent.nameofasb, tempevent.nameofdevice, tempevent.isserios, tempevent.discribeevent, tempevent.fixevent);
+                closebut.click();
+              
+               
+            });
+            
+
+            const closebut = document.getElementById("closechanges");
+            closebut.addEventListener("click", function (e) {    
+                alert("closechanges");
+            });
+
+
             const tablinks = document.getElementsByClassName("nav-link px-2");
 
             function change(event){
@@ -218,11 +243,6 @@
                          
             }
 
-            function showevent(target) {
-                const curevent = target.currentTarget;
-                GetEvent(curevent.id);
-            }
-
             for (var i = 0;i<tablinks.length;i++){
                tablinks[i].onclick = change;
             }
@@ -230,33 +250,84 @@
             function row(event) {
      
                 const tr = document.createElement("tr");
+               
                 tr.id = event.id;
                 tr.setAttribute("data-rowid", event.id);
 
                 const idTd = document.createElement("td");
+                idTd.setAttribute("name","id");
                 idTd.append(event.id);
                 tr.append(idTd);
 
                 const dateofeventTd = document.createElement("td");
+                dateofeventTd.setAttribute("name","dateofevent");
                 dateofeventTd.append(event.dateofevent);
                 tr.append(dateofeventTd);
 
                 const nameofasbTd = document.createElement("td");
+                nameofasbTd.setAttribute("name","nameofasb");
                 nameofasbTd.append(event.nameofasb);
                 tr.append(nameofasbTd);
 
                 const nameofdeviceTd = document.createElement("td");
+                nameofdeviceTd.setAttribute("name","nameofdevice");
                 nameofdeviceTd.append(event.nameofdevice);
                 tr.append(nameofdeviceTd);
 
                 const isseriosTd = document.createElement("td");
+                isseriosTd.setAttribute("name","isserios");
                 isseriosTd.append(event.isserios);
                 tr.append(isseriosTd);
+
+                tr.addEventListener("click", function (e) {
+                    const curtr = e.currentTarget;
+                    GetEvent(curtr.id);
+                });
                     
                 tr.setAttribute("data-bs-toggle", "modal");
                 tr.setAttribute("data-bs-target", "#Modal");
-                tr.onclick = showevent;
+                
                 return tr;
+            }
+
+            //async function EditEvent(eventId, eventDiscribeevent, eventFixevent) {
+            //    const response = await fetch("api/events", {
+            //        method: "PUT",
+            //        headers: { "Accept": "application/json", "Content-Type": "application/json" },
+            //        body: JSON.stringify({
+            //            id: parseInt(eventId, 10),
+            //            discribeevent: eventDiscribeevent,
+            //            fixevent: eventFixevent
+            //        })
+            //    });
+            //    if (response.ok === true) {
+            //        const event = await response.json();
+
+            //    }
+            //}
+
+            async function EditEvent(eventId, eventDateofevent, eventNameofasb, eventNameofdevice, eventIsserios, eventDiscribeevent, eventFixevent) {
+                const response = await fetch("api/events", {
+                    method: "PUT",
+                    headers: { "Accept": "application/json", "Content-Type": "application/json" },
+                    body: JSON.stringify({
+                        id: parseInt(eventId, 10),
+                        dateofevent: eventDateofevent,
+                        nameofasb: eventNameofasb,
+                        nameofdevice: eventNameofdevice,
+                        isserios: eventIsserios,
+                        discribeevent: eventDiscribeevent,
+                        fixevent: eventFixevent
+                    })
+                });
+                if (response.ok === true) {
+                    const event = await response.json();
+                    const temptr = document.getElementById(event.id);
+                    temptr.replaceWith(row(event));
+                    alert("Происшествие обновлено");
+                    
+                }
+               
             }
 
             async function CreateEvent(eventDateofevent, eventNameofasb, eventNameofdevice, eventIsserios, eventDiscribeevent, eventFixevent) {
@@ -270,50 +341,28 @@
                             isserios: eventIsserios,
                             discribeevent: eventDiscribeevent,
                             fixevent: eventFixevent
-
                         })
                     });
                     if (response.ok === true) {
                         const event = await response.json();                  
-                     //   reset();
                         document.querySelector("tbody").append(row(event));
+                        
                     }
             }
 
-            function reset() {
-                    const form = document.forms["eventForm"];
-                    form.reset();
-                    form.elements["id"].value = 0;
-                    
-            } 
-
-            const resetbut = document.getElementById("reset");
-            resetbut.onclick = function(e){
-                    e.preventDefault();
-                    reset();
-            }
-
+            
             document.forms["eventForm"].addEventListener("submit", e => {
                 e.preventDefault();
                 alert("начало");
                 const form = document.forms["eventForm"];
-                alert("форма");
-               // const id = form.elements["id"].value;
-               // alert("айди");
                 const dateofevent = form.elements["dateofevent"].value;
-                alert("дата");
                 const nameofasb = form.elements["nameofasb"].value;
-                alert("асбо");
                 const nameofdevice = form.elements["nameofdevice"].value;
-                alert("устройства");
                 const isserios = form.elements["isserios"].value;
-                alert("серьезно");
                 const discribeevent = form.elements["discribeevent"].value;
-                alert("описание");
                 const fixevent = form.elements["fixevent"].value;
-                alert("испрвление");
                 CreateEvent(dateofevent, nameofasb, nameofdevice, isserios, discribeevent, fixevent);
-                alert("метод");
+                form.reset();
                       
                 });
 
@@ -323,16 +372,12 @@
                     headers: { "Accept": "application/json" }
                 });
                 if (response.ok === true) {
-                    const event = await response.json();
-                    const Label = document.getElementById("ModalLabel");
-                    const discribe = document.getElementById("discribe");
-                    const fix = document.getElementById("fix");
+                    const event = await response.json(); 
+                    tempevent = event;
+                    idh.textContent = event.id;
                     Label.textContent = event.nameofdevice;
-                    discribe.textContent = event.discribeevent;
-                    fix.textContent = event.fixevent;
-
-                    return event;
-                    
+                    discribe.value = event.discribeevent;
+                    fix.value = event.fixevent; 
                 }
             }
 
@@ -353,6 +398,7 @@
                     });
                 }
             }
+
             GetEvents();
 
          
