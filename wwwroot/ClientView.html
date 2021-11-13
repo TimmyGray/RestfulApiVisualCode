@@ -368,6 +368,7 @@
             if (response.ok === true) {
                 const event = await response.json();
                 const temptr = document.getElementById(event.id);
+                
                 temptr.replaceWith(row(event));
                 alert("Происшествие обновлено");
 
@@ -391,6 +392,7 @@
             if (response.ok === true) {
                 const event = await response.json();
                 document.querySelector("tbody").append(row(event));
+                alert("Происшествие создано");
 
             }
         }
@@ -398,7 +400,6 @@
 
         document.forms["eventForm"].addEventListener("submit", e => {
             e.preventDefault();
-            alert("начало");
             const form = document.forms["eventForm"];
             const dateofevent = form.elements["dateofevent"].value;
             const nameofasb = form.elements["nameofasb"].value;
@@ -452,7 +453,14 @@
             if (response.ok === true) {
                 const event = await response.json();
                 document.querySelector("tr[data-rowid='" + event.id + "']").remove();
-                alert("delete suc");
+                const tds = document.getElementsByName("id");
+                tds.forEach(td => {
+                    if (parseInt(td.textContent) > id)
+                        td.textContent = (parseInt(td.textContent) - 1).toString();
+                    
+                });
+                
+                alert("Происшествие удалено");
             }
         }
 

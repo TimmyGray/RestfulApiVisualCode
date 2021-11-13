@@ -19,8 +19,11 @@ namespace RestfulApiVisualCode.Controllers
             db = context;
             if (!db.Events.Any())
             {
-                db.Events.Add(new Event { Nameofdevice = "SSL", Nameofasb = 4,Dateofevent = DateTime.Now.Date.ToShortDateString(), Isserios="no", Discribeevent = "ваще коллапс", Fixevent = "все пофиксили"});
-                db.Events.Add(new Event { Nameofdevice = "Karrera", Nameofasb = 7,Dateofevent = DateTime.Now.Date.ToShortDateString(), Isserios="yes", Discribeevent = "произошел пиздец", Fixevent = "это не" });
+                db.Events.Add(new Event { Nameofdevice = "SSL", Nameofasb = 1,Dateofevent = DateTime.Now.Date.ToShortDateString(), Isserios="серьезно", Discribeevent = "ваще коллапс", Fixevent = "все пофиксили"});
+                db.Events.Add(new Event { Nameofdevice = "Karrera", Nameofasb = 2,Dateofevent = DateTime.Now.Date.ToShortDateString(), Isserios="не серьезно", Discribeevent = "все сломалось", Fixevent = "это не" });
+                db.Events.Add(new Event { Nameofdevice = "микрофон", Nameofasb = 7, Dateofevent = DateTime.Now.Date.ToShortDateString(), Isserios = "не серьезно", Discribeevent = "ваще коллапс", Fixevent = "все пофиксили" });
+                db.Events.Add(new Event { Nameofdevice = "Karrera", Nameofasb = 5, Dateofevent = DateTime.Now.Date.ToShortDateString(), Isserios = "серьезно", Discribeevent = "жесть какая", Fixevent = "это не" });
+
                 db.SaveChanges();
                 
             }
@@ -84,6 +87,8 @@ namespace RestfulApiVisualCode.Controllers
                 return NotFound();
             }
             db.Events.Remove(evnt);
+            
+            db.UpdateRange(evnt);
             await db.SaveChangesAsync();
             return Ok(evnt);
         }

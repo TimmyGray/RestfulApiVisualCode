@@ -5986,19 +5986,21 @@
   },
   "packageFolders": {
     "C:\\Users\\zuuub\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {},
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "G:\\Visual studio\\RestfulApiVisualCode\\RestfulApiVisualCode.csproj",
+      "projectUniqueName": "C:\\Users\\zuuub\\Source\\Repos\\TimmyGray\\RestfulApiVisualCode\\RestfulApiVisualCode.csproj",
       "projectName": "RestfulApiVisualCode",
-      "projectPath": "G:\\Visual studio\\RestfulApiVisualCode\\RestfulApiVisualCode.csproj",
+      "projectPath": "C:\\Users\\zuuub\\Source\\Repos\\TimmyGray\\RestfulApiVisualCode\\RestfulApiVisualCode.csproj",
       "packagesPath": "C:\\Users\\zuuub\\.nuget\\packages\\",
-      "outputPath": "G:\\Visual studio\\RestfulApiVisualCode\\obj\\",
+      "outputPath": "C:\\Users\\zuuub\\Source\\Repos\\TimmyGray\\RestfulApiVisualCode\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
+        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
         "C:\\Users\\zuuub\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -6065,7 +6067,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.402\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.302\\RuntimeIdentifierGraph.json"
       }
     }
   }
