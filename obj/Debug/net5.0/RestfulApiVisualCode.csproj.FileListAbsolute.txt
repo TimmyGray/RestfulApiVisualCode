@@ -173,7 +173,6 @@ C:\Users\zuuub\Source\Repos\TimmyGray\RestfulApiVisualCode\obj\Debug\net5.0\stat
 C:\Users\zuuub\Source\Repos\TimmyGray\RestfulApiVisualCode\obj\Debug\net5.0\staticwebassets\RestfulApiVisualCode.StaticWebAssets.xml
 C:\Users\zuuub\Source\Repos\TimmyGray\RestfulApiVisualCode\obj\Debug\net5.0\scopedcss\bundle\RestfulApiVisualCode.styles.css
 C:\Users\zuuub\Source\Repos\TimmyGray\RestfulApiVisualCode\obj\Debug\net5.0\RestfulApiVisualCode.RazorTargetAssemblyInfo.cache
-C:\Users\zuuub\Source\Repos\TimmyGray\RestfulApiVisualCode\obj\Debug\net5.0\RestfulApiVisualCode.csproj.CopyComplete
 C:\Users\zuuub\Source\Repos\TimmyGray\RestfulApiVisualCode\obj\Debug\net5.0\RestfulApiVisualCode.dll
 C:\Users\zuuub\Source\Repos\TimmyGray\RestfulApiVisualCode\obj\Debug\net5.0\ref\RestfulApiVisualCode.dll
 C:\Users\zuuub\Source\Repos\TimmyGray\RestfulApiVisualCode\obj\Debug\net5.0\RestfulApiVisualCode.pdb

@@ -251,9 +251,9 @@
 
 
         const closebut = document.getElementById("closechanges");
-        closebut.addEventListener("click", function (e) {
-            alert("closechanges");
-        });
+        //closebut.addEventListener("click", function (e) {
+           
+        //});
 
 
         const tablinks = document.getElementsByClassName("nav-link px-2");
@@ -276,7 +276,7 @@
             tablinks[i].onclick = change;
         }
 
-        function row(event) {
+        function row(event,num) {
 
             const tr = document.createElement("tr");
 
@@ -287,14 +287,25 @@
             idTd.setAttribute("name", "id");
             idTd.setAttribute("data-bs-toggle", "modal");
             idTd.setAttribute("data-bs-target", "#Modal");
-            idTd.append(event.id);
+            idTd.append(num);
             tr.append(idTd);
 
             const dateofeventTd = document.createElement("td");
             dateofeventTd.setAttribute("name", "dateofevent");
             dateofeventTd.setAttribute("data-bs-toggle", "modal");
             dateofeventTd.setAttribute("data-bs-target", "#Modal");
-            dateofeventTd.append(event.dateofevent);
+            let datestring = event.dateofevent;
+            let correctdate = "";
+            for (let i = 0; i < datestring.length; i++) {
+                if (datestring[i] === ".") {
+                    const repl = datestring[i].replace(".", "-");
+                    correctdate = correctdate + repl;
+                }
+                else {
+                    correctdate = correctdate + datestring[i];
+                }
+            }
+            dateofeventTd.append(correctdate);
             tr.append(dateofeventTd);
 
             const nameofasbTd = document.createElement("td");
@@ -326,8 +337,8 @@
             const delbutimg = document.createElement("img");
             delbutimg.src = "Resources/recyclebin.png";
             delbutimg.alt = "";
-            delbutimg.height = "50";
-            delbutimg.width = "50";
+            delbutimg.height = "35";
+            delbutimg.width = "35";
             
             delbut.append(delbutimg);
             delbut.addEventListener("click", function (e) {
@@ -368,8 +379,9 @@
             if (response.ok === true) {
                 const event = await response.json();
                 const temptr = document.getElementById(event.id);
-                
-                temptr.replaceWith(row(event));
+                const tdupdate = temptr.querySelector("td");
+                const num = parseInt(tdupdate.textContent);
+                temptr.replaceWith(row(event, num));
                 alert("Происшествие обновлено");
 
             }
@@ -391,7 +403,9 @@
             });
             if (response.ok === true) {
                 const event = await response.json();
-                document.querySelector("tbody").append(row(event));
+                const tds = document.getElementsByName("id");
+                const num = tds.length + 1;
+                document.querySelector("tbody").append(row(event,num));
                 alert("Происшествие создано");
 
             }
@@ -438,9 +452,10 @@
 
                 const events = await response.json();
                 let rows = document.querySelector("tbody");
+                let i = 0;
                 events.forEach(event => {
-
-                    rows.append(row(event));
+                    const num = ++i;
+                    rows.append(row(event,num));
                 });
             }
         }
@@ -453,11 +468,10 @@
             if (response.ok === true) {
                 const event = await response.json();
                 document.querySelector("tr[data-rowid='" + event.id + "']").remove();
-                const tds = document.getElementsByName("id");
+                let tds = document.getElementsByName("id");
+                let i = 0;
                 tds.forEach(td => {
-                    if (parseInt(td.textContent) > id)
-                        td.textContent = (parseInt(td.textContent) - 1).toString();
-                    
+                    td.textContent = `${++i}`;
                 });
                 
                 alert("Происшествие удалено");

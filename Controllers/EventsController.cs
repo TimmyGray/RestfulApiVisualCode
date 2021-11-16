@@ -87,8 +87,6 @@ namespace RestfulApiVisualCode.Controllers
                 return NotFound();
             }
             db.Events.Remove(evnt);
-            
-            db.UpdateRange(evnt);
             await db.SaveChangesAsync();
             return Ok(evnt);
         }
