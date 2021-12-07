@@ -153,7 +153,6 @@
             <div class="row">
                 <div class="col-auto">
                     <select id="Sorting" class="form-select" hidden>
-                        <option id="val" value></option>
                     </select>
 
                 </div>
@@ -166,11 +165,11 @@
                             <th id="Date">Дата события</th>
                             <th id="Number">Номер АСБ</th>
                             <th id="Device">Устройство</th>
-                            <th id="Serios">Серезность</th>
+                            <th id="Serios">Серьезность</th>
                             <th id="Delete"></th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody id="body">
                     </tbody>
                 </table>
             </div>
@@ -214,31 +213,22 @@
     </main>
     <script src="bootstrap/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
     <script>
-        const idsort = document.getElementById("#");
-        const datesort = document.getElementById("Date");
+      //const idsort = document.getElementById("#");
+      //  const datesort = document.getElementById("Date");
         const numbersort = document.getElementById("Number");
         const devicesort = document.getElementById("Device");
         const seriossort = document.getElementById("Serios");
 
-        idsort.addEventListener("click", Sorting);
-        datesort.addEventListener("click", Sorting);
-        numbersort.addEventListener("click", Sorting);
-        devicesort.addEventListener("click", Sorting);
-        seriossort.addEventListener("click", Sorting);
-
-        function Sorting(event) {
-            const sort = event.currentTarget;
-            const sorting = document.getElementById("Sorting");
-            const val = document.getElementById("val");
-            val.textContent = sort.textContent;
-            sorting.hidden = false;
-        }
- 
         const idh = document.getElementById("idh");
         const Label = document.getElementById("ModalLabel");
         const discribe = document.getElementById("discribe");
         const fix = document.getElementById("fix");
+
         var tempevent;
+
+        const closebut = document.getElementById("closechanges");
+
+        const tablinks = document.getElementsByClassName("nav-link px-2");
 
         const editbut = document.getElementById("savechanges");
         editbut.addEventListener("click", function (e) {
@@ -249,12 +239,206 @@
             closebut.click();
         });
 
-        const closebut = document.getElementById("closechanges");
-        //closebut.addEventListener("click", function (e) {
-           
-        //});
+       // idsort.addEventListener("click", Sorting);
+       // datesort.addEventListener("click", Sorting);
+        numbersort.addEventListener("click", Sorting);
+        devicesort.addEventListener("click", Sorting);
+        seriossort.addEventListener("click", Sorting);
 
-        const tablinks = document.getElementsByClassName("nav-link px-2");
+        document.forms["eventForm"].addEventListener("submit", e => {
+            e.preventDefault();
+            const form = document.forms["eventForm"];
+            const dateofevent = form.elements["dateofevent"].value;
+            const nameofasb = form.elements["nameofasb"].value;
+            const nameofdevice = form.elements["nameofdevice"].value;
+            const isserios = form.elements["isserios"].value;
+            const discribeevent = form.elements["discribeevent"].value;
+            const fixevent = form.elements["fixevent"].value;
+            CreateEvent(dateofevent, nameofasb, nameofdevice, isserios, discribeevent, fixevent);
+            form.reset();
+
+        });
+
+        for (var i = 0; i < tablinks.length; i++) {
+            tablinks[i].onclick = change;
+        }
+
+        function Sorting(event) {
+            const sort = event.currentTarget;
+            const sorting = document.getElementById("Sorting");
+            sorting.innerHTML = "";
+            const val = document.createElement("option");
+            val.textContent = sort.textContent;
+            sorting.appendChild(val);
+            if (sort.textContent == "Номер АСБ") {
+
+                AddSortingASB(sorting);
+            }
+            if (sort.textContent == "Устройство") {
+                
+                AddSortingDevice(sorting);
+            }
+            if (sort.textContent == "Серьезность") {
+
+                AddSortingSerios(sorting);
+            }
+            sorting.hidden = false;
+            const tempbody = document.querySelector("tbody");
+            var trs = tempbody.children;
+            for (var i = 0; i < trs.length; i++) {
+                trs[i].hidden = false;
+            }
+
+        }
+
+        function AddSortingASB(sorting) {
+            sorting.removeEventListener("change", SortingDevice);
+            sorting.removeEventListener("change", SortingSerios);
+            sorting.addEventListener("change", SortingASB);
+
+            const firstoption = document.createElement("option");
+            const thirddoption = document.createElement("option");
+            const fourthoption = document.createElement("option");
+            const fivesoption = document.createElement("option");
+            const sixsoption = document.createElement("option");
+            const sevensndoption = document.createElement("option");
+            const eigthsoption = document.createElement("option");
+
+            firstoption.textContent = "1";
+            thirddoption.textContent = "3";
+            fourthoption.textContent = "4";
+            fivesoption.textContent = "5";
+            sixsoption.textContent = "6";
+            sevensndoption.textContent = "7";
+            eigthsoption.textContent = "8";
+
+            sorting.appendChild(firstoption);
+            sorting.appendChild(thirddoption);
+            sorting.appendChild(fourthoption);
+            sorting.appendChild(fivesoption);
+            sorting.appendChild(sixsoption);
+            sorting.appendChild(sevensndoption);
+            sorting.appendChild(eigthsoption);
+            
+        }
+
+        function AddSortingDevice(sorting) {
+            sorting.removeEventListener("change", SortingASB);
+            sorting.removeEventListener("change", SortingSerios);
+            sorting.addEventListener("change", SortingDevice);
+
+            const ssloption = document.createElement("option");
+            const soundcraftoption = document.createElement("option");
+            const karreraoption = document.createElement("option");
+            const micoption = document.createElement("option");
+            const daletoption = document.createElement("option");
+            const platinumoption = document.createElement("option");
+            const lightoption = document.createElement("option");
+            const decoroption = document.createElement("option");
+            const camsoption = document.createElement("option");
+            const graphicsoption = document.createElement("option");
+            const computeroption = document.createElement("option");
+            const otheroption = document.createElement("option");
+
+            ssloption.textContent = "SSL";
+            soundcraftoption.textContent = "Sound Craft";
+            karreraoption.textContent = "Karrera";
+            micoption.textContent = "Микрофон, мониторинг, приемопередатчик";
+            daletoption.textContent = "Dalet";
+            platinumoption.textContent = "Матрица Platinum";
+            lightoption.textContent = "Свет и оборудование";
+            decoroption.textContent = "Декорации";
+            camsoption.textContent = "Камеры и камерные каналы";
+            graphicsoption.textContent = "Графические станции";
+            computeroption.textContent = "Компьютеры";
+            otheroption.textContent = "Другое";
+
+            sorting.appendChild(ssloption);
+            sorting.appendChild(soundcraftoption);
+            sorting.appendChild(karreraoption);
+            sorting.appendChild(micoption);
+            sorting.appendChild(daletoption);
+            sorting.appendChild(platinumoption);
+            sorting.appendChild(lightoption);
+            sorting.appendChild(decoroption);
+            sorting.appendChild(camsoption);
+            sorting.appendChild(graphicsoption);
+            sorting.appendChild(computeroption);
+            sorting.appendChild(otheroption);
+            
+        }
+
+        function AddSortingSerios(sorting) {
+            sorting.removeEventListener("change", SortingDevice);
+            sorting.removeEventListener("change", SortingASB);
+            sorting.addEventListener("change", SortingSerios)
+
+            const Seriosoption = document.createElement("option");
+            const Notseriosoption = document.createElement("option");
+
+            Seriosoption.textContent = "Серьезное";
+            Notseriosoption.textContent = "Несерьезное";
+
+            sorting.appendChild(Seriosoption);
+            sorting.appendChild(Notseriosoption);
+        }
+
+        function SortingASB(e) {
+            const tempitem = e.currentTarget;
+            const tempbody = document.querySelector("tbody");
+            var trs = tempbody.children;
+            if (tempitem.selectedIndex != 0) {
+                for (var i = 0; i < trs.length; i++) {
+                    trs[i].hidden = false;
+                    var temptds = trs[i].querySelector("td[name=nameofasb]");
+                    if (temptds.textContent != tempitem.options[tempitem.selectedIndex].textContent)
+                        trs[i].hidden = true;
+                }
+            }
+            else {
+                for (var i = 0; i < trs.length; i++) {
+                    trs[i].hidden = false;
+                }
+            }
+        }
+
+        function SortingDevice(e) {
+            const tempitem = e.currentTarget;
+            const tempbody = document.querySelector("tbody");
+            var trs = tempbody.children;
+            if (tempitem.selectedIndex != 0) {
+                for (var i = 0; i < trs.length; i++) {
+                    trs[i].hidden = false;
+                    var temptds = trs[i].querySelector("td[name=nameofdevice]");
+                    if (temptds.textContent != tempitem.options[tempitem.selectedIndex].textContent)
+                        trs[i].hidden = true;
+                }
+            }
+            else {
+                for (var i = 0; i < trs.length; i++) {
+                    trs[i].hidden = false;
+                }
+            }
+        }
+
+        function SortingSerios(e) {
+            const tempitem = e.currentTarget;
+            const tempbody = document.querySelector("tbody");
+            var trs = tempbody.children;
+            if (tempitem.selectedIndex != 0) {
+                for (var i = 0; i < trs.length; i++) {
+                    trs[i].hidden = false;
+                    var temptds = trs[i].querySelector("td[name=isserios]");
+                    if (temptds.textContent != `${tempitem.options[tempitem.selectedIndex].textContent} происшествие`)
+                        trs[i].hidden = true;
+                }
+            }
+            else {
+                for (var i = 0; i < trs.length; i++) {
+                    trs[i].hidden = false;
+                }
+            }
+        }
 
         function change(event) {
             const maintabs = document.getElementsByTagName("main");
@@ -268,10 +452,6 @@
                 row();
             }
 
-        }
-
-        for (var i = 0; i < tablinks.length; i++) {
-            tablinks[i].onclick = change;
         }
 
         function row(event,num) {
@@ -408,21 +588,6 @@
 
             }
         }
-
-
-        document.forms["eventForm"].addEventListener("submit", e => {
-            e.preventDefault();
-            const form = document.forms["eventForm"];
-            const dateofevent = form.elements["dateofevent"].value;
-            const nameofasb = form.elements["nameofasb"].value;
-            const nameofdevice = form.elements["nameofdevice"].value;
-            const isserios = form.elements["isserios"].value;
-            const discribeevent = form.elements["discribeevent"].value;
-            const fixevent = form.elements["fixevent"].value;
-            CreateEvent(dateofevent, nameofasb, nameofdevice, isserios, discribeevent, fixevent);
-            form.reset();
-
-        });
 
         async function GetEvent(id) {
             const response = await fetch("/api/events/" + id, {

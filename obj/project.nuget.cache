@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "HFd6YkscfpogGDrx2uyvaeszzVqB6Y1JoLbmDKk2/RXdt2c88nc33WFj8e7KtUxNLfxqxUYADLK7aXVw7hXG5w==",
+  "dgSpecHash": "1qiB4f0Tm9kmgbZOEWQKVEclbMGe3cXpgS5L7u4G22TPHU6psJTCYav5lAle7aocCrJQJ9wtoCbQHDTQfzilMQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\zuuub\\Source\\Repos\\TimmyGray\\RestfulApiVisualCode\\RestfulApiVisualCode.csproj",
+  "projectFilePath": "C:\\Users\\zuuub\\source\\repos\\TimmyGray\\RestfulApiVisualCode\\RestfulApiVisualCode.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\zuuub\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\zuuub\\.nuget\\packages\\microsoft.aspnetcore.authentication.abstractions\\2.2.0\\microsoft.aspnetcore.authentication.abstractions.2.2.0.nupkg.sha512",

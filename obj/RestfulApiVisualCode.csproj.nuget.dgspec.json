@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\zuuub\\Source\\Repos\\TimmyGray\\RestfulApiVisualCode\\RestfulApiVisualCode.csproj": {}
+    "C:\\Users\\zuuub\\source\\repos\\TimmyGray\\RestfulApiVisualCode\\RestfulApiVisualCode.csproj": {}
   },
   "projects": {
-    "C:\\Users\\zuuub\\Source\\Repos\\TimmyGray\\RestfulApiVisualCode\\RestfulApiVisualCode.csproj": {
+    "C:\\Users\\zuuub\\source\\repos\\TimmyGray\\RestfulApiVisualCode\\RestfulApiVisualCode.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\zuuub\\Source\\Repos\\TimmyGray\\RestfulApiVisualCode\\RestfulApiVisualCode.csproj",
+        "projectUniqueName": "C:\\Users\\zuuub\\source\\repos\\TimmyGray\\RestfulApiVisualCode\\RestfulApiVisualCode.csproj",
         "projectName": "RestfulApiVisualCode",
-        "projectPath": "C:\\Users\\zuuub\\Source\\Repos\\TimmyGray\\RestfulApiVisualCode\\RestfulApiVisualCode.csproj",
+        "projectPath": "C:\\Users\\zuuub\\source\\repos\\TimmyGray\\RestfulApiVisualCode\\RestfulApiVisualCode.csproj",
         "packagesPath": "C:\\Users\\zuuub\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\zuuub\\Source\\Repos\\TimmyGray\\RestfulApiVisualCode\\obj\\",
+        "outputPath": "C:\\Users\\zuuub\\source\\repos\\TimmyGray\\RestfulApiVisualCode\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

@@ -1,6 +1,8 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\wwwroot",
+    "\\wwwroot\\scss"
   ],
   "SelectedNode": "\\RestfulApiVisualCode.sln",
   "PreviewInSolutionExplorer": false
