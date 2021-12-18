@@ -150,13 +150,69 @@
         </div>
         
         <div class="container-fluid">
-            <div class="row">
-                <div class="col-auto">
-                    <select id="Sorting" class="form-select" hidden>
-                        <option id="val" value></option>
+            <div class="row mb-2">
+                <div class="col-2 mb-1" hidden id="sortingdiv">
+                    <select id="Sorting" class="form-select" >
                     </select>
 
                 </div>
+                <div class="col-9" hidden id="datediv">
+                    <div class="row">
+                        <div class="col-3">
+                            <label for="yearselect">Год</label>
+                            <select class="form-select" id="yearselect">
+                                <option value>Выбрать...</option>
+                                <option>2022</option>
+                                <option>2021</option>
+                                <option>2020</option>
+                                <option>2019</option>
+                                <option>2018</option>
+                                <option>2017</option>
+                                <option>2016</option>
+                                <option>2015</option>
+                                <option>2014</option>
+                                <option>2014</option>
+                                <option>2013</option>
+                                <option>2012</option>
+                                <option>2011</option>
+                                <option>2010</option>
+                                <option>2009</option>
+                                <option>2008</option>
+                                <option>2007</option>
+                                <option>2007</option>
+                                <option>2007</option>
+                                <option>2007</option>
+                            </select>
+                        </div>
+                        <div class="col-3">
+                            <label for="monthselect">Месяц</label>
+                            <select class="form-select" id="monthselect">
+                                <option value>Выбрать...</option>
+                                <option>Январь</option>
+                                <option>Февраль</option>
+                                <option>Март</option>
+                                <option>Апрель</option>
+                                <option>Май</option>
+                                <option>Июнь</option>
+                                <option>Июль</option>
+                                <option>Август</option>
+                                <option>Сентябрь</option>
+                                <option>Октябрь</option>
+                                <option>Ноябрь</option>
+                                <option>Декабрь</option>
+                            </select>
+                        </div>
+
+                        <div class="col-3">
+                            <label for="currentdayselect">День</label>
+                            <input id="currentdayselect" value="Конкретный день" class="form-control" type="date" />
+                        </div>
+                        
+                    </div>
+                        
+                   
+                </div>
+                
             </div>
             <div class="table-responsive">
                 <table class="table table-striped table-hover">
@@ -166,11 +222,11 @@
                             <th id="Date">Дата события</th>
                             <th id="Number">Номер АСБ</th>
                             <th id="Device">Устройство</th>
-                            <th id="Serios">Серезность</th>
+                            <th id="Serios">Серьезность</th>
                             <th id="Delete"></th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody id="body">
                     </tbody>
                 </table>
             </div>
@@ -214,31 +270,22 @@
     </main>
     <script src="bootstrap/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
     <script>
-        const idsort = document.getElementById("#");
+
         const datesort = document.getElementById("Date");
         const numbersort = document.getElementById("Number");
         const devicesort = document.getElementById("Device");
         const seriossort = document.getElementById("Serios");
 
-        idsort.addEventListener("click", Sorting);
-        datesort.addEventListener("click", Sorting);
-        numbersort.addEventListener("click", Sorting);
-        devicesort.addEventListener("click", Sorting);
-        seriossort.addEventListener("click", Sorting);
-
-        function Sorting(event) {
-            const sort = event.currentTarget;
-            const sorting = document.getElementById("Sorting");
-            const val = document.getElementById("val");
-            val.textContent = sort.textContent;
-            sorting.hidden = false;
-        }
- 
         const idh = document.getElementById("idh");
         const Label = document.getElementById("ModalLabel");
         const discribe = document.getElementById("discribe");
         const fix = document.getElementById("fix");
+
         var tempevent;
+
+        const closebut = document.getElementById("closechanges");
+
+        const tablinks = document.getElementsByClassName("nav-link px-2");
 
         const editbut = document.getElementById("savechanges");
         editbut.addEventListener("click", function (e) {
@@ -249,14 +296,253 @@
             closebut.click();
         });
 
+       
+        numbersort.addEventListener("click", Sorting);
+        devicesort.addEventListener("click", Sorting);
+        seriossort.addEventListener("click", Sorting);
+        datesort.addEventListener("click", Sorting);
 
-        const closebut = document.getElementById("closechanges");
-        closebut.addEventListener("click", function (e) {
-            alert("closechanges");
+
+        document.forms["eventForm"].addEventListener("submit", e => {
+            e.preventDefault();
+            const form = document.forms["eventForm"];
+            const dateofevent = form.elements["dateofevent"].value;
+            const nameofasb = form.elements["nameofasb"].value;
+            const nameofdevice = form.elements["nameofdevice"].value;
+            const isserios = form.elements["isserios"].value;
+            const discribeevent = form.elements["discribeevent"].value;
+            const fixevent = form.elements["fixevent"].value;
+            CreateEvent(dateofevent, nameofasb, nameofdevice, isserios, discribeevent, fixevent);
+            form.reset();
+
         });
 
+        for (var i = 0; i < tablinks.length; i++) {
+            tablinks[i].onclick = change;
+        }
 
-        const tablinks = document.getElementsByClassName("nav-link px-2");
+        function Sorting(event) {
+            
+            const sort = event.currentTarget;
+            const sorting = document.getElementById("Sorting");
+            sorting.innerHTML = "";
+            const val = document.createElement("option");
+            val.textContent = sort.textContent;
+            sorting.appendChild(val);
+            const sortingdiv = document.getElementById("sortingdiv");
+            sortingdiv.hidden = false;
+            const datediv = document.getElementById("datediv");
+            datediv.hidden = true;
+
+            if (sort.textContent == "Дата события") {
+                sortingdiv.hidden = true;
+                datediv.hidden = false;
+                AddSortingDate();
+            }
+            if (sort.textContent == "Номер АСБ") {
+
+                AddSortingASB(sorting);
+
+            }
+            if (sort.textContent == "Устройство") {
+                
+                AddSortingDevice(sorting);
+            }
+            if (sort.textContent == "Серьезность") {
+
+                AddSortingSerios(sorting);
+            }
+            const tempbody = document.querySelector("tbody");
+            var trs = tempbody.children;
+            for (var i = 0; i < trs.length; i++) {
+                trs[i].hidden = false;
+            }
+
+        }
+
+        function AddSortingDate() {
+            const yearselect = document.getElementById("yearselect");
+            const monthselect = document.getElementById("monthselect");
+            const currentdayselect = document.getElementById("currentdayselect");
+            yearselect.addEventListener("change", SortingDate);
+            monthselect.addEventListener("change", SortingDate);
+            currentdayselect.addEventListener("change", SortingDate);
+
+        }
+
+        function AddSortingASB(sorting) {
+            sorting.removeEventListener("change", SortingDevice);
+            sorting.removeEventListener("change", SortingSerios);
+            sorting.addEventListener("change", SortingASB);
+
+            const firstoption = document.createElement("option");
+            const thirddoption = document.createElement("option");
+            const fourthoption = document.createElement("option");
+            const fivesoption = document.createElement("option");
+            const sixsoption = document.createElement("option");
+            const sevensndoption = document.createElement("option");
+            const eigthsoption = document.createElement("option");
+
+            firstoption.textContent = "1";
+            thirddoption.textContent = "3";
+            fourthoption.textContent = "4";
+            fivesoption.textContent = "5";
+            sixsoption.textContent = "6";
+            sevensndoption.textContent = "7";
+            eigthsoption.textContent = "8";
+
+            sorting.appendChild(firstoption);
+            sorting.appendChild(thirddoption);
+            sorting.appendChild(fourthoption);
+            sorting.appendChild(fivesoption);
+            sorting.appendChild(sixsoption);
+            sorting.appendChild(sevensndoption);
+            sorting.appendChild(eigthsoption);
+            
+        }
+
+        function AddSortingDevice(sorting) {
+            sorting.removeEventListener("change", SortingASB);
+            sorting.removeEventListener("change", SortingSerios);
+            sorting.addEventListener("change", SortingDevice);
+
+            const ssloption = document.createElement("option");
+            const soundcraftoption = document.createElement("option");
+            const karreraoption = document.createElement("option");
+            const micoption = document.createElement("option");
+            const daletoption = document.createElement("option");
+            const platinumoption = document.createElement("option");
+            const lightoption = document.createElement("option");
+            const decoroption = document.createElement("option");
+            const camsoption = document.createElement("option");
+            const graphicsoption = document.createElement("option");
+            const computeroption = document.createElement("option");
+            const otheroption = document.createElement("option");
+
+            ssloption.textContent = "SSL";
+            soundcraftoption.textContent = "Sound Craft";
+            karreraoption.textContent = "Karrera";
+            micoption.textContent = "Микрофон, мониторинг, приемопередатчик";
+            daletoption.textContent = "Dalet";
+            platinumoption.textContent = "Матрица Platinum";
+            lightoption.textContent = "Свет и оборудование";
+            decoroption.textContent = "Декорации";
+            camsoption.textContent = "Камеры и камерные каналы";
+            graphicsoption.textContent = "Графические станции";
+            computeroption.textContent = "Компьютеры";
+            otheroption.textContent = "Другое";
+
+            sorting.appendChild(ssloption);
+            sorting.appendChild(soundcraftoption);
+            sorting.appendChild(karreraoption);
+            sorting.appendChild(micoption);
+            sorting.appendChild(daletoption);
+            sorting.appendChild(platinumoption);
+            sorting.appendChild(lightoption);
+            sorting.appendChild(decoroption);
+            sorting.appendChild(camsoption);
+            sorting.appendChild(graphicsoption);
+            sorting.appendChild(computeroption);
+            sorting.appendChild(otheroption);
+            
+        }
+
+        function AddSortingSerios(sorting) {
+            sorting.removeEventListener("change", SortingDevice);
+            sorting.removeEventListener("change", SortingASB);
+            sorting.addEventListener("change", SortingSerios)
+
+            const Seriosoption = document.createElement("option");
+            const Notseriosoption = document.createElement("option");
+
+            Seriosoption.textContent = "Серьезное";
+            Notseriosoption.textContent = "Несерьезное";
+
+            sorting.appendChild(Seriosoption);
+            sorting.appendChild(Notseriosoption);
+        }
+
+        function SortingASB(e) {
+            const tempitem = e.currentTarget;
+            const tempbody = document.querySelector("tbody");
+            var trs = tempbody.children;
+            if (tempitem.selectedIndex != 0) {
+                for (var i = 0; i < trs.length; i++) {
+                    trs[i].hidden = false;
+                    var temptds = trs[i].querySelector("td[name=nameofasb]");
+                    if (temptds.textContent != tempitem.options[tempitem.selectedIndex].textContent)
+                        trs[i].hidden = true;
+                }
+            }
+            else {
+                for (var i = 0; i < trs.length; i++) {
+                    trs[i].hidden = false;
+                }
+            }
+        }
+
+        function SortingDevice(e) {
+            const tempitem = e.currentTarget;
+            const tempbody = document.querySelector("tbody");
+            var trs = tempbody.children;
+            if (tempitem.selectedIndex != 0) {
+                for (var i = 0; i < trs.length; i++) {
+                    trs[i].hidden = false;
+                    var temptds = trs[i].querySelector("td[name=nameofdevice]");
+                    if (temptds.textContent != tempitem.options[tempitem.selectedIndex].textContent)
+                        trs[i].hidden = true;
+                }
+            }
+            else {
+                for (var i = 0; i < trs.length; i++) {
+                    trs[i].hidden = false;
+                }
+            }
+        }
+
+        function SortingSerios(e) {
+            const tempitem = e.currentTarget;
+            const tempbody = document.querySelector("tbody");
+            var trs = tempbody.children;
+            if (tempitem.selectedIndex != 0) {
+                for (var i = 0; i < trs.length; i++) {
+                    trs[i].hidden = false;
+                    var temptds = trs[i].querySelector("td[name=isserios]");
+                    if (temptds.textContent != `${tempitem.options[tempitem.selectedIndex].textContent} происшествие`)
+                        trs[i].hidden = true;
+                }
+            }
+            else {
+                for (var i = 0; i < trs.length; i++) {
+                    trs[i].hidden = false;
+                }
+            }
+        }
+
+        function SortingDate(e) {
+            const currentselect = e.currentTarget;
+            const tempbody = document.querySelector("tbody");
+            var trs = tempbody.children;
+            if (currentselect.selectedIndex != 0) {
+                if (currentselect.id == "yearselect") {
+                    for (var i = 0; i < trs.length; i++) {
+                        
+                    }
+                }
+                if (currentselect.id == "monthselect") {
+                    alert("2");
+                }
+                if (currentselect.id == "currentdayselect") {
+                    alert("3");
+                }
+            }
+            else {
+                for (var i = 0; i < trs.length; i++) {
+                    trs[i].hidden = false;
+                }
+            }
+  
+        }
 
         function change(event) {
             const maintabs = document.getElementsByTagName("main");
@@ -272,11 +558,7 @@
 
         }
 
-        for (var i = 0; i < tablinks.length; i++) {
-            tablinks[i].onclick = change;
-        }
-
-        function row(event) {
+        function row(event,num) {
 
             const tr = document.createElement("tr");
 
@@ -287,14 +569,25 @@
             idTd.setAttribute("name", "id");
             idTd.setAttribute("data-bs-toggle", "modal");
             idTd.setAttribute("data-bs-target", "#Modal");
-            idTd.append(event.id);
+            idTd.append(num);
             tr.append(idTd);
 
             const dateofeventTd = document.createElement("td");
             dateofeventTd.setAttribute("name", "dateofevent");
             dateofeventTd.setAttribute("data-bs-toggle", "modal");
             dateofeventTd.setAttribute("data-bs-target", "#Modal");
-            dateofeventTd.append(event.dateofevent);
+            let datestring = event.dateofevent;
+            let correctdate = "";
+            for (let i = 0; i < datestring.length; i++) {
+                if (datestring[i] === ".") {
+                    const repl = datestring[i].replace(".", "-");
+                    correctdate = correctdate + repl;
+                }
+                else {
+                    correctdate = correctdate + datestring[i];
+                }
+            }
+            dateofeventTd.append(correctdate);
             tr.append(dateofeventTd);
 
             const nameofasbTd = document.createElement("td");
@@ -326,8 +619,8 @@
             const delbutimg = document.createElement("img");
             delbutimg.src = "Resources/recyclebin.png";
             delbutimg.alt = "";
-            delbutimg.height = "50";
-            delbutimg.width = "50";
+            delbutimg.height = "35";
+            delbutimg.width = "35";
             
             delbut.append(delbutimg);
             delbut.addEventListener("click", function (e) {
@@ -368,8 +661,9 @@
             if (response.ok === true) {
                 const event = await response.json();
                 const temptr = document.getElementById(event.id);
-                
-                temptr.replaceWith(row(event));
+                const tdupdate = temptr.querySelector("td");
+                const num = parseInt(tdupdate.textContent);
+                temptr.replaceWith(row(event, num));
                 alert("Происшествие обновлено");
 
             }
@@ -391,26 +685,13 @@
             });
             if (response.ok === true) {
                 const event = await response.json();
-                document.querySelector("tbody").append(row(event));
+                const tds = document.getElementsByName("id");
+                const num = tds.length + 1;
+                document.querySelector("tbody").append(row(event,num));
                 alert("Происшествие создано");
 
             }
         }
-
-
-        document.forms["eventForm"].addEventListener("submit", e => {
-            e.preventDefault();
-            const form = document.forms["eventForm"];
-            const dateofevent = form.elements["dateofevent"].value;
-            const nameofasb = form.elements["nameofasb"].value;
-            const nameofdevice = form.elements["nameofdevice"].value;
-            const isserios = form.elements["isserios"].value;
-            const discribeevent = form.elements["discribeevent"].value;
-            const fixevent = form.elements["fixevent"].value;
-            CreateEvent(dateofevent, nameofasb, nameofdevice, isserios, discribeevent, fixevent);
-            form.reset();
-
-        });
 
         async function GetEvent(id) {
             const response = await fetch("/api/events/" + id, {
@@ -438,9 +719,10 @@
 
                 const events = await response.json();
                 let rows = document.querySelector("tbody");
+                let i = 0;
                 events.forEach(event => {
-
-                    rows.append(row(event));
+                    const num = ++i;
+                    rows.append(row(event,num));
                 });
             }
         }
@@ -453,11 +735,10 @@
             if (response.ok === true) {
                 const event = await response.json();
                 document.querySelector("tr[data-rowid='" + event.id + "']").remove();
-                const tds = document.getElementsByName("id");
+                let tds = document.getElementsByName("id");
+                let i = 0;
                 tds.forEach(td => {
-                    if (parseInt(td.textContent) > id)
-                        td.textContent = (parseInt(td.textContent) - 1).toString();
-                    
+                    td.textContent = `${++i}`;
                 });
                 
                 alert("Происшествие удалено");
