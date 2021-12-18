@@ -1,8 +1,9 @@
 {
   "ExpandedNodes": [
     "",
-    "\\Controllers"
+    "\\wwwroot",
+    "\\wwwroot\\scss"
   ],
-  "SelectedNode": "\\Controllers\\EventsController.cs",
+  "SelectedNode": "\\RestfulApiVisualCode.sln",
   "PreviewInSolutionExplorer": false
 }

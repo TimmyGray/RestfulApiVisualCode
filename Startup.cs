@@ -19,27 +19,27 @@ namespace RestfulApiVisualCode
 {
     public class Startup
     {
-      /*   public Startup(IConfiguration configuration)
-        {
-            Configuration = configuration;
-        } */
-
-     //   public IConfiguration Configuration { get; }
-
-        // This method gets called by the runtime. Use this method to add services to the container.
+     
         public void ConfigureServices(IServiceCollection services)
         {
 
              string con = "Server=(localdb)\\mssqllocaldb;Database=eventsdbstore;Trusted_Connection=True;";
-            // устанавливаем контекст данных
             services.AddDbContext<EventsContext>(options => options.UseSqlServer(con));
             
-            services.AddControllers(); // используем контроллеры без представлений
+            services.AddControllers(); 
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-         public void Configure(IApplicationBuilder app)
+        public void Configure(IApplicationBuilder app)
         {
+            var loggerfactory = LoggerFactory.Create(builder =>
+            {
+                builder.AddConsole();
+            });
+            ILogger logger = loggerfactory.CreateLogger<Startup>();
+            //app.Run(async (context) =>
+            //{
+            //    logger.LogInformation("Logg: {0}", context.Request.Path);
+            //});
             app.UseDeveloperExceptionPage();
  
             app.UseDefaultFiles();

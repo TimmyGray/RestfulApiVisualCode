@@ -6,7 +6,7 @@ using RestfulApiVisualCode.Models;
 using System.Threading.Tasks;
 using RestfulApiVisualCode.DataBaseContext;
 using System;
- 
+using System.Globalization;
 namespace RestfulApiVisualCode.Controllers
 {
     [ApiController]
@@ -49,14 +49,21 @@ namespace RestfulApiVisualCode.Controllers
         [HttpPost]
         public async Task<ActionResult<Event>> Post(Event evnt)
         {
-            if (evnt == null)
+            //if (evnt == null)
+            //{
+            //    return BadRequest();
+            //}
+            if(Convert.ToDateTime(evnt.Dateofevent)>DateTime.Now)
             {
-                return BadRequest();
+                ModelState.AddModelError("Dateofevent", "Дата не может быть позднее сегодняшнего числа");
             }
+            if (!ModelState.IsValid)
+                return BadRequest();
  
             db.Events.Add(evnt);
             await db.SaveChangesAsync();
             return Ok(evnt);
+            
         }
  
         
