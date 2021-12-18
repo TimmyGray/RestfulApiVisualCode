@@ -521,16 +521,69 @@
 
         function SortingDate(e) {
             const currentselect = e.currentTarget;
-            const tempbody = document.querySelector("tbody");
-            var trs = tempbody.children;
             if (currentselect.selectedIndex != 0) {
+                const tempbody = document.querySelector("tbody");
+                var trs = tempbody.children;
+                var tempoption = currentselect.options[currentselect.selectedIndex];
                 if (currentselect.id == "yearselect") {
                     for (var i = 0; i < trs.length; i++) {
-                        
+                        trs[i].hidden = false;
+                        var temptds = trs[i].querySelector("td[name=dateofevent]");
+
+                        if (!temptds.textContent.includes(tempoption.textContent)) {
+                                trs[i].hidden = true;
+                        }
+             
                     }
                 }
                 if (currentselect.id == "monthselect") {
-                    alert("2");
+                    var tempmonth;
+                    if (tempoption.textContent == "Январь") {
+                        tempmonth = "01";
+                    }
+                    if (tempoption.textContent == "Февраль") {
+                        tempmonth = "02";
+                    }
+                    if (tempoption.textContent == "Март") {
+                        tempmonth = "03";
+                    }
+                    if (tempoption.textContent == "Апрель") {
+                        tempmonth = "04";
+                    }
+                    if (tempoption.textContent == "Май") {
+                        tempmonth = "05";
+                    }
+                    if (tempoption.textContent == "Июнь") {
+                        tempmonth = "06";
+                    }
+                    if (tempoption.textContent == "Июль") {
+                        tempmonth = "07";
+                    }
+                    if (tempoption.textContent == "Август") {
+                        tempmonth = "08";
+                    }
+                    if (tempoption.textContent == "Сентябрь") {
+                        tempmonth = "09";
+                    }
+                    if (tempoption.textContent == "Октябрь") {
+                        tempmonth = "10";
+                    }
+                    if (tempoption.textContent == "Ноябрь") {
+                        tempmonth = "11";
+                    }
+                    if (tempoption.textContent == "Декабрь") {
+                        tempmonth = "12";
+                    }
+                    alert(tempmonth);
+                    for (var i = 0; i < trs.length; i++) {
+                        trs[i].hidden = false;
+                        var temptds = trs[i].querySelector("td[name=dateofevent]");
+
+                        if (!temptds.textContent.slice(4,7).includes(tempmonth)) {
+                            trs[i].hidden = true;
+                        }
+
+                    }
                 }
                 if (currentselect.id == "currentdayselect") {
                     alert("3");
