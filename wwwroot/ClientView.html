@@ -99,7 +99,7 @@
                     <div class="col-md-6 col-lg-4 col-sm-6 col-12 mb-3">
                         <label for="dateofevent">Дата происшествия</label>
                         <div class="w-100"></div>
-                        <input name="dateofevent" class="form-control" type="date" required />
+                        <input name="dateofevent" class="form-control"  type="date" required />
                         <div class="invalid-feedback">Укажите дату происшествия</div>
                     </div>
                     <div class="col-auto mb-3">
@@ -148,14 +148,77 @@
         <div class="container justify-content-center">
             <h1 id="SecondPage" style="text-align: center;">История происшествий</h1>
         </div>
-        
+
         <div class="container-fluid">
-            <div class="row">
-                <div class="col-auto">
-                    <select id="Sorting" class="form-select" hidden>
+
+            <div class="container d-flex mb-2 justify-content-start">
+                <div class="col-2 mb-1" hidden id="sortingdiv">
+                    <select id="Sorting" class="form-select">
                     </select>
 
                 </div>
+                <div  hidden id="datediv">
+                    <div class="row">
+                        <div class="col-3">
+                            <label for="yearselect">Год</label>
+                            <select class="form-select" id="yearselect">
+                                <option value>Выбрать...</option>
+                                <option>2022</option>
+                                <option>2021</option>
+                                <option>2020</option>
+                                <option>2019</option>
+                                <option>2018</option>
+                                <option>2017</option>
+                                <option>2016</option>
+                                <option>2015</option>
+                                <option>2014</option>
+                                <option>2014</option>
+                                <option>2013</option>
+                                <option>2012</option>
+                                <option>2011</option>
+                                <option>2010</option>
+                                <option>2009</option>
+                                <option>2008</option>
+                                <option>2007</option>
+                                <option>2007</option>
+                                <option>2007</option>
+                                <option>2007</option>
+                            </select>
+                        </div>
+                        <div class="col-3">
+                            <label for="monthselect">Месяц</label>
+                            <select class="form-select" id="monthselect">
+                                <option value>Выбрать...</option>
+                                <option>Январь</option>
+                                <option>Февраль</option>
+                                <option>Март</option>
+                                <option>Апрель</option>
+                                <option>Май</option>
+                                <option>Июнь</option>
+                                <option>Июль</option>
+                                <option>Август</option>
+                                <option>Сентябрь</option>
+                                <option>Октябрь</option>
+                                <option>Ноябрь</option>
+                                <option>Декабрь</option>
+                            </select>
+                        </div>
+
+                        <div class="col-3">
+                            <label for="currentdayselect">День</label>
+                            <input id="currentdayselect" class="form-control" type="date" />
+                        </div>
+
+                    </div>
+
+                </div>
+                <div class="col-1">
+                    <a href="#" class="d-flex align-items-center text-decoration-none mb-2">
+                        <img src="Resources/closeicon.png" alt="" height="25" width="25">
+                    </a>
+                </div>
+                
+
             </div>
             <div class="table-responsive">
                 <table class="table table-striped table-hover">
@@ -213,8 +276,9 @@
     </main>
     <script src="bootstrap/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
     <script>
-      //const idsort = document.getElementById("#");
-      //  const datesort = document.getElementById("Date");
+
+       
+        const datesort = document.getElementById("Date");
         const numbersort = document.getElementById("Number");
         const devicesort = document.getElementById("Device");
         const seriossort = document.getElementById("Serios");
@@ -239,11 +303,12 @@
             closebut.click();
         });
 
-       // idsort.addEventListener("click", Sorting);
-       // datesort.addEventListener("click", Sorting);
+
         numbersort.addEventListener("click", Sorting);
         devicesort.addEventListener("click", Sorting);
         seriossort.addEventListener("click", Sorting);
+        datesort.addEventListener("click", Sorting);
+
 
         document.forms["eventForm"].addEventListener("submit", e => {
             e.preventDefault();
@@ -256,7 +321,6 @@
             const fixevent = form.elements["fixevent"].value;
             CreateEvent(dateofevent, nameofasb, nameofdevice, isserios, discribeevent, fixevent);
             form.reset();
-
         });
 
         for (var i = 0; i < tablinks.length; i++) {
@@ -264,30 +328,52 @@
         }
 
         function Sorting(event) {
+
             const sort = event.currentTarget;
             const sorting = document.getElementById("Sorting");
             sorting.innerHTML = "";
             const val = document.createElement("option");
             val.textContent = sort.textContent;
             sorting.appendChild(val);
+            const sortingdiv = document.getElementById("sortingdiv");
+            sortingdiv.hidden = false;
+            const datediv = document.getElementById("datediv");
+            datediv.hidden = true;
+
+            if (sort.textContent == "Дата события") {
+                sortingdiv.hidden = true;
+                datediv.hidden = false;
+                AddSortingDate();
+            }
             if (sort.textContent == "Номер АСБ") {
 
                 AddSortingASB(sorting);
+
             }
             if (sort.textContent == "Устройство") {
-                
+
                 AddSortingDevice(sorting);
             }
             if (sort.textContent == "Серьезность") {
 
                 AddSortingSerios(sorting);
             }
-            sorting.hidden = false;
             const tempbody = document.querySelector("tbody");
             var trs = tempbody.children;
             for (var i = 0; i < trs.length; i++) {
                 trs[i].hidden = false;
             }
+
+        }
+
+        function AddSortingDate() {
+            const yearselect = document.getElementById("yearselect");
+            const monthselect = document.getElementById("monthselect");
+            const currentdayselect = document.getElementById("currentdayselect");
+            yearselect.addEventListener("change", SortingDate);
+            monthselect.addEventListener("change", SortingDate);
+            currentdayselect.addEventListener("change", SortingDate);
+           
 
         }
 
@@ -319,7 +405,7 @@
             sorting.appendChild(sixsoption);
             sorting.appendChild(sevensndoption);
             sorting.appendChild(eigthsoption);
-            
+
         }
 
         function AddSortingDevice(sorting) {
@@ -365,7 +451,7 @@
             sorting.appendChild(graphicsoption);
             sorting.appendChild(computeroption);
             sorting.appendChild(otheroption);
-            
+
         }
 
         function AddSortingSerios(sorting) {
@@ -438,6 +524,92 @@
                     trs[i].hidden = false;
                 }
             }
+        }
+
+        function SortingDate(e) {
+            const currentselect = e.currentTarget;
+            const tempbody = document.querySelector("tbody");
+            var trs = tempbody.children;
+            if (currentselect.id == "currentdayselect") {
+                for (var i = 0; i < trs.length; i++) {
+                    trs[i].hidden = false;
+                    var temptds = trs[i].querySelector("td[name=dateofevent]");
+                    if (temptds.textContent != currentselect.value) {
+                        trs[i].hidden = true;
+                    }
+                }
+            }
+            if (currentselect.selectedIndex != 0) {
+                var tempoption = currentselect.options[currentselect.selectedIndex];
+                if (currentselect.id == "yearselect") {
+                    for (var i = 0; i < trs.length; i++) {
+                        trs[i].hidden = false;
+                        var temptds = trs[i].querySelector("td[name=dateofevent]");
+
+                        if (!temptds.textContent.includes(tempoption.textContent)) {
+                                trs[i].hidden = true;
+                        }
+
+                    }
+                }
+                if (currentselect.id == "monthselect") {
+                    var tempmonth;
+                    if (tempoption.textContent == "Январь") {
+                        tempmonth = "01";
+                    }
+                    if (tempoption.textContent == "Февраль") {
+                        tempmonth = "02";
+                    }
+                    if (tempoption.textContent == "Март") {
+                        tempmonth = "03";
+                    }
+                    if (tempoption.textContent == "Апрель") {
+                        tempmonth = "04";
+                    }
+                    if (tempoption.textContent == "Май") {
+                        tempmonth = "05";
+                    }
+                    if (tempoption.textContent == "Июнь") {
+                        tempmonth = "06";
+                    }
+                    if (tempoption.textContent == "Июль") {
+                        tempmonth = "07";
+                    }
+                    if (tempoption.textContent == "Август") {
+                        tempmonth = "08";
+                    }
+                    if (tempoption.textContent == "Сентябрь") {
+                        tempmonth = "09";
+                    }
+                    if (tempoption.textContent == "Октябрь") {
+                        tempmonth = "10";
+                    }
+                    if (tempoption.textContent == "Ноябрь") {
+                        tempmonth = "11";
+                    }
+                    if (tempoption.textContent == "Декабрь") {
+                        tempmonth = "12";
+                    }
+                    
+                    for (var i = 0; i < trs.length; i++) {
+                        trs[i].hidden = false;
+                        var temptds = trs[i].querySelector("td[name=dateofevent]");
+
+                        if (!temptds.textContent.slice(4,7).includes(tempmonth)) {
+                            trs[i].hidden = true;
+                        }
+
+                    }
+                }
+               
+            }
+            
+            else {
+                for (var i = 0; i < trs.length; i++) {
+                    trs[i].hidden = false;
+                }
+            }
+
         }
 
         function change(event) {
@@ -517,20 +689,20 @@
             delbutimg.alt = "";
             delbutimg.height = "35";
             delbutimg.width = "35";
-            
+
             delbut.append(delbutimg);
             delbut.addEventListener("click", function (e) {
                 DeleteEvent(event.id);
             });
-            
+
 
             delbutTd.append(delbut);
-            
+
             tr.appendChild(delbutTd);
-           
+
             tr.addEventListener("click", trclick);
 
-         
+
 
             return tr;
         }
@@ -636,7 +808,7 @@
                 tds.forEach(td => {
                     td.textContent = `${++i}`;
                 });
-                
+
                 alert("Происшествие удалено");
             }
         }
