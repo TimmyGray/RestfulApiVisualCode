@@ -32,7 +32,26 @@ html{
         padding-left:10px;
     }
 }
+.faq-div {
+    @media(min-width:575px) {
+        .faq-ul-collapse {
+            display: flex;
+            flex-basis: auto;
+        }
 
+        .faq-btn-collapse {
+            display: none;
+        }
+
+        
+        
+    }
+}
+
+svg{
+    stroke:$darkred;
+    stroke-width:0.5px;
+}
 
 
 .darkredtext{
@@ -49,6 +68,11 @@ html{
 
 .navitem{
     border-radius:5px;
+    @media (max-width:575px){
+        width:50%;
+        display:inline-block;
+        
+    }
 }
 .navitem:hover {
     background: #f1aeb5;
