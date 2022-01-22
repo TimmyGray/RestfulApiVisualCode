@@ -1,63 +1,138 @@
-@import "../bootstrap/scss/functions";
-@import "../bootstrap/scss/variables";
-@import "../bootstrap/scss/mixins";
-@import "../bootstrap/scss/root";
-@import "../bootstrap/scss/bootstrap.scss";
-
 $darkred: rgb(71, 10, 10);
 $softbrown:rgb(90, 45, 17);
 $creambrule:rgb(240,220,150);
 $softyellow:rgb(250,160,60);
+$softpink: #bf3330;
+$softred:#ffb473;
 
-$mycolors:(
-  "darkred":    $darkred,
-  "softbrown":  $softbrown,
-  "creambrule": $creambrule,
-  "softyellow": $softyellow 
-);
-
-$theme-colors: map-merge($theme-colors , $mycolors);
-
-
-
-$link-color:$softyellow;
-$link-hover-color:$softbrown;
-$nav-link-color:$link-color;
-$nav-link-hover-color:$link-hover-color;
-
-
-
-header{
-  background:$darkred;
+html{
+    height:100%;
+}
+.darkredclass{
+    background:$darkred;
 }
 
 
-body{
+.five-header-ul{
+    @media (max-width: 992px) and (min-width:768px){
+        width:33%;
+        
+    }
+}
+
+.five-header-search {
+    @media (max-width: 992px) and (min-width:768px) {
+        width: 25%;
+        margin-bottom: 0;
+    }
+}
+
+.five-header-btn {
+    @media (max-width: 992px) and (min-width:768px) {
+        padding-left:10px;
+    }
+}
+
+
+
+.darkredtext{
+    color:$darkred;
+}
+
+.softpinkclass{
+    background:$softpink;
+}
+
+.softredtext {
+    color: $softred;
+}
+
+.navitem{
+    border-radius:5px;
+}
+.navitem:hover {
+    background: #f1aeb5;
+}
+
+.activenavitem {
+    background: #f1aeb5;
+}
+
+.faqlink {
+    font-weight: 700;
+    display: block;
+    padding: 0.5rem 1rem;
+    text-decoration: none;
+    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out;
+    &:hover{
+        color:$darkred;
+    }
+    &span {
+        font-weight: 700;
+    }
+}
+
+.fivebody{
     height: 100%;
     background: linear-gradient($creambrule,rgb(255, 244, 204)) no-repeat;
     background-attachment: fixed;
 }
 
-
-
-h1{
-  color: $softbrown;
-}
-
 .activetab{
-  display: none;
+  display: block;
 }
 
 .disactivetab{
   display: none;
 }
 
+.faq-minilink {
+    color: $darkred;
+
+    &:hover {
+        color: $creambrule;
+    }
+
+    &:focus {
+        color: $creambrule;
+    }
+}
+
+.creambrule-link{
+    color:$creambrule;
+    &:hover{
+        color:$softbrown;
+    }
+    &:focus{
+        color:$softbrown;
+    }
+}
 
 
-@import "../bootstrap/scss/functions";
-@import "../bootstrap/scss/variables";
-@import "../bootstrap/scss/mixins";
-@import "../bootstrap/scss/root";
-@import "../bootstrap/scss/reboot";
-@import "../bootstrap/scss/type";
-@import "../bootstrap/scss/bootstrap.scss";
+.darkred-btn{
+    background:$darkred;
+    color:$creambrule;
+    &:hover{
+        background:$softyellow;
+    }
+
+}
+
+.creambrule-text{
+    color:$creambrule;
+}
+
+.headerbtn{
+    background:$softyellow;
+    color:$darkred;
+    &:hover{
+        background:$softbrown;
+    }
+}
+
+.withouth-botalign{
+    vertical-align:middle;
+}
+
+
+

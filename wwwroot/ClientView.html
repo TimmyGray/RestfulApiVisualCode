@@ -1,166 +1,168 @@
 <!DOCTYPE html>
-<html style="height: 100%;">
+<html ">
 <head>
     <meta charset="utf-8" />
-    <meta name="clientview" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Происшествия</title>
-    <link rel="stylesheet" type="text/css" href="bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" href="css/main.css">
 
 </head>
-<body id="body">
+<body class="fivebody" id="body">
 
-    <header class="p-3 text-white">
+    <header class="p-3 darkredclass">
         <div class="container">
-            <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
-                <a href="#" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
-                    <img src="Resources/warning-sign.svg" alt="" height="50" width="50">
-                </a>
 
-                <ul id="nav" class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-                    <li><a href="#" name="Create" class="nav-link px-2" id="CreateClick">Создать</a></li>
-                    <li><a href="#" name="Histories" class="nav-link px-2" id="HistoryClick">История</a></li>
-                    <li><a href="#" name="Faq" class="nav-link px-2" id="FaqClick">Бестиарий</a></li>
+            <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-start">
+                <img class="img-fluid" src="/Resources/warning_sign.png" width="48" height="48" />
+
+                <ul id="nav" class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0 five-header-ul">
+                    <li><a href="#" name="Create" class="nav-link creambrule-link px-1" id="CreateClick">Создать</a></li>
+                    <li><a href="#" name="Histories" class="nav-link creambrule-link px-1" id="HistoryClick">История</a></li>
+                    <li><a href="#" name="Faq" class="nav-link creambrule-link px-1" id="FaqClick">Бестиарий</a></li>
                 </ul>
 
-                <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
-                    <input type="search" class="form-control form-control-dark" placeholder="Искать..." aria-label="Search">
-                </form>
+                <div class="col-lg-auto mb-lg-0 mb-3 mb-md-0 me-lg-3 col-12 five-header-search">
+                    <form>
+                        <input type="search" class="form-control form-control-dark" placeholder="Искать..." aria-label="Search">
+                    </form>
+                </div>
 
-                <div class="text-end">
-                    <button type="button" class="btn btn-softyellow me-2">Войти</button>
-                    <button type="button" class="btn btn-softbrown">Регистрация</button>
+                <div class="text-end five-header-btn">
+                    <button type="button" class="btn headerbtn me-2">Войти</button>
+                
+                    <button type="button" class="btn headerbtn">Регистрация</button>
                 </div>
             </div>
+
         </div>
     </header>
 
-    <main id="Create" name="Create">
-        <div class="container justify-content-center">
-            <h1 id="FirstPage" style="text-align: center;">Карточка происшествия</h1>
-        </div>
-        <form name="eventForm" class="was was-validated" id="cardevent">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-md-6 col-lg-4 col-sm-6 col-12 mb-3">
-                        <label for="nameofdevice">Устройство</label>
-                        <select class="form-select d-block w-100 d-done" name="nameofdevice" required>
-                            <option value>Выбрать...</option>
-                            <option>SSL</option>
-                            <option>Karrera</option>
-                            <option>SoundCraft</option>
-                            <option>Dalet</option>
-                            <option>Микрофон, мониторинг, приемопередатчик</option>
-                            <option>Platinum</option>
-                            <option>Свет и оборудование</option>
-                            <option>Декорации</option>
-                            <option>Камеры и камерные каналы</option>
-                            <option>Графические станции</option>
-                            <option>Компьютер</option>
-                            <option>Другое</option>
-                        </select>
-                        <div class="invalid-feedback">Необходимо указать устройство</div>
-                    </div>
-                    <div class="col-auto mb-3">
-                        <label for="nameofasb">Номер АСБ</label>
-                        <select class="form-select d-block w-100 d-done" name="nameofasb" required>
-                            <option value>Выбрать...</option>
-                            <option>1</option>
-                            <option>3</option>
-                            <option>4</option>
-                            <option>5</option>
-                            <option>6</option>
-                            <option>7</option>
-                            <option>8</option>
-                        </select>
-                        <div class="invalid-feedback">Необхоимо указать номер АСБ</div>
-                    </div>
-                </div>
+    <main id="Create" class="activetab" name="Create">
 
-                <div class="row">
-                    <div class="col-md-6 col-lg-4 col-sm-6 col-12 mb-3">
-                        <div class="form-group">
-                            <label for="eventdiscribe">Описание проблемы</label>
-                            <textarea class="form-control" name="discribeevent" rows="3" required></textarea>
+        <div class="container-fluid">
+            <form name="eventForm" class="was was-validated" id="cardevent">
+                <div class="container">
+                    <h1 class="h1 darkredtext" id="FirstPage">Карточка происшествия</h1>
+                    <div class="row">
+                        <div class="col-md-6 col-lg-4 col-sm-6 col-12 mb-3">
+                            <label for="nameofdevice">Устройство</label>
+                            <select class="form-select d-block w-100 d-done" name="nameofdevice" required>
+                                <option value>Выбрать...</option>
+                                <option>SSL</option>
+                                <option>Karrera</option>
+                                <option>SoundCraft</option>
+                                <option>Dalet</option>
+                                <option>Микрофон, мониторинг, приемопередатчик</option>
+                                <option>Platinum</option>
+                                <option>Свет и оборудование</option>
+                                <option>Декорации</option>
+                                <option>Камеры и камерные каналы</option>
+                                <option>Графические станции</option>
+                                <option>Компьютер</option>
+                                <option>Другое</option>
+                            </select>
+                            <div class="invalid-feedback">Необходимо указать устройство</div>
                         </div>
-                        <div class="invalid-feedback">Заполните описание</div>
-
-                    </div>
-                    <div class="col-auto mb-3">
-                        <div class="form-group">
-                            <label for="fixdiscribe">Как исправили(если исправили)</label>
-                            <textarea class="form-control" name="fixevent" rows="3"></textarea>
+                        <div class="col-auto mb-3">
+                            <label for="nameofasb">Номер АСБ</label>
+                            <select class="form-select d-block w-100 d-done" name="nameofasb" required>
+                                <option value>Выбрать...</option>
+                                <option>1</option>
+                                <option>3</option>
+                                <option>4</option>
+                                <option>5</option>
+                                <option>6</option>
+                                <option>7</option>
+                                <option>8</option>
+                            </select>
+                            <div class="invalid-feedback">Необхоимо указать номер АСБ</div>
                         </div>
-
                     </div>
-                </div>
 
-                <div class="row">
-                    <div class="col-md-6 col-lg-4 col-sm-6 col-12 mb-3">
-                        <label for="dateofevent">Дата происшествия</label>
-                        <div class="w-100"></div>
-                        <input name="dateofevent" class="form-control"  type="date" required />
-                        <div class="invalid-feedback">Укажите дату происшествия</div>
-                    </div>
-                    <div class="col-auto mb-3">
-                        <label for="isserios">Серьезность</label>
-                        <select name="isserios" class="form-select d-block w-100 d-done" required>
-                            <option value>Выбрать...</option>
-                            <option>Серьезное происшествие</option>
-                            <option>Несерьезное происшествие</option>
-                        </select>
-                        <div class="invalid-feedback">Укажите серьезность</div>
-                    </div>
-                </div>
+                    <div class="row">
+                        <div class="col-md-6 col-lg-4 col-sm-6 col-12 mb-3">
+                            <div class="form-group">
+                                <label for="eventdiscribe">Описание проблемы</label>
+                                <textarea class="form-control" name="discribeevent" rows="3" required></textarea>
+                            </div>
+                            <div class="invalid-feedback">Заполните описание</div>
 
-                <div class="row">
-                    <div class="col-md-7 col-lg-7 col-sm-12 col-12">
-                        <div class="input-group mb-3">
-                            <label for="inputGroupFile">Фотография поломки</label>
+                        </div>
+                        <div class="col-auto mb-3">
+                            <div class="form-group">
+                                <label for="fixdiscribe">Как исправили(если исправили)</label>
+                                <textarea class="form-control" name="fixevent" rows="3"></textarea>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 col-lg-4 col-sm-6 col-12 mb-3">
+                            <label for="dateofevent">Дата происшествия</label>
                             <div class="w-100"></div>
-                            <input type="file" class="form-control" id="inputGroupFile" aria-describedby="inputGroupFileAddon" aria-label="Загрузить">
-                            <button class="btn btn-outline-softbrown" type="button" id="inputGroupFileAddon">Загрузить</button>
+                            <input name="dateofevent" class="form-control" type="date" required />
+                            <div class="invalid-feedback">Укажите дату происшествия</div>
+                        </div>
+                        <div class="col-auto mb-3">
+                            <label for="isserios">Серьезность</label>
+                            <select name="isserios" class="form-select d-block w-100 d-done" required>
+                                <option value>Выбрать...</option>
+                                <option>Серьезное происшествие</option>
+                                <option>Несерьезное происшествие</option>
+                            </select>
+                            <div class="invalid-feedback">Укажите серьезность</div>
                         </div>
                     </div>
 
-                </div>
+                    <div class="row">
+                        <div class="col-md-7 col-lg-7 col-sm-12 col-12">
+                            <div class="input-group mb-3">
+                                <label for="inputGroupFile">Фотография поломки</label>
+                                <div class="w-100"></div>
+                                <input type="file" class="form-control" id="inputGroupFile" aria-describedby="inputGroupFileAddon" aria-label="Загрузить">
+                                <button class="btn btn-outline-softbrown" type="button" id="inputGroupFileAddon">Загрузить</button>
+                            </div>
+                        </div>
 
-                <div class="row">
-                    <div class="col-md-6 col-lg-4 col-sm-6 col-6 mb-3">
-                        <button id="submit" type="submit" class="btn btn-softyellow">Создать</button>
                     </div>
-                    <div class="col-auto mb-3">
-                        <button id="reset" type="reset" class="btn btn-softyellow">Сброс</button>
+
+                    <div class="row">
+                        <div class="col-md-3 col-lg-3 col-sm-6 col-6 mt-sm-3">
+                            <button id="submit" type="submit" class="btn darkred-btn">Создать</button>
+                        </div>
+                        <div class="col-md-4 col-lg-4 col-sm-6 col-6 mt-sm-3">
+                            <button id="reset" type="reset" class="btn darkred-btn">Сброс</button>
+                        </div>
+
                     </div>
 
+
                 </div>
+            </form>
 
-
-            </div>
-        </form>
-
-
+        </div>
     </main>
 
     <main id="Histories" name="Histories" class="disactivetab">
 
-
         <div class="container justify-content-center">
-            <h1 id="SecondPage" style="text-align: center;">История происшествий</h1>
+            <h1 id="SecondPage" class="darkredtext text-center">История происшествий</h1>
         </div>
 
         <div class="container-fluid">
 
             <div class="row">
-                <div class="col-1 mb-2" hidden id="sortingdiv">
+                <div class="col-lg-3 col-md-4 col-sm-10 col-10 mb-2" hidden id="sortingdiv">
                     <select id="Sorting" class="form-select">
                     </select>
 
                 </div>
-                <div class="col-10 mb-2" hidden id="datediv">
+                <div class="col-12 mb-2" hidden id="datediv">
                     <div class="row">
 
-                        <div class="col-3">
+                        <div class="col-sm-3 col-6">
                             <label for="yearselect">Год</label>
                             <select class="form-select" id="yearselect">
                                 <option value>Выбрать...</option>
@@ -187,7 +189,7 @@
                             </select>
                         </div>
 
-                        <div class="col-3">
+                        <div class="col-6 col-sm-3">
                             <label for="monthselect">Месяц</label>
                             <select class="form-select" id="monthselect">
                                 <option value>Выбрать...</option>
@@ -206,12 +208,12 @@
                             </select>
                         </div>
 
-                        <div class="col-3">
+                        <div class="col-6 col-sm-3">
                             <label for="currentdayselect">День</label>
                             <input id="currentdayselect" class="form-control" type="date" />
                         </div>
 
-                        <div id="closesorting2" class="d-flex col-1 align-items-center mt-4">
+                        <div id="closesorting2" class="d-flex col-2 align-items-center mt-4">
                             <a href="#">
                                 <img src="Resources/closeicon.png" alt="" height="25" width="25">
                             </a>
@@ -221,7 +223,7 @@
                     
                 </div>
                 
-                <div  class="d-flex col-1 align-items-center mb-2"  >
+                <div  class="d-flex col-2 align-items-center mb-2"  >
                     <a id="closesorting1" href="#" hidden>
                         <img src="Resources/closeicon.png" alt="" height="25" width="25">
                     </a>
@@ -229,8 +231,8 @@
 
             </div>
             <div class="table-responsive">
-                <table class="table table-striped table-hover">
-                    <thead style="background-color: lightcoral;">
+                <table class="table table-striped table-hover"> 
+                    <thead class="softpinkclass creambrule-text" style="vertical-align:middle">
                         <tr id="sorttr">
                             <th id="#">#</th>
                             <th id="Date">Дата события</th>
@@ -255,10 +257,10 @@
                         </div>
                         <div class="modal-body">
                             <div class="row">
-                                <div class="col-6">
+                                <div class="col-xs-6">
                                     <textarea class="form-control" rows="3" id="discribe"></textarea>
                                 </div>
-                                <div class="col-6">
+                                <div class="col-xs-6">
                                     <textarea class="form-control" rows="3" id="fix"></textarea>
                                 </div>
                             </div>
@@ -280,12 +282,191 @@
     </main>
 
     <main id="Faq" name="Faq" class="disactivetab">
+        <div class="row">
 
+            <div class="d-flex flex-column flex-shrink-0 p-3 softpinkclass col-6 col-sm-4 col-md-4 col-lg-3">
+
+                <ul id="testul" class="nav flex-column mb-auto">
+
+                    <li class="navitem">
+
+                        <a id="testa" href="#CamsLinks" class="faqlink softredtext" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="CamsLinks">
+                            <img src="Resources/camera.png" class="img-fluid" height="48" width="48" />
+                            Камеры, CCU и OCP
+                        </a>
+
+                        <ul class="nav collapse" id="CamsLinks">
+                            <li>
+                                <a class="nav-link faq-minilink">
+                                    Cams
+                                </a> 
+                            </li>
+                            <li>
+                                <a class="nav-link faq-minilink">
+                                    CCU
+                                </a>
+                            </li>
+                            <li>
+                                <a class="nav-link faq-minilink">
+                                    OCP
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="navitem">
+
+                        <a href="#VideoMixerLinks" class="faqlink softredtext" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="VideoMixerLinks">
+                            <img src="Resources/GVvideomixer.png" class="img-fluid" height="48" width="48" />
+                            Видеопульт
+                        </a>
+
+                        <ul class="nav collapse" id="VideoMixerLinks">
+                            <li>
+                                <a class="nav-link faq-minilink">
+                                    Karrera
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="navitem">
+
+                        <a href="#SoundMixerLinks" class="faqlink softredtext" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="SoundMixerLinks">
+                            <img src="Resources/soundmixer.png" class="img-fluid" height="48" width="48" />
+                            Звуковые пульты
+                        </a>
+
+                        <ul class="nav collapse" id="SoundMixerLinks">
+                            <li>
+                                <a class="nav-link faq-minilink">
+                                    SSL
+                                </a>
+                            </li>
+                            <li>
+                                <a class="nav-link faq-minilink">
+                                    Sound Craft
+                                </a>
+                            </li>
+
+                        </ul>
+
+                    </li>
+                    <li class="navitem">
+                        <a href="#MatrixLinks" class="faqlink softredtext" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="MatrixLinks">
+                            <img src="Resources/matrix.png" class="img-fluid" height="48" width="48" />
+                            Матрица
+                        </a>
+
+                        <ul class="nav collapse" id="MatrixLinks">
+                            <li>
+                                <a class="nav-link faq-minilink">
+                                    Platinum
+                                </a>
+                            </li>
+
+
+                        </ul>
+
+                    </li>
+                    <li class="navitem">
+                        <a href="#SoundDeviceLinks" class="faqlink softredtext" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="MatrixLinks">
+                            <img src="Resources/microphone.png" class="img-fluid" height="48" width="48" />
+                            Звуковое оборудование
+                        </a>
+                        <ul class="nav collapse" id="SoundDeviceLinks">
+                            <li>
+                                <a class="nav-link faq-minilink">
+                                    Микрофоны
+                                </a>
+                            </li>
+                            <li>
+                                <a class="nav-link faq-minilink">
+                                    Приемники
+                                </a>
+                            </li>
+                            <li>
+                                <a class="nav-link faq-minilink">
+                                    Передатчики
+                                </a>
+                            </li>
+
+                        </ul>
+                    </li>
+                    <li class="navitem">
+                        <a href="#ComputerDeviceLinks" class="faqlink softredtext" data-bs-toggle="collapse" role="button" aria-controls="ComputerDeviceLinks" aria-expanded="false">
+                            <img src="Resources/computer.png" class="img-fluid" height="48" width="48" />
+                            Компьютеры, Графические станции, Dalet
+                        </a>
+                        <ul class="nav collapse" id="ComputerDeviceLinks">
+                            <li>
+                                <a class="nav-link faq-minilink">
+                                    Компьютеры
+                                </a>
+                            </li>
+                            <li>
+                                <a class="nav-link faq-minilink">
+                                    Графические станции
+                                </a>
+                            </li>
+                            <li>
+                                <a class="nav-link faq-minilink">
+                                    Dalet
+                                </a>
+                                
+                            </li>
+
+                        </ul>
+                    </li>
+                    <li class="navitem">
+                        <a href="#LightDeviceLinks" class="faqlink softredtext" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="LightDeviceLinks">
+                            <img src="Resources/spotlight.png" class="img-fluid" height="48" width="48" />
+                            Световое оборудование
+                        </a>
+                        <ul class="nav collapse" id="LightDeviceLinks">
+                            
+                        </ul>
+
+                    </li>
+                    <li class="navitem">
+                        <a href="#StudioLinks" class="faqlink softredtext" data-bs-toggle="collapse" role="button" aria-expanded="false"aria-controls="StudioLinks">
+                            <img src="Resources/studio.png" class="img-fluid" height="48" width="48" />
+                            Студия
+
+                        </a>
+                        <ul class="nav collapse" id="StudioLinks">
+
+                        </ul>
+                    </li>
+                </ul>
+                <hr>
+
+            </div>
+            <div class="col-6 col-sm-8 col-md-8 col-lg-9">
+                <h1 id="ThirdPage" class="darkredtext text-center">Бестиарий</h1>
+            </div>
+
+        </div>
     </main>
     <script src="bootstrap/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
     <script>
 
-       
+        const tablinks = document.getElementsByClassName("nav-link creambrule-link px-1");
+
+        function change(event) {
+            const maintabs = document.querySelectorAll("main");
+            for (var num = 0; num < maintabs.length; num++) {
+                maintabs[num].className = "disactivetab";
+            }
+
+            document.getElementById(event.currentTarget.name).className = "activetab";
+            if (event.currentTarget.name === Histories) {
+                row();
+            }
+
+        }
+        for (var tabnum = 0; tabnum < tablinks.length; tabnum++) {
+            tablinks[tabnum].onclick = change;
+        }
+
         const datesort = document.getElementById("Date");
         const numbersort = document.getElementById("Number");
         const devicesort = document.getElementById("Device");
@@ -298,9 +479,8 @@
 
         var tempevent;
 
-        const closebut = document.getElementById("closechanges");
 
-        const tablinks = document.getElementsByClassName("nav-link px-2");
+        const closebut = document.getElementById("closechanges");
 
         const editbut = document.getElementById("savechanges");
         editbut.addEventListener("click", function (e) {
@@ -309,8 +489,25 @@
             tempevent.id = idh.textContent;
             EditEvent(tempevent.id, tempevent.dateofevent, tempevent.nameofasb, tempevent.nameofdevice, tempevent.isserios, tempevent.discribeevent, tempevent.fixevent);
             closebut.click();
-        });
+        }); 
 
+        const navitems = document.getElementsByClassName("navitem");
+
+        function Activelink(e) {
+            for (var k = 0; k < navitems.length; k++) {
+                navitems[k].className = "navitem";
+                navitems[k].firstElementChild.className = "faqlink softredtext";
+            }
+            const curlink = e.currentTarget;
+            curlink.className = "navitem activenavitem";
+            curlink.firstElementChild.className = "faqlink darkredtext";
+            const thirdpage = document.getElementById("ThirdPage");
+            thirdpage.textContent = curlink.textContent;
+        }
+
+        for (var n = 0; n < navitems.length; n++) {
+            navitems[n].onclick = Activelink;
+        }
 
         numbersort.addEventListener("click", Sorting);
         devicesort.addEventListener("click", Sorting);
@@ -330,10 +527,6 @@
             CreateEvent(dateofevent, nameofasb, nameofdevice, isserios, discribeevent, fixevent);
             form.reset();
         });
-
-        for (var i = 0; i < tablinks.length; i++) {
-            tablinks[i].onclick = change;
-        }
 
         function Sorting(event) {
 
@@ -658,19 +851,7 @@
 
         }
 
-        function change(event) {
-            const maintabs = document.getElementsByTagName("main");
-
-            for (var i = 0; i < maintabs.length; i++) {
-                maintabs[i].className = "disactivetab";
-            }
-
-            document.getElementById(event.currentTarget.name).className = "";
-            if (event.currentTarget.name === Histories) {
-                row();
-            }
-
-        }
+       
 
         function row(event,num) {
 
@@ -859,8 +1040,12 @@
             }
         }
 
+        
+
         GetEvents();
 
+       
+           
 
     </script>
 
