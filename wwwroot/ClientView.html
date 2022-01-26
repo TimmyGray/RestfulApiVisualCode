@@ -282,170 +282,171 @@
     </main>
 
     <main id="Faq" name="Faq" class="disactivetab">
-        <div class="row">
+        <div class="container" style="margin-left:0px;">
+            <div class="row">
 
-            <div class="d-flex flex-column flex-shrink-0 p-3 softpinkclass col-12 col-sm-4 col-md-4 col-lg-3 faq-div">
-                <a href="#testul" class="faq-btn-collapse" data-bs-toggle="collapse" role="button" aria-controls="testul" aria-expanded="false">
-                    <svg viewBox="0 0 100 4"  xlms="http://www.w3.org/2000/svg">
-                        <line x1="5" x2="95" y1="1" y2="1"/>
-                        <line x1="5" x2="95" y1="2" y2="2"/>
-                        <line x1="5" x2="95" y1="3" y2="3"/>
-                    </svg>
-                </a>
+                <div class="d-flex flex-column flex-shrink-0 p-3 softpinkclass col-12 col-sm-4 col-md-4 col-lg-3 faq-div">
+                    <a id="CollapseBtn" href="#CollapseUl" class="faq-btn-collapse" data-bs-toggle="collapse" role="button" aria-controls="CollapseUl" aria-expanded="false">
+                        <svg viewBox="0 0 100 4" xlms="http://www.w3.org/2000/svg">
+                            <line x1="5" x2="95" y1="1" y2="1" />
+                            <line x1="5" x2="95" y1="2" y2="2" />
+                            <line x1="5" x2="95" y1="3" y2="3" />
+                        </svg>
+                    </a>
 
-                <ul id="testul" class="nav collapse faq-ul-collapse mb-auto ">
-                    <li class="navitem">
+                    <ul id="CollapseUl" class="nav collapse faq-ul-collapse mb-auto ">
+                        <li class="navitem">
 
-                        <a id="testa" href="#CamsLinks" class="faqlink softredtext" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="CamsLinks">
-                            <img src="Resources/camera.png" class="img-fluid" height="48" width="48" />
-                            Камеры, CCU и OCP
-                        </a>
+                            <a id="CollapseCam" href="#CamsLinks" class="faqlink softredtext" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="CamsLinks">
+                                <img src="Resources/camera.png" class="img-fluid" height="48" width="48" />
+                                Камеры, CCU и OCP
+                            </a>
 
-                        <ul class="nav collapse" id="CamsLinks">
-                            <li>
-                                <a class="nav-link faq-minilink">
-                                    Cams
-                                </a> 
-                            </li>
-                            <li>
-                                <a class="nav-link faq-minilink">
-                                    CCU
-                                </a>
-                            </li>
-                            <li>
-                                <a class="nav-link faq-minilink">
-                                    OCP
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="navitem">
+                            <ul class="nav collapse" id="CamsLinks">
+                                <li>
+                                    <a class="nav-link faq-minilink">
+                                        Cams
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="nav-link faq-minilink">
+                                        CCU
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="nav-link faq-minilink">
+                                        OCP
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="navitem">
 
-                        <a href="#VideoMixerLinks" class="faqlink softredtext" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="VideoMixerLinks">
-                            <img src="Resources/GVvideomixer.png" class="img-fluid" height="48" width="48" />
-                            Видеопульт
-                        </a>
+                            <a id="CollapseVideoMixer" href="#VideoMixerLinks" class="faqlink softredtext" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="VideoMixerLinks">
+                                <img src="Resources/GVvideomixer.png" class="img-fluid" height="48" width="48" />
+                                Видеопульт
+                            </a>
 
-                        <ul class="nav collapse" id="VideoMixerLinks">
-                            <li>
-                                <a class="nav-link faq-minilink">
-                                    Karrera
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="navitem">
+                            <ul class="nav collapse" id="VideoMixerLinks">
+                                <li>
+                                    <a class="nav-link faq-minilink">
+                                        Karrera
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="navitem">
 
-                        <a href="#SoundMixerLinks" class="faqlink softredtext" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="SoundMixerLinks">
-                            <img src="Resources/soundmixer.png" class="img-fluid" height="48" width="48" />
-                            Звуковые пульты
-                        </a>
+                            <a id="CollapseSoundMixer" href="#SoundMixerLinks" class="faqlink softredtext" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="SoundMixerLinks">
+                                <img src="Resources/soundmixer.png" class="img-fluid" height="48" width="48" />
+                                Звуковые пульты
+                            </a>
 
-                        <ul class="nav collapse" id="SoundMixerLinks">
-                            <li>
-                                <a class="nav-link faq-minilink">
-                                    SSL
-                                </a>
-                            </li>
-                            <li>
-                                <a class="nav-link faq-minilink">
-                                    Sound Craft
-                                </a>
-                            </li>
+                            <ul class="nav collapse" id="SoundMixerLinks">
+                                <li>
+                                    <a class="nav-link faq-minilink">
+                                        SSL
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="nav-link faq-minilink">
+                                        Sound Craft
+                                    </a>
+                                </li>
 
-                        </ul>
+                            </ul>
 
-                    </li>
-                    <li class="navitem">
-                        <a href="#MatrixLinks" class="faqlink softredtext" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="MatrixLinks">
-                            <img src="Resources/matrix.png" class="img-fluid" height="48" width="48" />
-                            Матрица
-                        </a>
+                        </li>
+                        <li class="navitem">
+                            <a id="CollapseMatrix" href="#MatrixLinks" class="faqlink softredtext" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="MatrixLinks">
+                                <img src="Resources/matrix.png" class="img-fluid" height="48" width="48" />
+                                Матрица
+                            </a>
 
-                        <ul class="nav collapse" id="MatrixLinks">
-                            <li>
-                                <a class="nav-link faq-minilink">
-                                    Platinum
-                                </a>
-                            </li>
+                            <ul class="nav collapse" id="MatrixLinks">
+                                <li>
+                                    <a class="nav-link faq-minilink">
+                                        Platinum
+                                    </a>
+                                </li>
 
 
-                        </ul>
+                            </ul>
 
-                    </li>
-                    <li class="navitem">
-                        <a href="#SoundDeviceLinks" class="faqlink softredtext" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="MatrixLinks">
-                            <img src="Resources/microphone.png" class="img-fluid" height="48" width="48" />
-                            Звуковое оборудование
-                        </a>
-                        <ul class="nav collapse" id="SoundDeviceLinks">
-                            <li>
-                                <a class="nav-link faq-minilink">
-                                    Микрофоны
-                                </a>
-                            </li>
-                            <li>
-                                <a class="nav-link faq-minilink">
-                                    Приемники
-                                </a>
-                            </li>
-                            <li>
-                                <a class="nav-link faq-minilink">
-                                    Передатчики
-                                </a>
-                            </li>
+                        </li>
+                        <li class="navitem">
+                            <a id="CollapseSoundDevice" href="#SoundDeviceLinks" class="faqlink softredtext" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="MatrixLinks">
+                                <img src="Resources/microphone.png" class="img-fluid" height="48" width="48" />
+                                Звуковое оборудование
+                            </a>
+                            <ul class="nav collapse" id="SoundDeviceLinks">
+                                <li>
+                                    <a class="nav-link faq-minilink">
+                                        Микрофоны
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="nav-link faq-minilink">
+                                        Приемники
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="nav-link faq-minilink">
+                                        Передатчики
+                                    </a>
+                                </li>
 
-                        </ul>
-                    </li>
-                    <li class="navitem">
-                        <a href="#ComputerDeviceLinks" class="faqlink softredtext" data-bs-toggle="collapse" role="button" aria-controls="ComputerDeviceLinks" aria-expanded="false">
-                            <img src="Resources/computer.png" class="img-fluid" height="48" width="48" />
-                            Компьютеры, Графические станции, Dalet
-                        </a>
-                        <ul class="nav collapse" id="ComputerDeviceLinks">
-                            <li>
-                                <a class="nav-link faq-minilink">
-                                    Компьютеры
-                                </a>
-                            </li>
-                            <li>
-                                <a class="nav-link faq-minilink">
-                                    Графические станции
-                                </a>
-                            </li>
-                            <li>
-                                <a class="nav-link faq-minilink">
-                                    Dalet
-                                </a>
-                                
-                            </li>
+                            </ul>
+                        </li>
+                        <li class="navitem">
+                            <a id="CollapseComputers" href="#ComputerDeviceLinks" class="faqlink softredtext" data-bs-toggle="collapse" role="button" aria-controls="ComputerDeviceLinks" aria-expanded="false">
+                                <img src="Resources/computer.png" class="img-fluid" height="48" width="48" />
+                                Компьютеры, Графические станции, Dalet
+                            </a>
+                            <ul class="nav collapse" id="ComputerDeviceLinks">
+                                <li>
+                                    <a class="nav-link faq-minilink">
+                                        Компьютеры
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="nav-link faq-minilink">
+                                        Графические станции
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="nav-link faq-minilink">
+                                        Dalet
+                                    </a>
 
-                        </ul>
-                    </li>
-                    <li class="navitem">
-                        <a href="#LightDeviceLinks" class="faqlink softredtext" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="LightDeviceLinks">
-                            <img src="Resources/spotlight.png" class="img-fluid" height="48" width="48" />
-                            Световое оборудование
-                        </a>
-                        <ul class="nav collapse" id="LightDeviceLinks">
-                            
-                        </ul>
+                                </li>
 
-                    </li>
-                    <li class="navitem">
-                        <a href="#StudioLinks" class="faqlink softredtext" data-bs-toggle="collapse" role="button" aria-expanded="false"aria-controls="StudioLinks">
-                            <img src="Resources/studio.png" class="img-fluid" height="48" width="48" />
-                            Студия
+                            </ul>
+                        </li>
+                        <li class="navitem">
+                            <a id="CollapseLightDevice" href="#LightDeviceLinks" class="faqlink softredtext" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="LightDeviceLinks">
+                                <img src="Resources/spotlight.png" class="img-fluid" height="48" width="48" />
+                                Световое оборудование
+                            </a>
+                            <ul class="nav collapse" id="LightDeviceLinks">
+                            </ul>
 
-                        </a>
-                        <ul class="nav collapse" id="StudioLinks">
+                        </li>
+                        <li class="navitem">
+                            <a id="CollapseStudio" href="#StudioLinks" class="faqlink softredtext" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="StudioLinks">
+                                <img src="Resources/studio.png" class="img-fluid" height="48" width="48" />
+                                Студия
 
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-            <div class="col-12 col-sm-8 col-md-8 col-lg-9">
-                <h1 id="ThirdPage" class="darkredtext text-center">Бестиарий</h1>
+                            </a>
+                            <ul class="nav collapse" id="StudioLinks">
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-12 col-sm-8 col-md-8 col-lg-9">
+                    <h1 id="ThirdPage" class="darkredtext text-center">Бестиарий</h1>
+                </div>
+
             </div>
 
         </div>
@@ -483,7 +484,6 @@
 
         var tempevent;
 
-
         const closebut = document.getElementById("closechanges");
 
         const editbut = document.getElementById("savechanges");
@@ -518,6 +518,61 @@
         seriossort.addEventListener("click", Sorting);
         datesort.addEventListener("click", Sorting);
 
+        const CollapseCam = document.getElementById("CollapseCam");
+        CollapseCam.addEventListener("blur", function () {
+            const CamsLinks = document.getElementById("CamsLinks");
+            const Collapse = new bootstrap.Collapse(CamsLinks, { toggle: false });
+            Collapse.toggle();
+        });
+
+        const CollapseVideoMixer = document.getElementById("CollapseVideoMixer");
+        CollapseVideoMixer.addEventListener("blur", function () {
+            const VideoMixerLinks = document.getElementById("VideoMixerLinks");
+            const Collapse = new bootstrap.Collapse(VideoMixerLinks, { toggle: false });
+            Collapse.toggle();
+        });
+
+        const CollapseSoundMixer = document.getElementById("CollapseSoundMixer");
+        CollapseSoundMixer.addEventListener("blur", function () {
+            const SoundMixerLinks = document.getElementById("SoundMixerLinks");
+            const Collapse = new bootstrap.Collapse(SoundMixerLinks, { toggle: false });
+            Collapse.toggle();
+        });
+
+        const CollapseMatrix = document.getElementById("CollapseMatrix");
+        CollapseMatrix.addEventListener("blur", function () {
+            const MatrixLinks = document.getElementById("MatrixLinks");
+            const Collapse = new bootstrap.Collapse(MatrixLinks, { toggle: false });
+            Collapse.toggle();
+        });
+
+        const CollapseSoundDevice = document.getElementById("CollapseSoundDevice");
+        CollapseSoundDevice.addEventListener("blur", function () {
+            const SoundDeviceLinks = document.getElementById("SoundDeviceLinks");
+            const Collapse = new bootstrap.Collapse(SoundDeviceLinks, { toggle: false });
+            Collapse.toggle();
+        });
+
+        const CollapseComputers = document.getElementById("CollapseComputers");
+        CollapseComputers.addEventListener("blur", function () {
+            const ComputerDeviceLinks = document.getElementById("ComputerDeviceLinks");
+            const Collapse = new bootstrap.Collapse(ComputerDeviceLinks, { toggle: false });
+            Collapse.toggle();
+        });
+
+        const CollapseLightDevice = document.getElementById("CollapseLightDevice");
+        CollapseLightDevice.addEventListener("blur", function () {
+            const LightDeviceLinks = document.getElementById("LightDeviceLinks");
+            const Collapse = new bootstrap.Collapse(LightDeviceLinks, { toggle: false });
+            Collapse.toggle();
+        });
+
+        const CollapseStudio = document.getElementById("CollapseStudio");
+        CollapseStudio.addEventListener("blur", function () {
+            const StudioLinks = document.getElementById("StudioLinks");
+            const Collapse = new bootstrap.Carousel(StudioLinks, { toggle: false });
+            Collapse.toggle();
+        });
 
         document.forms["eventForm"].addEventListener("submit", e => {
             e.preventDefault();
@@ -855,8 +910,6 @@
 
         }
 
-       
-
         function row(event,num) {
 
             const tr = document.createElement("tr");
@@ -1044,12 +1097,7 @@
             }
         }
 
-        
-
         GetEvents();
-
-       
-           
 
     </script>
 

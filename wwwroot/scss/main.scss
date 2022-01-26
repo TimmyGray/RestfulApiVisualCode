@@ -5,9 +5,7 @@ $softyellow:rgb(250,160,60);
 $softpink: #bf3330;
 $softred:#ffb473;
 
-html{
-    height:100%;
-}
+
 .darkredclass{
     background:$darkred;
 }
@@ -158,5 +156,8 @@ svg{
     vertical-align:middle;
 }
 
+.without-left-margin{
+    margin-left:0px;
+}
 
 
