@@ -30,7 +30,20 @@ $softred:#ffb473;
         padding-left:10px;
     }
 }
+
+.faq-btn-collapse{
+    &:hover{
+        background-color:$softred;
+    }
+
+    display:inline-block;
+    border-radius:5px;
+}
+
 .faq-div {
+    &hover{
+        background-color:$softpink;
+    }
     @media(min-width:575px) {
         .faq-ul-collapse {
             display: flex;
@@ -40,15 +53,22 @@ $softred:#ffb473;
         .faq-btn-collapse {
             display: none;
         }
-
+        &hover{
+            background-color:none;
+        }
         
         
     }
 }
 
-svg{
-    stroke:$darkred;
-    stroke-width:0.5px;
+svg {
+    stroke: $darkred;
+    stroke-width: 0.5px;
+    border-radius: 5px;
+    background-color:$softred;
+    &:hover {
+        background-color: $creambrule;
+    }
 }
 
 
@@ -110,9 +130,11 @@ svg{
 
 .faq-minilink {
     color: $darkred;
+    cursor: pointer;
 
     &:hover {
         color: $creambrule;
+        cursor: pointer;
     }
 
     &:focus {
@@ -158,6 +180,21 @@ svg{
 
 .without-left-margin{
     margin-left:0px;
+}
+
+.info-input{
+    border-color:$softyellow;
+    border-radius:5px;
+    &:hover{
+        border-color:$softred;
+    }
+    &:focus{
+        border-color:$softred;
+       
+    }
+}
+.hide-form{
+    display:none;
 }
 
 

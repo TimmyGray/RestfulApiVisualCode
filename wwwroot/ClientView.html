@@ -287,10 +287,10 @@
 
                 <div class="d-flex flex-column flex-shrink-0 p-3 softpinkclass col-12 col-sm-4 col-md-4 col-lg-3 faq-div">
                     <a id="CollapseBtn" href="#CollapseUl" class="faq-btn-collapse" data-bs-toggle="collapse" role="button" aria-controls="CollapseUl" aria-expanded="false">
-                        <svg viewBox="0 0 100 4" xlms="http://www.w3.org/2000/svg">
-                            <line x1="5" x2="95" y1="1" y2="1" />
-                            <line x1="5" x2="95" y1="2" y2="2" />
-                            <line x1="5" x2="95" y1="3" y2="3" />
+                        <svg viewBox="0 0 35 4" xlms="http://www.w3.org/2000/svg">
+                            <line x1="5" x2="30" y1="1" y2="1" />
+                            <line x1="5" x2="30" y1="2" y2="2" />
+                            <line x1="5" x2="30" y1="3" y2="3" />
                         </svg>
                     </a>
 
@@ -441,10 +441,37 @@
                             <ul class="nav collapse" id="StudioLinks">
                             </ul>
                         </li>
+                        <li class="navitem">
+                            <a id="AddInfo" href="#AddInfo" class="faqlink softredtext">
+                                <img src="Resources/add.png" class="img-fluid" height="48" width="48" />
+                                Добавить информацию
+                            </a>
+                        </li>
                     </ul>
                 </div>
                 <div class="col-12 col-sm-8 col-md-8 col-lg-9">
+
                     <h1 id="ThirdPage" class="darkredtext text-center">Бестиарий</h1>
+                    <div id="ForTextDiv"  class="container">
+                        <form id="InfoForm" class="hide-form">
+                            <div class="row">
+                                <div class="col-lg-4 offset-4 mb-3">
+                                    <input class="info-input" placeholder="Введите заголовок..." />
+                                </div>
+                                <div class="col-lg-12">
+                                    <textarea class="form-control info-input" rows="10"></textarea>
+                                </div>
+
+                            </div>
+                            
+                            <div class="row mt-3">
+                                <button class="btn darkred-btn col-lg-3 offset-2">Добавить</button>
+                                <button class="btn darkred-btn col-lg-3 offset-1">Сброс значений</button>
+
+                            </div>
+                        </form>
+
+                    </div>
                 </div>
 
             </div>
@@ -502,11 +529,18 @@
                 navitems[k].className = "navitem";
                 navitems[k].firstElementChild.className = "faqlink softredtext";
             }
+            const InfoForm = document.getElementById("InfoForm");
+            InfoForm.className = "hide-form";
             const curlink = e.currentTarget;
             curlink.className = "navitem activenavitem";
             curlink.firstElementChild.className = "faqlink darkredtext";
+            const ForTextDiv = document.getElementById("ForTextDiv");
             const thirdpage = document.getElementById("ThirdPage");
-            thirdpage.textContent = curlink.textContent;
+            thirdpage.textContent = curlink.firstElementChild.textContent;
+            if (curlink.firstElementChild.id == "AddInfo") {
+                InfoForm.className = "";
+
+            }
         }
 
         for (var n = 0; n < navitems.length; n++) {
@@ -518,61 +552,6 @@
         seriossort.addEventListener("click", Sorting);
         datesort.addEventListener("click", Sorting);
 
-        const CollapseCam = document.getElementById("CollapseCam");
-        CollapseCam.addEventListener("blur", function () {
-            const CamsLinks = document.getElementById("CamsLinks");
-            const Collapse = new bootstrap.Collapse(CamsLinks, { toggle: false });
-            Collapse.toggle();
-        });
-
-        const CollapseVideoMixer = document.getElementById("CollapseVideoMixer");
-        CollapseVideoMixer.addEventListener("blur", function () {
-            const VideoMixerLinks = document.getElementById("VideoMixerLinks");
-            const Collapse = new bootstrap.Collapse(VideoMixerLinks, { toggle: false });
-            Collapse.toggle();
-        });
-
-        const CollapseSoundMixer = document.getElementById("CollapseSoundMixer");
-        CollapseSoundMixer.addEventListener("blur", function () {
-            const SoundMixerLinks = document.getElementById("SoundMixerLinks");
-            const Collapse = new bootstrap.Collapse(SoundMixerLinks, { toggle: false });
-            Collapse.toggle();
-        });
-
-        const CollapseMatrix = document.getElementById("CollapseMatrix");
-        CollapseMatrix.addEventListener("blur", function () {
-            const MatrixLinks = document.getElementById("MatrixLinks");
-            const Collapse = new bootstrap.Collapse(MatrixLinks, { toggle: false });
-            Collapse.toggle();
-        });
-
-        const CollapseSoundDevice = document.getElementById("CollapseSoundDevice");
-        CollapseSoundDevice.addEventListener("blur", function () {
-            const SoundDeviceLinks = document.getElementById("SoundDeviceLinks");
-            const Collapse = new bootstrap.Collapse(SoundDeviceLinks, { toggle: false });
-            Collapse.toggle();
-        });
-
-        const CollapseComputers = document.getElementById("CollapseComputers");
-        CollapseComputers.addEventListener("blur", function () {
-            const ComputerDeviceLinks = document.getElementById("ComputerDeviceLinks");
-            const Collapse = new bootstrap.Collapse(ComputerDeviceLinks, { toggle: false });
-            Collapse.toggle();
-        });
-
-        const CollapseLightDevice = document.getElementById("CollapseLightDevice");
-        CollapseLightDevice.addEventListener("blur", function () {
-            const LightDeviceLinks = document.getElementById("LightDeviceLinks");
-            const Collapse = new bootstrap.Collapse(LightDeviceLinks, { toggle: false });
-            Collapse.toggle();
-        });
-
-        const CollapseStudio = document.getElementById("CollapseStudio");
-        CollapseStudio.addEventListener("blur", function () {
-            const StudioLinks = document.getElementById("StudioLinks");
-            const Collapse = new bootstrap.Carousel(StudioLinks, { toggle: false });
-            Collapse.toggle();
-        });
 
         document.forms["eventForm"].addEventListener("submit", e => {
             e.preventDefault();
