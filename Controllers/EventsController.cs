@@ -49,11 +49,11 @@ namespace RestfulApiVisualCode.Controllers
         [HttpPost]
         public async Task<ActionResult<Event>> Post(Event evnt)
         {
-            //if (evnt == null)
-            //{
-            //    return BadRequest();
-            //}
-            if(Convert.ToDateTime(evnt.Dateofevent)>DateTime.Now)
+            if (evnt == null)
+            {
+                return BadRequest();
+            }
+            if (Convert.ToDateTime(evnt.Dateofevent)>DateTime.Now)
             {
                 ModelState.AddModelError("Dateofevent", "Дата не может быть позднее сегодняшнего числа");
             }

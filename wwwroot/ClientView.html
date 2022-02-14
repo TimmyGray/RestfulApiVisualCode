@@ -453,6 +453,7 @@
 
                     <h1 id="ThirdPage" class="darkredtext text-center">Бестиарий</h1>
                     <div id="ForTextDiv"  class="container">
+                        <p id="PageText"></p>
                         <form id="InfoForm" class="hide-form">
                             <div class="row">
                                 <div class="col-lg-4 offset-4 mb-3">
@@ -480,6 +481,11 @@
     </main>
     <script src="bootstrap/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
     <script>
+const { post, get } = require("jquery");
+
+/* END EXTERNAL SOURCE */
+/* BEGIN EXTERNAL SOURCE */
+
 
         const tablinks = document.getElementsByClassName("nav-link creambrule-link px-1");
 
@@ -1058,6 +1064,33 @@
             }
         }
 
+        async function GetPages() {
+            const response = await fetch("/api/pages", {
+                method: "GET",
+                headers: { "Accept": "application/json" }
+            });
+            if (response.ok === true) {
+                const pages = await response.json();
+                //const PageText = document.getElementById("PageText");
+                //pages.forEach(page => {
+                //    PageText.textContent = page.info;
+                //});
+                
+            }
+        }
+
+        async function GetPage(subheader) {
+            const response = await fetch("/api/pages" + subheader, {
+                method: "GET",
+                headers: { "Accept": "application/json" }
+            });
+            if (response.ok == true) {
+                const page = response.json();
+                const pagelink = document.querySelector(page.subheader);
+
+            }
+        }
+
         async function DeleteEvent(id) {
             const response = await fetch("/api/events/" + id, {
                 method: "DELETE",
@@ -1075,8 +1108,9 @@
                 alert("Происшествие удалено");
             }
         }
-
-        GetEvents();
+        
+            GetEvents();
+        //GetPages();
 
     </script>
 

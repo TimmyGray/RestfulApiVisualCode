@@ -1,10 +1,9 @@
 {
   "version": 2,
-  "dgSpecHash": "yUioKeQt4TkawHj+sK+GxFsW8BrhxI+jTzNFG06edQII25eUyFAhw7YCkPARrdb9iqbEDWfBtprOLDJDFCXjqg==",
+  "dgSpecHash": "vxWoOU9EVrxp2XCL9vMcQSpSn6l0PaW1ErUe5FRUmW1cOT8IpwcwLM//z5NFzmY+vIAAsbSbB4hcggiQ1n2wdw==",
   "success": true,
   "projectFilePath": "C:\\Users\\zuuub\\source\\repos\\TimmyGray\\RestfulApiVisualCode\\RestfulApiVisualCode.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\zuuub\\.nuget\\packages\\bootstrap\\5.1.3\\bootstrap.5.1.3.nupkg.sha512",
     "C:\\Users\\zuuub\\.nuget\\packages\\buildwebcompiler\\1.12.405\\buildwebcompiler.1.12.405.nupkg.sha512",
     "C:\\Users\\zuuub\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\zuuub\\.nuget\\packages\\microsoft.aspnetcore.authentication.abstractions\\2.2.0\\microsoft.aspnetcore.authentication.abstractions.2.2.0.nupkg.sha512",

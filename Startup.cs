@@ -23,26 +23,20 @@ namespace RestfulApiVisualCode
         public void ConfigureServices(IServiceCollection services)
         {
 
-             string con = "Server=(localdb)\\mssqllocaldb;Database=eventsdbstore;Trusted_Connection=True;";
+            string con = "Server=(localdb)\\mssqllocaldb;Database=eventsdbstore;Trusted_Connection=True;";
             services.AddDbContext<EventsContext>(options => options.UseSqlServer(con));
-            
-            services.AddControllers(); 
+            services.AddMvc();
+            services.AddControllers();
+
         }
 
         public void Configure(IApplicationBuilder app)
         {
-            var loggerfactory = LoggerFactory.Create(builder =>
-            {
-                builder.AddConsole();
-            });
-            ILogger logger = loggerfactory.CreateLogger<Startup>();
-            //app.Run(async (context) =>
-            //{
-            //    logger.LogInformation("Logg: {0}", context.Request.Path);
-            //});
             app.UseDeveloperExceptionPage();
- 
-            app.UseDefaultFiles();
+            DefaultFilesOptions options = new DefaultFilesOptions();
+            options.DefaultFileNames.Clear();
+            options.DefaultFileNames.Add("ClientView.html");
+            app.UseDefaultFiles(options);
             app.UseStaticFiles();
  
             app.UseRouting();
