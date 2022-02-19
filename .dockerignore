@@ -1,0 +1,4 @@
+﻿**/bundleconfig
+**/compileconfig
+.dockerignore
+README.md

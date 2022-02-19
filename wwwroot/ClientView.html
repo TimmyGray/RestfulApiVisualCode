@@ -481,15 +481,10 @@
     </main>
     <script src="bootstrap/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
     <script>
-const { post, get } = require("jquery");
-
-/* END EXTERNAL SOURCE */
-/* BEGIN EXTERNAL SOURCE */
-
 
         const tablinks = document.getElementsByClassName("nav-link creambrule-link px-1");
 
-        function change(event) {
+        function Сhange(event) {
             const maintabs = document.querySelectorAll("main");
             for (var num = 0; num < maintabs.length; num++) {
                 maintabs[num].className = "disactivetab";
@@ -502,7 +497,7 @@ const { post, get } = require("jquery");
 
         }
         for (var tabnum = 0; tabnum < tablinks.length; tabnum++) {
-            tablinks[tabnum].onclick = change;
+            tablinks[tabnum].onclick = Сhange;
         }
 
         const datesort = document.getElementById("Date");
@@ -1109,7 +1104,7 @@ const { post, get } = require("jquery");
             }
         }
         
-            GetEvents();
+        GetEvents();
         //GetPages();
 
     </script>

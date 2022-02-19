@@ -3,6 +3,7 @@
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
     <UserSecretsId>a464fbe1-41ae-4653-b357-140e09ddf191</UserSecretsId>
+    <StartupObject>RestfulApiVisualCode.Program</StartupObject>
   </PropertyGroup>
 
   <ItemGroup>
@@ -74,5 +75,7 @@
       <Generator>SassTranspiler</Generator>
     </Content>
   </ItemGroup>
+
+  <ProjectExtensions><VisualStudio><UserProperties properties_4launchsettings_1json__JsonSchema="" /></VisualStudio></ProjectExtensions>
 
 </Project>
