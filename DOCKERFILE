@@ -1,17 +1,22 @@
-﻿FROM microsoft/dotnet/sdk:5.0 AS build
-WORKDIR /dockersource
+﻿FROM mcr.microsoft.com/dotnet/aspnet:5.0 as base
+WORKDIR /dockerapp
 EXPOSE 5000
 
-COPY  *.sln .
-COPY *.csproj .
-RUN dotnet restore
+FROM mcr.microsoft.com/dotnet/sdk:5.0 as build
+WORKDIR /dockersrc
+COPY RestfulApiVisualCode.csproj .
+RUN dotnet restore RestfulApiVisualCode.csproj
 
 COPY . .
-RUN dotnet publish -c release -o /release --no-restore
+WORKDIR /dockersrc
+RUN dotnet build RestfulApiVisualCode.csproj -c Release -o /dockerapp 
 
-FROM microsoft/dotnet/aspnet:5.0
+FROM build as publish
+RUN dotnet publish RestfulApiVisualCode.csproj -c release -o /dockerapp
+
+FROM base as final
 WORKDIR /dockerapp
-COPY --from=build /release ./
+COPY --from=publish /dockerapp .
 ENTRYPOINT ["dotnet","RestfulApiVisualCode.dll"]
 
 

@@ -1,4 +1,11 @@
-﻿**/bundleconfig
-**/compileconfig
+﻿**/bundleconfig.json
+**/compilerconfig.json
+**/.git
+**/.vs
+**/.vscode
+**/bin
+**/obj
+**/Properties
 .dockerignore
+**/docker-compose.yml
 README.md

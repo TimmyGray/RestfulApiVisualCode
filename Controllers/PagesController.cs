@@ -21,7 +21,7 @@ namespace RestfulApiVisualCode.Controllers
             db = context;
             if (!db.Pages.Any())
             {
-                db.Pages.Add(new Page { Header = "Компьютеры, Графические станции, Dalet", SubHeader = "Компьютеры", Info="Это тестовая статья, помогающая понять работает или нет" });
+                db.Pages.Add(new Page { Header = "Компьютеры, Графические станции, Dalet", Subheader = "Компьютеры", Info="Это тестовая статья, помогающая понять работает или нет" });
                 db.SaveChanges();
             }
         }
@@ -39,7 +39,7 @@ namespace RestfulApiVisualCode.Controllers
         [HttpGet("{subheader}")]
         public async Task<ActionResult<Page>> GetOne(string subheader)
         {
-            Page page = await db.Pages.FirstOrDefaultAsync(p => p.SubHeader == subheader);
+            Page page = await db.Pages.FirstOrDefaultAsync(p => p.Subheader == subheader);
             if (page == null)
             {
                 return NotFound();
@@ -66,7 +66,7 @@ namespace RestfulApiVisualCode.Controllers
             {
                 return BadRequest();
             }
-            Page updpage = await db.Pages.FirstOrDefaultAsync(p => p.SubHeader == page.SubHeader);
+            Page updpage = await db.Pages.FirstOrDefaultAsync(p => p.Subheader == page.Subheader);
             if (updpage == null)
             {
                 return NotFound();
@@ -83,7 +83,7 @@ namespace RestfulApiVisualCode.Controllers
             {
                 return BadRequest();
             }
-            Page delpage = await db.Pages.FirstOrDefaultAsync(p => p.SubHeader == page.SubHeader);
+            Page delpage = await db.Pages.FirstOrDefaultAsync(p => p.Subheader == page.Subheader);
             if(delpage == null)
             {
                 return NotFound();

@@ -1,0 +1,11 @@
+﻿version: "3.9"
+services:
+  db:
+    image: "mcr.microsoft.com/mssql/server"
+    
+  restfulapivisualcode:
+    build: .
+    ports:
+    - "5000:80"
+    depends_on:
+    - db

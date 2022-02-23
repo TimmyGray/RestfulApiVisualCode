@@ -14,7 +14,6 @@ using Microsoft.EntityFrameworkCore;
 using RestfulApiVisualCode.DataBaseContext;
 using RestfulApiVisualCode.Models;
 
-
 namespace RestfulApiVisualCode
 {
     public class Startup
@@ -22,7 +21,6 @@ namespace RestfulApiVisualCode
      
         public void ConfigureServices(IServiceCollection services)
         {
-
             string con = "Server=(localdb)\\mssqllocaldb;Database=eventsdbstore;Trusted_Connection=True;";
             services.AddDbContext<EventsContext>(options => options.UseSqlServer(con));
             services.AddMvc();
