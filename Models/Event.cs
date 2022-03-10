@@ -4,7 +4,7 @@ namespace RestfulApiVisualCode.Models
 {
     public class Event
     {
-        public int Id { get; set; }    
+        public int EventId { get; set; }    
         public string Dateofevent{get;set;}
         public int Nameofasb { get; set; }
         public string Nameofdevice { get; set; }

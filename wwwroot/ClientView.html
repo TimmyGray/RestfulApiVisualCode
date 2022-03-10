@@ -1,15 +1,13 @@
-<!DOCTYPE html>
-<html>
+﻿<!doctype html>
+<html lang="en">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Происшествия</title>
     <link rel="stylesheet" type="text/css" href="bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" href="css/main.css">
-
 </head>
-<body class="fivebody" id="body">
-
+<body>
     <header class="p-3 darkredclass">
         <div class="container">
 
@@ -30,14 +28,13 @@
 
                 <div class="text-end five-header-btn">
                     <button type="button" class="btn headerbtn me-2">Войти</button>
-                
+
                     <button type="button" class="btn headerbtn">Регистрация</button>
                 </div>
             </div>
 
         </div>
     </header>
-
     <main id="Create" class="activetab" name="Create">
 
         <div class="container-fluid">
@@ -144,7 +141,6 @@
 
         </div>
     </main>
-
     <main id="Histories" name="Histories" class="disactivetab">
 
         <div class="container justify-content-center">
@@ -220,10 +216,10 @@
                         </div>
                     </div>
 
-                    
+
                 </div>
-                
-                <div  class="d-flex col-2 align-items-center mb-2"  >
+
+                <div class="d-flex col-2 align-items-center mb-2">
                     <a id="closesorting1" href="#" hidden>
                         <img src="Resources/closeicon.png" alt="" height="25" width="25">
                     </a>
@@ -231,7 +227,7 @@
 
             </div>
             <div class="table-responsive">
-                <table class="table table-striped table-hover"> 
+                <table class="table table-striped table-hover">
                     <thead class="softpinkclass creambrule-text" style="vertical-align:middle">
                         <tr id="sorttr">
                             <th id="#">#</th>
@@ -280,7 +276,6 @@
         </div>
 
     </main>
-
     <main id="Faq" name="Faq" class="disactivetab">
         <div class="container" style="margin-left:0px;">
             <div class="row">
@@ -404,7 +399,7 @@
                 <div class="col-12 col-sm-8 col-md-8 col-lg-9">
 
                     <h1 id="ThirdPage" class="darkredtext text-center">Бестиарий</h1>
-                    <div id="ForTextDiv"  class="container">
+                    <div id="ForTextDiv" class="container">
                         <p id="PageText"></p>
                         <form id="InfoForm" class="hide-form">
                             <div class="row">
@@ -416,7 +411,7 @@
                                 </div>
 
                             </div>
-                            
+
                             <div class="row mt-3">
                                 <button class="btn darkred-btn col-lg-3 offset-2">Добавить</button>
                                 <button class="btn darkred-btn col-lg-3 offset-1">Сброс значений</button>
@@ -431,7 +426,7 @@
 
         </div>
     </main>
-    <script src="bootstrap/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
+
     <script>
         const tablinks = document.getElementsByClassName("nav-link creambrule-link px-1");
 
@@ -442,8 +437,12 @@
             }
 
             document.getElementById(event.currentTarget.name).className = "activetab";
-            if (event.currentTarget.name === Histories) {
-                row();
+            if (event.currentTarget.id === "HistoryClick") {
+                GetEvents();
+            }
+
+            if (event.currentTarget.id === "FaqClick") {
+                GetPages();
             }
 
         }
@@ -469,10 +468,10 @@
         editbut.addEventListener("click", function (e) {
             tempevent.discribeevent = discribe.value;
             tempevent.fixevent = fix.value;
-            tempevent.id = idh.textContent;
-            EditEvent(tempevent.id, tempevent.dateofevent, tempevent.nameofasb, tempevent.nameofdevice, tempevent.isserios, tempevent.discribeevent, tempevent.fixevent);
+            tempevent.eventid = idh.textContent;
+            EditEvent(tempevent.eventId, tempevent.dateofevent, tempevent.nameofasb, tempevent.nameofdevice, tempevent.isserios, tempevent.discribeevent, tempevent.fixevent);
             closebut.click();
-        }); 
+        });
 
         const navitems = document.getElementsByClassName("navitem");
 
@@ -547,7 +546,7 @@
             datediv.hidden = true;
 
             if (sort.textContent == "Дата события") {
-               sortingdiv.hidden = true;
+                sortingdiv.hidden = true;
                 datediv.hidden = false;
                 closesorting1.hidden = true;
 
@@ -592,7 +591,7 @@
             yearselect.addEventListener("change", SortingDate);
             monthselect.addEventListener("change", SortingDate);
             currentdayselect.addEventListener("change", SortingDate);
-           
+
 
         }
 
@@ -776,7 +775,7 @@
                         var temptds = trs[i].querySelector("td[name=dateofevent]");
 
                         if (!temptds.textContent.includes(tempoption.textContent)) {
-                                trs[i].hidden = true;
+                            trs[i].hidden = true;
                         }
 
                     }
@@ -819,20 +818,20 @@
                     if (tempoption.textContent == "Декабрь") {
                         tempmonth = "12";
                     }
-                    
+
                     for (var i = 0; i < trs.length; i++) {
                         trs[i].hidden = false;
                         var temptds = trs[i].querySelector("td[name=dateofevent]");
 
-                        if (!temptds.textContent.slice(4,7).includes(tempmonth)) {
+                        if (!temptds.textContent.slice(4, 7).includes(tempmonth)) {
                             trs[i].hidden = true;
                         }
 
                     }
                 }
-               
+
             }
-            
+
             else {
                 for (var i = 0; i < trs.length; i++) {
                     trs[i].hidden = false;
@@ -841,12 +840,12 @@
 
         }
 
-        function row(event,num) {
+        function row(event, num) {
 
             const tr = document.createElement("tr");
 
-            tr.id = event.id;
-            tr.setAttribute("data-rowid", event.id);
+            tr.id = event.eventId;
+            tr.setAttribute("data-rowid", event.eventId);
 
             const idTd = document.createElement("td");
             idTd.setAttribute("name", "id");
@@ -907,7 +906,7 @@
 
             delbut.append(delbutimg);
             delbut.addEventListener("click", function (e) {
-                DeleteEvent(event.id);
+                DeleteEvent(event.eventId);
             });
 
 
@@ -924,15 +923,16 @@
 
         function trclick(event) {
             const curtr = event.currentTarget;
+            alert(curtr.id);
             GetEvent(curtr.id);
         }
 
-        async function EditEvent(eventId, eventDateofevent, eventNameofasb, eventNameofdevice, eventIsserios, eventDiscribeevent, eventFixevent) {
-            const response = await fetch("api/events", {
+        async function EditEvent(eventid, eventDateofevent, eventNameofasb, eventNameofdevice, eventIsserios, eventDiscribeevent, eventFixevent) {
+            const response = await fetch("/api/events", {
                 method: "PUT",
                 headers: { "Accept": "application/json", "Content-Type": "application/json" },
                 body: JSON.stringify({
-                    id: parseInt(eventId, 10),
+                    eventId: parseInt(eventid, 10),
                     dateofevent: eventDateofevent,
                     nameofasb: eventNameofasb,
                     nameofdevice: eventNameofdevice,
@@ -943,7 +943,7 @@
             });
             if (response.ok === true) {
                 const event = await response.json();
-                const temptr = document.getElementById(event.id);
+                const temptr = document.getElementById(event.eventId);
                 const tdupdate = temptr.querySelector("td");
                 const num = parseInt(tdupdate.textContent);
                 temptr.replaceWith(row(event, num));
@@ -954,7 +954,7 @@
         }
 
         async function CreateEvent(eventDateofevent, eventNameofasb, eventNameofdevice, eventIsserios, eventDiscribeevent, eventFixevent) {
-            const response = await fetch("api/events", {
+            const response = await fetch("/api/events", {
                 method: "POST",
                 headers: { "Accept": "application/json", "Content-Type": "application/json" },
                 body: JSON.stringify({
@@ -970,7 +970,7 @@
                 const event = await response.json();
                 const tds = document.getElementsByName("id");
                 const num = tds.length + 1;
-                document.querySelector("tbody").append(row(event,num));
+                document.querySelector("tbody").append(row(event, num));
                 alert("Происшествие создано");
 
             }
@@ -984,7 +984,7 @@
             if (response.ok === true) {
                 const event = await response.json();
                 tempevent = event;
-                idh.textContent = event.id;
+                idh.textContent = event.eventId;
                 Label.textContent = event.nameofdevice;
                 discribe.value = event.discribeevent;
                 fix.value = event.fixevent;
@@ -1005,7 +1005,7 @@
                 let i = 0;
                 events.forEach(event => {
                     const num = ++i;
-                    rows.append(row(event,num));
+                    rows.append(row(event, num));
                 });
             }
         }
@@ -1060,9 +1060,9 @@
                                 AddLinks(pages[j], uls[i]);
                             }
                         }
-                            
+
                     }
-                }                
+                }
             }
         }
 
@@ -1094,7 +1094,7 @@
             });
             if (response.ok === true) {
                 const event = await response.json();
-                document.querySelector("tr[data-rowid='" + event.id + "']").remove();
+                document.querySelector("tr[data-rowid='" + event.eventId + "']").remove();
                 let tds = document.getElementsByName("id");
                 let i = 0;
                 tds.forEach(td => {
@@ -1104,11 +1104,10 @@
                 alert("Происшествие удалено");
             }
         }
-        
-        GetEvents();
-        GetPages();
 
     </script>
+
+    <script src="bootstrap/dist/js/bootstrap.bundle.min.js"  crossorigin="anonymous"></script>
 
 </body>
 </html>

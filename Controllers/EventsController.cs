@@ -13,20 +13,10 @@ namespace RestfulApiVisualCode.Controllers
     [Route("api/[controller]")]
     public class EventsController : ControllerBase
     {
-        EventsContext db;
+        readonly EventsContext db;
         public EventsController(EventsContext context)
         {
             db = context;
-            if (!db.Events.Any())
-            {
-                db.Events.Add(new Event { Nameofdevice = "SSL", Nameofasb = 1,Dateofevent = DateTime.Now.Date.ToShortDateString(), Isserios="серьезно", Discribeevent = "ваще коллапс", Fixevent = "все пофиксили"});
-                db.Events.Add(new Event { Nameofdevice = "Karrera", Nameofasb = 2,Dateofevent = DateTime.Now.Date.ToShortDateString(), Isserios="не серьезно", Discribeevent = "все сломалось", Fixevent = "это не" });
-                db.Events.Add(new Event { Nameofdevice = "микрофон", Nameofasb = 7, Dateofevent = DateTime.Now.Date.ToShortDateString(), Isserios = "не серьезно", Discribeevent = "ваще коллапс", Fixevent = "все пофиксили" });
-                db.Events.Add(new Event { Nameofdevice = "Karrera", Nameofasb = 5, Dateofevent = DateTime.Now.Date.ToShortDateString(), Isserios = "серьезно", Discribeevent = "жесть какая", Fixevent = "это не" });
-
-                db.SaveChanges();
-                
-            }
         }
  
         [HttpGet]
@@ -39,7 +29,7 @@ namespace RestfulApiVisualCode.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Event>> Get(int id)
         {
-            Event evnt = await db.Events.FirstOrDefaultAsync(x => x.Id == id);
+            Event evnt = await db.Events.FirstOrDefaultAsync(x => x.EventId == id);
             if (evnt == null)
                 return NotFound();
             return new ObjectResult(evnt);
@@ -74,7 +64,7 @@ namespace RestfulApiVisualCode.Controllers
             {
                 return BadRequest();
             }
-            if (!db.Events.Any(x => x.Id == evnt.Id))
+            if (!db.Events.Any(x => x.EventId == evnt.EventId))
             {
                 return NotFound();
             }
@@ -88,7 +78,7 @@ namespace RestfulApiVisualCode.Controllers
         [HttpDelete("{id}")]
         public async Task<ActionResult<Event>> Delete(int id)
         {
-            Event evnt = db.Events.FirstOrDefault(x => x.Id == id);
+            Event evnt = db.Events.FirstOrDefault(x => x.EventId == id);
             if (evnt == null)
             {
                 return NotFound();

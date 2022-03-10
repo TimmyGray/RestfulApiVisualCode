@@ -8,7 +8,7 @@ namespace RestfulApiVisualCode.Models
 {
     public class Page
     {
-        public int Id { get; set; }
+        public int PageId { get; set; }
         public string Header { get; set; }
         public string Subheader { get; set; }      
         public string Info { get; set; }

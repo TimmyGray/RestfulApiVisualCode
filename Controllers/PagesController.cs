@@ -19,11 +19,6 @@ namespace RestfulApiVisualCode.Controllers
         public PagesController(EventsContext context)
         {
             db = context;
-            if (!db.Pages.Any())
-            {
-                db.Pages.Add(new Page { Header = "Компьютеры, Графические станции, Dalet", Subheader = "Компьютеры", Info="Это тестовая статья, помогающая понять работает или нет" });
-                db.SaveChanges();
-            }
         }
 
         [HttpGet]

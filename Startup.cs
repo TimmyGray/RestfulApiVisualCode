@@ -1,4 +1,5 @@
 using System;
+using System.IO;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -9,7 +10,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using Microsoft.OpenApi.Models;
 using Microsoft.EntityFrameworkCore;
 using RestfulApiVisualCode.DataBaseContext;
 using RestfulApiVisualCode.Models;
@@ -18,11 +18,14 @@ namespace RestfulApiVisualCode
 {
     public class Startup
     {
-     
+        IConfiguration Configuration { get; }
+        public Startup(IConfiguration configuration)
+        {
+            Configuration = configuration;
+        }
         public void ConfigureServices(IServiceCollection services)
         {
-            string con = "Server=(localdb)\\mssqllocaldb;Database=eventsdbstore;Trusted_Connection=True;";
-            services.AddDbContext<EventsContext>(options => options.UseSqlServer(con));
+            services.AddDbContext<EventsContext>(options => options.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
             services.AddMvc();
             services.AddControllers();
 
@@ -30,13 +33,13 @@ namespace RestfulApiVisualCode
 
         public void Configure(IApplicationBuilder app)
         {
+            DataBaseExtention.CreateDataBase(app);
             app.UseDeveloperExceptionPage();
             DefaultFilesOptions options = new DefaultFilesOptions();
             options.DefaultFileNames.Clear();
             options.DefaultFileNames.Add("ClientView.html");
             app.UseDefaultFiles(options);
             app.UseStaticFiles();
- 
             app.UseRouting();
  
             app.UseEndpoints(endpoints =>

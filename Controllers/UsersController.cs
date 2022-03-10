@@ -17,11 +17,6 @@ namespace RestfulApiVisualCode.Controllers
         public UsersController(EventsContext context)
         {
             db = context;
-            if (!db.Users.Any())
-            {
-                db.Users.Add(new User { Login = "Timmy", Password = "1234" });
-                db.SaveChanges();
-            }
         }
 
         [HttpGet]
