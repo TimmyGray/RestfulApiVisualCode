@@ -1,10 +1,12 @@
 
 FROM mcr.microsoft.com/dotnet/aspnet:5.0 AS base
 WORKDIR /app
+
 EXPOSE 5000
 
 FROM mcr.microsoft.com/dotnet/sdk:5.0 AS build
 WORKDIR /src
+
 COPY RestfulApiVisualCode.csproj .
 RUN dotnet restore "RestfulApiVisualCode.csproj"
 COPY . .
@@ -13,6 +15,8 @@ COPY . /app
 
 FROM build AS publish
 RUN dotnet publish "RestfulApiVisualCode.csproj" -c Release -o /app
+
+VOLUME /database
 
 FROM base AS final
 WORKDIR /app
