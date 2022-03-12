@@ -1,7 +1,12 @@
-version: '3.4'
+version: '3.5'
 
 services:
-  restfulapivisualcode:
-    image: ${DOCKER_REGISTRY-}restfulapivisualcode
+  eventapi:
+    image: eventapiimage
     build: .
+    ports:
+    - '5000:80'
+    volumes:
+    - ./database/:/app/database/
+
       
