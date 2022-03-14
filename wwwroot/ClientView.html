@@ -413,8 +413,8 @@
                             </div>
 
                             <div class="row mt-3">
-                                <button class="btn darkred-btn col-lg-3 offset-2">Добавить</button>
-                                <button class="btn darkred-btn col-lg-3 offset-1">Сброс значений</button>
+                                <button id="CreatePageBut" class="btn darkred-btn col-lg-3 offset-2">Добавить</button>
+                                <button id="ResetPageBut" type="reset" class="btn darkred-btn col-lg-3 offset-1">Сброс значений</button>
 
                             </div>
                         </form>
@@ -923,7 +923,6 @@
 
         function trclick(event) {
             const curtr = event.currentTarget;
-            alert(curtr.id);
             GetEvent(curtr.id);
         }
 
@@ -1071,20 +1070,29 @@
             const linka = document.createElement("a");
             linka.className = "nav-link faq-minilink";
             linka.textContent = page.subheader;
+            linka.addEventListener("click", PageClick);
             links.appendChild(linka);
             ullink.appendChild(links);
         }
 
         async function GetPage(subheader) {
-            const response = await fetch("/api/pages" + subheader, {
+            const response = await fetch("/api/pages/" + subheader, {
                 method: "GET",
                 headers: { "Accept": "application/json" }
             });
-            if (response.ok == true) {
-                const page = response.json();
-                const pagelink = document.querySelector(page.subheader);
-
+            if (response.ok === true) {
+                const page = await response.json();
+                const headertext = document.getElementById("ThirdPage");
+                headertext.textContent = `${page.header}\n\n${page.subheader}`;
+                const textarea = document.getElementById("PageText");
+                textarea.textContent = page.info;
+                
             }
+        }
+
+        function PageClick(e) {
+            GetPage(e.currentTarget.textContent);
+             
         }
 
         async function DeleteEvent(id) {
@@ -1102,6 +1110,32 @@
                 });
 
                 alert("Происшествие удалено");
+            }
+        }
+
+        const createpagebut = document.getElementById("CreatePageBut");
+        createpagebut.addEventListener("click", CreatePage);
+        async function CreatePage(pageheader, pagesubheader, pageinfo) {
+            const response = await fetch("/api/pages/", {
+                method: "POST",
+                headers: { "Accept": "application/json", "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    header: pageheader,
+                    subheader: pagesubheader,
+                    info: pageinfo
+                })
+
+            });
+            if (response.ok === true) {
+                const page = await response.json();
+                const ullink = document.getElementById(page.header);
+                const newa = document.createElement(a);
+                const newlink = document.createElement(li);
+                newa.textContent = page.subheader;
+                newa.className = "nav-link faq-minilink";
+                newlink.appendChild(newa);
+                ullink.appendChild(newlink);
+                alert("Статья создана");
             }
         }
 

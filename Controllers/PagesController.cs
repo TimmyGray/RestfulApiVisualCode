@@ -49,10 +49,20 @@ namespace RestfulApiVisualCode.Controllers
             {
                 return BadRequest();
             }
-            db.Pages.Add(page);
-            await db.SaveChangesAsync();
-            return Ok(page);
+            Page testpage = await db.Pages.FirstOrDefaultAsync(p=>p.Subheader==page.Subheader);
+            if (testpage==null)
+            {
+                db.Pages.Add(page);
+                await db.SaveChangesAsync();
+                return Ok(page);
+            }
+            else
+            {
+                return BadRequest();
+            }
+            
         }
+
 
         [HttpPut]
         public async Task<ActionResult<Page>> UpdatePage(Page page)
