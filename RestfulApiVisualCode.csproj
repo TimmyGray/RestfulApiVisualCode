@@ -74,18 +74,6 @@
     <Folder Include="wwwroot\css\" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Content Update="wwwroot\scss\main.css">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>main.scss</DependentUpon>
-    </Content>
-    <Content Update="wwwroot\scss\main.scss">
-      <Generator>SassTranspiler</Generator>
-      <LastGenOutput>main.css</LastGenOutput>
-    </Content>
-  </ItemGroup>
-
   <ProjectExtensions><VisualStudio><UserProperties properties_4launchsettings_1json__JsonSchema="" /></VisualStudio></ProjectExtensions>
 
 </Project>

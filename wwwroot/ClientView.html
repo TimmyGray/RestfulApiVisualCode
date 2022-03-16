@@ -7,7 +7,7 @@
     <link rel="stylesheet" type="text/css" href="bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" href="css/main.css">
 </head>
-<body>
+<body class="fivebody">
     <header class="p-3 darkredclass">
         <div class="container">
 
@@ -297,7 +297,7 @@
                                 Камеры, CCU и OCP
                             </a>
 
-                            <ul class="nav collapse faq-ul-minilink-collapse" id="CamsLinks">
+                            <ul name="Камеры, CCU и OCP" class="nav collapse faq-ul-minilink-collapse" id="CamsLinks">
                             </ul>
 
                         </li>
@@ -308,7 +308,7 @@
                                 Видеопульт
                             </a>
 
-                            <ul class="nav collapse faq-ul-minilink-collapse" id="VideoMixerLinks">
+                            <ul name="Видеопульт" class="nav collapse faq-ul-minilink-collapse" id="VideoMixerLinks">
                             </ul>
 
                         </li>
@@ -319,7 +319,7 @@
                                 Звуковые пульты
                             </a>
 
-                            <ul class="nav collapse faq-ul-minilink-collapse" id="SoundMixerLinks">
+                            <ul name ="Звуковые пульты" class="nav collapse faq-ul-minilink-collapse" id="SoundMixerLinks">
                             </ul>
 
                         </li>
@@ -330,7 +330,7 @@
                                 Матрица
                             </a>
 
-                            <ul class="nav collapse faq-ul-minilink-collapse" id="MatrixLinks">
+                            <ul name="Матрица" class="nav collapse faq-ul-minilink-collapse" id="MatrixLinks">
                             </ul>
 
                         </li>
@@ -341,7 +341,7 @@
                                 Звуковое оборудование
                             </a>
 
-                            <ul class="nav collapse faq-ul-minilink-collapse" id="SoundDeviceLinks">
+                            <ul name="Звуковое оборудование" class="nav collapse faq-ul-minilink-collapse" id="SoundDeviceLinks">
                             </ul>
 
                         </li>
@@ -352,7 +352,7 @@
                                 Компьютеры, Графические станции, Dalet
                             </a>
 
-                            <ul class="nav collapse faq-ul-minilink-collapse" id="ComputerDeviceLinks">
+                            <ul name="Компьютеры, Графические станции, Dalet" class="nav collapse faq-ul-minilink-collapse" id="ComputerDeviceLinks">
                             </ul>
 
                         </li>
@@ -363,7 +363,7 @@
                                 Световое оборудование
                             </a>
 
-                            <ul class="nav collapse faq-ul-minilink-collapse" id="LightDeviceLinks">
+                            <ul name="Световое оборудование" class="nav collapse faq-ul-minilink-collapse" id="LightDeviceLinks">
                             </ul>
 
                         </li>
@@ -374,7 +374,7 @@
                                 Студия
                             </a>
 
-                            <ul class="nav collapse faq-ul-minilink-collapse" id="StudioLinks">
+                            <ul name="Студия" class="nav collapse faq-ul-minilink-collapse" id="StudioLinks">
                             </ul>
 
                         </li>
@@ -403,17 +403,30 @@
                         <p id="PageText"></p>
                         <form id="InfoForm" class="hide-form">
                             <div class="row">
-                                <div class="col-lg-4 offset-4 mb-3">
-                                    <input class="info-input" placeholder="Введите заголовок..." />
+                                <div class="col-lg-4 mb-3">
+                                    <select id="HeaderValue"  class="w-100 info-select">
+                                        <option value>Заголовок...</option>
+                                        <option>Камеры, CCU и OCP</option>
+                                        <option>Видеопульт</option>
+                                        <option>Звуковые пульты</option>
+                                        <option>Матрица</option>
+                                        <option>Звуковое оборудование</option>
+                                        <option>Компьютеры, Графические станции, Dalet</option>
+                                        <option>Световое оборудование</option>
+                                        <option>Студия</option>
+                                    </select>
+                                </div>
+                                <div class="col-lg-4 mb-3">
+                                    <input id="SubheaderValue" class="info-input" placeholder="Название статьи..." />
                                 </div>
                                 <div class="col-lg-12">
-                                    <textarea class="form-control info-input" rows="10"></textarea>
+                                    <textarea id="InfoValue" class="form-control info-input" rows="10"></textarea>
                                 </div>
 
                             </div>
 
                             <div class="row mt-3">
-                                <button id="CreatePageBut" class="btn darkred-btn col-lg-3 offset-2">Добавить</button>
+                                <button id="CreatePageBut" type="submit" class="btn darkred-btn col-lg-3 offset-2">Добавить</button>
                                 <button id="ResetPageBut" type="reset" class="btn darkred-btn col-lg-3 offset-1">Сброс значений</button>
 
                             </div>
@@ -1113,10 +1126,17 @@
             }
         }
 
-        const createpagebut = document.getElementById("CreatePageBut");
-        createpagebut.addEventListener("click", CreatePage);
+        const infoform = document.getElementById("InfoForm");
+        infoform.addEventListener("submit", e => {
+            e.preventDefault();
+            const headervalue = document.getElementById("HeaderValue").value;
+            const subheadervalue = document.getElementById("SubheaderValue").value;
+            const infovalue = document.getElementById("InfoValue").value;
+            CreatePage(headervalue, subheadervalue, infovalue);
+        });
+
         async function CreatePage(pageheader, pagesubheader, pageinfo) {
-            const response = await fetch("/api/pages/", {
+            const response = await fetch("/api/pages", {
                 method: "POST",
                 headers: { "Accept": "application/json", "Content-Type": "application/json" },
                 body: JSON.stringify({
@@ -1127,16 +1147,50 @@
 
             });
             if (response.ok === true) {
-                const page = await response.json();
-                const ullink = document.getElementById(page.header);
-                const newa = document.createElement(a);
-                const newlink = document.createElement(li);
-                newa.textContent = page.subheader;
-                newa.className = "nav-link faq-minilink";
-                newlink.appendChild(newa);
-                ullink.appendChild(newlink);
+                if (pageheader == "Камеры, CCU и OCP") {
+                    const ullink = document.getElementById("CamsLinks");
+                    NewPage(pagesubheader,ullink);
+                }
+                if (pageheader == "Видеопульт") {
+                    const ullink = document.getElementById("VideoMixerLinks");
+                    NewPage(pagesubheader, ullink);
+                }
+                if (pageheader == "Звуковые пульты") {
+                    const ullink = document.getElementById("SoundMixerLinks");
+                    NewPage(pagesubheader, ullink);
+                }
+                if (pageheader == "Матрица") {
+                    const ullink = document.getElementById("MatrixLinks");
+                    NewPage(pagesubheader, ullink);
+                }
+                if (pageheader == "Звуковое оборудование") {
+                    const ullink = document.getElementById("SoundDeviceLinks");
+                    NewPage(pagesubheader, ullink);
+                }
+                if (pageheader == "Компьютеры, Графические станции, Dalet") {
+                    const ullink = document.getElementById("ComputerDeviceLinks");
+                    NewPage(pagesubheader, ullink);
+                }
+                if (pageheader == "Световое оборудование") {
+                    const ullink = document.getElementById("LightDeviceLinks");
+                    NewPage(pagesubheader, ullink);
+                }
+                if (pageheader == "Студия") {
+                    const ullink = document.getElementById("StudioLinks");
+                    NewPage(pagesubheader, ullink);
+                }
                 alert("Статья создана");
             }
+        }
+        function NewPage(subheader,pagelink) {
+            const newa = document.createElement("a");
+            const newlink = document.createElement("li");
+            newa.textContent = subheader;
+            newa.className = "nav-link faq-minilink";
+            newa.addEventListener("click", PageClick);
+            newlink.appendChild(newa);
+            pagelink.appendChild(newlink);
+
         }
 
     </script>

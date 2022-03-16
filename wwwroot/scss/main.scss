@@ -4,6 +4,9 @@ $creambrule:rgb(240,220,150);
 $softyellow:rgb(250,160,60);
 $softpink: #bf3330;
 $softred:#ffb473;
+$soft1brown:rgba(170,99,18,100);
+$softreda: rgba(255,180,115,50);
+
 
 
 .darkredclass{
@@ -114,9 +117,9 @@ svg {
     }
 }
 
-.fivebody{
+.fivebody {
     height: 100%;
-    background: linear-gradient($creambrule,rgb(255, 244, 204)) no-repeat;
+    background-image: radial-gradient($creambrule,rgb(255, 244, 204));
     background-attachment: fixed;
 }
 
@@ -180,6 +183,22 @@ svg {
 
 .without-left-margin{
     margin-left:0px;
+}
+
+.info-select {
+    border-color: $softyellow;
+    border-left-color: $soft1brown;
+    border-top-color: $soft1brown;
+    font: inherit;
+    height: 30px;
+    border-radius: 5px;
+    border-width: 2px;
+
+    &:hover {
+        border-color: mix(white,$softyellow,20%);
+        border-left-color: mix(white,$soft1brown,20%);
+        border-top-color: mix(white,$soft1brown,20%);
+    }
 }
 
 .info-input{

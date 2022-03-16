@@ -47,7 +47,7 @@ namespace RestfulApiVisualCode.Controllers
         {
             if (page == null)
             {
-                return BadRequest();
+                return BadRequest("Ничего не передалось");
             }
             Page testpage = await db.Pages.FirstOrDefaultAsync(p=>p.Subheader==page.Subheader);
             if (testpage==null)
@@ -58,7 +58,7 @@ namespace RestfulApiVisualCode.Controllers
             }
             else
             {
-                return BadRequest();
+                return BadRequest("Такое уже есть");
             }
             
         }
