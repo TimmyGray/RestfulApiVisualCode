@@ -8,6 +8,12 @@ $soft1brown:rgba(170,99,18,100);
 $softreda: rgba(255,180,115,50);
 
 
+.pointer{
+    &:hover{
+        cursor:pointer;
+        background-color:mix(white,$softpink,20%);
+    }
+}
 
 .darkredclass{
     background:$darkred;
