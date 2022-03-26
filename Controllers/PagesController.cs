@@ -49,7 +49,7 @@ namespace RestfulApiVisualCode.Controllers
             {
                 return BadRequest("Ничего не передалось");
             }
-            Page testpage = await db.Pages.FirstOrDefaultAsync(p=>p.Subheader==page.Subheader);
+            Page testpage = await db.Pages.FirstOrDefaultAsync(p=>p.PageId==page.PageId);
             if (testpage==null)
             {
                 db.Pages.Add(page);
@@ -69,14 +69,13 @@ namespace RestfulApiVisualCode.Controllers
         {
             if (page == null)
             {
-                return BadRequest();
+                return BadRequest("Такой статьи нет");
             }
-            Page updpage = await db.Pages.FirstOrDefaultAsync(p => p.Subheader == page.Subheader);
-            if (updpage == null)
+            if (!db.Pages.Any(p=>p.PageId==page.PageId))
             {
                 return NotFound();
             }
-            db.Pages.Update(page);
+            db.Update(page);
             await db.SaveChangesAsync();
             return Ok(page);
         }
@@ -88,7 +87,7 @@ namespace RestfulApiVisualCode.Controllers
             {
                 return BadRequest();
             }
-            Page delpage = await db.Pages.FirstOrDefaultAsync(p => p.Subheader == page.Subheader);
+            Page delpage = await db.Pages.FirstOrDefaultAsync(p => p.PageId == page.PageId);
             if(delpage == null)
             {
                 return NotFound();

@@ -68,6 +68,7 @@ function row(event, num) {
     const tr = document.createElement("tr");
 
     tr.id = event.eventId;
+    tr.className = "pointerrow";
     tr.setAttribute("data-rowid", event.eventId);
 
     const idTd = document.createElement("td");

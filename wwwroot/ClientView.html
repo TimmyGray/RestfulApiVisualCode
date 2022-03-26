@@ -231,14 +231,14 @@
                     <thead class="softpinkclass creambrule-text" style="vertical-align:middle">
                         <tr  id="sorttr">
                             <th id="#">#</th>
-                            <th style="cursor:pointer" id="Date">Дата события</th>
-                            <th style="cursor:pointer" id="Number">Номер АСБ</th>
-                            <th style="cursor:pointer" id="Device">Устройство</th>
-                            <th style="cursor:pointer"  id="Serios">Серьезность</th>
+                            <th class="pointer" style="cursor:pointer" id="Date">Дата события</th>
+                            <th class="pointer" style="cursor:pointer" id="Number">Номер АСБ</th>
+                            <th class="pointer" style="cursor:pointer" id="Device">Устройство</th>
+                            <th class="pointer" style="cursor:pointer"  id="Serios">Серьезность</th>
                             <th id="Delete"></th>
                         </tr>
                     </thead>
-                    <tbody class="pointer" id="body">
+                    <tbody  id="body">
                     </tbody>
                 </table>
             </div>
@@ -427,14 +427,41 @@
                             </div>
 
                             <div class="row mt-3">
-                                <button id="CreatePageBut" type="submit" class="btn darkred-btn col-lg-3 offset-2">Добавить</button>
-                                <button id="ResetPageBut" type="reset" class="btn darkred-btn col-lg-3 offset-1">Сброс значений</button>
+                                <button id="CreatePageBut" type="submit" class="btn darkred-btn col-lg-3 offset-lg-2 col-md-5 mb-3  ">Добавить</button>
+                                <button id="ResetPageBut" type="reset" class="btn darkred-btn col-lg-3 offset-lg-2 offset-md-2 col-md-5 mb-3">Сброс значений</button>
 
                             </div>
                         </form>
+                        <div id=UpdateDiv class="hide-form">
+                            <div>
+                                <select id="HeaderUpdate" class="form-select">
+                                    <option value>Заголовок...</option>
+                                    <option>Камеры, CCU и OCP</option>
+                                    <option>Видеопульт</option>
+                                    <option>Звуковые пульты</option>
+                                    <option>Матрица</option>
+                                    <option>Звуковое оборудование</option>
+                                    <option>Компьютеры, Графические станции, Dalet</option>
+                                    <option>Световое оборудование</option>
+                                    <option>Студия</option>
+                                </select>
+                            </div>
+                            <div>
+                                <select id="SubHeaderUpdate" class="form-select mt-3 hide-form">
 
+                                </select>
+                            </div>
+                            <div>
+                                <textarea id="TextUpdate" class="form-control info-input mt-3 hide-form" rows="20"></textarea>
+                            </div>
+                            <div>
+                                <button id="ButUpdate" class="btn darkred-btn col-lg-4 offset-4 mt-3 hide-form">Редактировать</button>
+                            </div>
+                        </div>
                     </div>
+
                 </div>
+
 
             </div>
 
