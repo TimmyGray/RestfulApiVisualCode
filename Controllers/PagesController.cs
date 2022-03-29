@@ -12,7 +12,7 @@ namespace RestfulApiVisualCode.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class PagesController:ControllerBase
+    public class PagesController : ControllerBase
     {
         EventsContext db;
 
@@ -24,7 +24,7 @@ namespace RestfulApiVisualCode.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Page>>> GetAll()
         {
-            if(!db.Pages.Any())
+            if (!db.Pages.Any())
             {
                 return NotFound();
             }
@@ -49,8 +49,8 @@ namespace RestfulApiVisualCode.Controllers
             {
                 return BadRequest("Ничего не передалось");
             }
-            Page testpage = await db.Pages.FirstOrDefaultAsync(p=>p.PageId==page.PageId);
-            if (testpage==null)
+            Page testpage = await db.Pages.FirstOrDefaultAsync(p => p.PageId == page.PageId);
+            if (testpage == null)
             {
                 db.Pages.Add(page);
                 await db.SaveChangesAsync();
@@ -60,7 +60,7 @@ namespace RestfulApiVisualCode.Controllers
             {
                 return BadRequest("Такое уже есть");
             }
-            
+
         }
 
 
@@ -71,7 +71,7 @@ namespace RestfulApiVisualCode.Controllers
             {
                 return BadRequest("Такой статьи нет");
             }
-            if (!db.Pages.Any(p=>p.PageId==page.PageId))
+            if (!db.Pages.Any(p => p.PageId == page.PageId))
             {
                 return NotFound();
             }
@@ -80,21 +80,17 @@ namespace RestfulApiVisualCode.Controllers
             return Ok(page);
         }
 
-        [HttpDelete]
-        public async Task<ActionResult<Page>> DeletePage(Page page)
+        [HttpDelete("{id}")]
+        public async Task<ActionResult<Page>> DeletePage(int id)
         {
-            if(page==null)
-            {
-                return BadRequest();
-            }
-            Page delpage = await db.Pages.FirstOrDefaultAsync(p => p.PageId == page.PageId);
+            Page delpage = await db.Pages.FirstOrDefaultAsync(p=>p.PageId==id);
             if(delpage == null)
             {
                 return NotFound();
             }
-            db.Pages.Remove(page);
+            db.Pages.Remove(delpage);
             await db.SaveChangesAsync();
-            return Ok(page);
+            return Ok(delpage);
         }
 
     }

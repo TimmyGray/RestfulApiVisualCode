@@ -319,7 +319,7 @@
                                 Звуковые пульты
                             </a>
 
-                            <ul name ="Звуковые пульты" class="nav collapse faq-ul-minilink-collapse" id="SoundMixerLinks">
+                            <ul name="Звуковые пульты" class="nav collapse faq-ul-minilink-collapse" id="SoundMixerLinks">
                             </ul>
 
                         </li>
@@ -394,6 +394,15 @@
                             </a>
 
                         </li>
+                        <li class="navitem">
+
+                            <a id="DeleteInfo" href="#DeleteInfo" class="faqlink softredtext">
+                                <img src="Resources/recycle_icon.png" class="img-fluid" height="60" width="60" />
+                                Удалить информацию
+                            </a>
+
+                        </li>
+
                     </ul>
                 </div>
                 <div class="col-12 col-sm-8 col-md-8 col-lg-9">
@@ -405,7 +414,7 @@
                         <form id="InfoForm" class="hide-form">
                             <div class="row">
                                 <div class="col-lg-4 mb-3">
-                                    <select id="HeaderValue"  class="w-100 info-select">
+                                    <select id="HeaderValue" class="w-100 info-select">
                                         <option value>Заголовок...</option>
                                         <option>Камеры, CCU и OCP</option>
                                         <option>Видеопульт</option>
@@ -418,10 +427,10 @@
                                     </select>
                                 </div>
                                 <div class="col-lg-4 mb-3">
-                                    <input id="SubheaderValue" class="info-input" placeholder="Название статьи..." />
+                                    <input id="SubheaderValue" class="info-input w-100" placeholder="Название статьи..." />
                                 </div>
                                 <div class="col-lg-12">
-                                    <textarea id="InfoValue" class="form-control info-input" rows="10"></textarea>
+                                    <textarea id="InfoValue" class="form-control info-input w-100" rows="10"></textarea>
                                 </div>
 
                             </div>
@@ -432,31 +441,22 @@
 
                             </div>
                         </form>
-                        <div id=UpdateDiv class="hide-form">
-                            <div>
-                                <select id="HeaderUpdate" class="form-select">
-                                    <option value>Заголовок...</option>
-                                    <option>Камеры, CCU и OCP</option>
-                                    <option>Видеопульт</option>
-                                    <option>Звуковые пульты</option>
-                                    <option>Матрица</option>
-                                    <option>Звуковое оборудование</option>
-                                    <option>Компьютеры, Графические станции, Dalet</option>
-                                    <option>Световое оборудование</option>
-                                    <option>Студия</option>
-                                </select>
-                            </div>
-                            <div>
-                                <select id="SubHeaderUpdate" class="form-select mt-3 hide-form">
-
-                                </select>
-                            </div>
-                            <div>
-                                <textarea id="TextUpdate" class="form-control info-input mt-3 hide-form" rows="20"></textarea>
-                            </div>
-                            <div>
-                                <button id="ButUpdate" class="btn darkred-btn col-lg-4 offset-4 mt-3 hide-form">Редактировать</button>
-                            </div>
+                        <div id=DelUpdateDiv class="hide-form">
+                            <select id="HeaderDelUpdate" class="form-select">
+                                <option value>Заголовок...</option>
+                                <option>Камеры, CCU и OCP</option>
+                                <option>Видеопульт</option>
+                                <option>Звуковые пульты</option>
+                                <option>Матрица</option>
+                                <option>Звуковое оборудование</option>
+                                <option>Компьютеры, Графические станции, Dalet</option>
+                                <option>Световое оборудование</option>
+                                <option>Студия</option>
+                            </select>
+                            <select id="SubHeaderDelUpdate" class="form-select mt-3 hide-form"></select>
+                            <textarea id="TextDelUpdate" class="form-control info-input mt-3 hide-form" rows="20"></textarea>
+                            <p id="TextDelete" class="hide-form"></p>
+                            <button id="ButDelUpdate" class="btn darkred-btn col-lg-4 offset-4 mt-3 hide-form">Редактировать</button>
                         </div>
                     </div>
 

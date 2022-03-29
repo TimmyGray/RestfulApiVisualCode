@@ -97,24 +97,28 @@ function Activelink(e) {
         const textpage = document.getElementById("PageText");
         textpage.textContent = "";
         const InfoForm = document.getElementById("InfoForm");
-        const UpdateDiv = document.getElementById("UpdateDiv");
-        if (InfoForm.className != "hide-form") {
-            InfoForm.className = "hide-form";
-        }
-        if (UpdateDiv.className != "hide-form") {
-            UpdateDiv.className = "hide-form";
-        }
-
+        const DelUpdateDiv = document.getElementById("DelUpdateDiv");
         if (curlink.firstElementChild.id == "AddInfo") {
+            if (InfoForm.className == "hide-form")
             InfoForm.className = "";
 
         }
-
-        if (curlink.firstElementChild.id == "UpdateInfo") {
-            UpdateDiv.className = "";
-            const headerselect = document.getElementById("HeaderUpdate");
+        else if (InfoForm.className != "hide-form") {
+            InfoForm.className = "hide-form";
+        }
+        if (curlink.firstElementChild.id == "UpdateInfo" || curlink.firstElementChild.id == "DeleteInfo") {
+            if (DelUpdateDiv.className == "hide-form") {
+                DelUpdateDiv.className = "";
+            }
+            const headerselect = document.getElementById("HeaderDelUpdate");
             headerselect.addEventListener("change", HeaderSelect);
         }
+        else if (DelUpdateDiv.className != "hide-form") {
+            DelUpdateDiv.className = "hide-form";
+        }
+
+        
+
     }
 
     
@@ -122,7 +126,7 @@ function Activelink(e) {
 
 function HeaderSelect(e) {
     const headeroption = e.currentTarget;
-    const subheaderselect = document.getElementById("SubHeaderUpdate");
+    const subheaderselect = document.getElementById("SubHeaderDelUpdate");
     if (headeroption.options[headeroption.selectedIndex].textContent == "Камеры, CCU и OCP") {
         AddSubHeaderOption(subheaderselect, "CamsLinks");
     }
@@ -170,21 +174,46 @@ function AddSubHeaderOption(subheaderselect, ulsid) {
 function SubHeaderSelect(e) {
     const cur = e.currentTarget;
     const cursub = cur.options[cur.selectedIndex];
-    const headerselect = document.getElementById("HeaderUpdate");
+    const headerselect = document.getElementById("HeaderDelUpdate");
     const curhead = headerselect.options[headerselect.selectedIndex].textContent;
-    const textupdate = document.getElementById("TextUpdate");
-    const butupdate = document.getElementById("ButUpdate");
-    GetPage(cursub.textContent, null, textupdate);
-    textupdate.classList.remove("hide-form");
-    butupdate.classList.remove("hide-form");
-    butupdate.addEventListener("click", function () {
-        EditPage(curhead, cursub.textContent, textupdate);
-    });
+    const header = document.getElementById("ThirdPage");
+    const deletestring = header.textContent;
+    const textdelupdate = document.getElementById("TextDelUpdate");
+    const butdelupdate = document.getElementById("ButDelUpdate");
+    const textdelete = document.getElementById("TextDelete");
+    alert(header.textContent.trim());
+
+    if (header.textContent.trim() === "Удалить информацию") {
+        alert(11212);
+        textdelete.classList.remove("hide-form");
+        butdelupdate.textContent = "Удалить";
+        GetPage(cursub.textContent, null, textdelete);
+        butdelupdate.removeEventListener("click", function () {
+            EditPage(curhead, cursub.textContent, textdelupdate);
+        });
+        butdelupdate.addEventListener("click", function () {
+            DeletePage(textdelete.getAttribute("num"));
+        });
+
+    }
+    else {
+        alert(444);
+        textdelupdate.classList.remove("hide-form");
+        butdelupdate.textContent = "Редактировать";
+        GetPage(cursub.textContent, null, textdelupdate);
+        butdelupdate.removeEventListener("click", function () {
+            DeletePage(textdelete.getAttribute("num"));
+        });
+        butdelupdate.addEventListener("click", function () {
+            EditPage(curhead, cursub.textContent, textdelupdate);
+        });
+    }
+    butdelupdate.classList.remove("hide-form");
 
 }
 
-async function EditPage(pageheader, pagesubheader, textupdate) {
-    const pageid = textupdate.getAttribute("num");
+async function EditPage(pageheader, pagesubheader, textdelupdate) {
+    const pageid = textdelupdate.getAttribute("num");
     alert(pageid);
     const response = await fetch("/api/pages", {
         method: "PUT",
@@ -193,7 +222,7 @@ async function EditPage(pageheader, pagesubheader, textupdate) {
             pageId: parseInt(pageid,10),
             header: pageheader,
             subheader: pagesubheader,
-            info: textupdate.value
+            info: textdelupdate.value
         })
     });
     if (response.ok === true) {
@@ -214,14 +243,33 @@ async function GetPage(subheader,subheadertext,textarea) {
         if (subheadertext != null) {
             subheadertext.textContent = page.subheader;
         }
-        else if (subheadertext == null) {
-            const textupdate = document.getElementById("TextUpdate");
-            textupdate.setAttribute("num", page.pageId);
+        else {
+            textarea.setAttribute("num", page.pageId);
         }
         textarea.textContent = page.info;
     }
 }
 
+async function DeletePage(id) {
+    const response = await fetch("/api/pages/" + id, {
+        method: "DELETE",
+        headers: {"Accept":"application/json"}
+    });
+    if (response.ok) {
+        const page = await response.json();
+        alert(page.subheader);
+        const delas = document.getElementsByClassName("nav-link faq-minilink");
+        for (var i = 0; i < delas.length; i++) {
+            if (delas[i].textContent == page.subheader) {
+                const deli = delas[i].parentNode;
+                deli.parentNode.removeChild(deli);
+                break;
+            }
+        }
+        alert("Удалено");
+
+    }
+}
 
 const infoform = document.getElementById("InfoForm");
 infoform.addEventListener("submit", e => {
@@ -279,6 +327,8 @@ async function CreatePage(pageheader, pagesubheader, pageinfo) {
         }
         alert("Статья создана");
     }
+
+
 }
 
 
