@@ -151,7 +151,7 @@ function trclick(event) {
 }
 
 async function EditEvent(eventid, eventDateofevent, eventNameofasb, eventNameofdevice, eventIsserios, eventDiscribeevent, eventFixevent) {
-    const response = await fetch("/api/events", {
+    const response = await fetch("/events", {
         method: "PUT",
         headers: { "Accept": "application/json", "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -177,7 +177,7 @@ async function EditEvent(eventid, eventDateofevent, eventNameofasb, eventNameofd
 }
 
 async function CreateEvent(eventDateofevent, eventNameofasb, eventNameofdevice, eventIsserios, eventDiscribeevent, eventFixevent) {
-    const response = await fetch("/api/events", {
+    const response = await fetch("/events", {
         method: "POST",
         headers: { "Accept": "application/json", "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -200,7 +200,7 @@ async function CreateEvent(eventDateofevent, eventNameofasb, eventNameofdevice, 
 }
 
 async function GetEvent(id) {
-    const response = await fetch("/api/events/" + id, {
+    const response = await fetch("/events/" + id, {
         method: "GET",
         headers: { "Accept": "application/json" }
     });
@@ -216,7 +216,7 @@ async function GetEvent(id) {
 
 async function GetEvents() {
 
-    const response = await fetch("/api/events", {
+    const response = await fetch("/events", {
         method: "GET",
         headers: { "Accept": "application/json" }
     });
@@ -234,7 +234,7 @@ async function GetEvents() {
 }
 
 async function DeleteEvent(id) {
-    const response = await fetch("/api/events/" + id, {
+    const response = await fetch("/events/" + id, {
         method: "DELETE",
         headers: { "Accept": "application/json" }
     });

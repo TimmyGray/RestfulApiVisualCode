@@ -20,7 +20,7 @@ function AddLinks(page, ullink) {
 
 
 async function GetPages() {
-    const response = await fetch("/api/pages", {
+    const response = await fetch("/pages", {
         method: "GET",
         headers: { "Accept": "application/json" }
     });
@@ -181,10 +181,8 @@ function SubHeaderSelect(e) {
     const textdelupdate = document.getElementById("TextDelUpdate");
     const butdelupdate = document.getElementById("ButDelUpdate");
     const textdelete = document.getElementById("TextDelete");
-    alert(header.textContent.trim());
 
     if (header.textContent.trim() === "Удалить информацию") {
-        alert(11212);
         textdelete.classList.remove("hide-form");
         butdelupdate.textContent = "Удалить";
         GetPage(cursub.textContent, null, textdelete);
@@ -197,7 +195,6 @@ function SubHeaderSelect(e) {
 
     }
     else {
-        alert(444);
         textdelupdate.classList.remove("hide-form");
         butdelupdate.textContent = "Редактировать";
         GetPage(cursub.textContent, null, textdelupdate);
@@ -215,7 +212,7 @@ function SubHeaderSelect(e) {
 async function EditPage(pageheader, pagesubheader, textdelupdate) {
     const pageid = textdelupdate.getAttribute("num");
     alert(pageid);
-    const response = await fetch("/api/pages", {
+    const response = await fetch("/pages", {
         method: "PUT",
         headers: { "Accept": "application/json", "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -234,7 +231,7 @@ async function EditPage(pageheader, pagesubheader, textdelupdate) {
 
 
 async function GetPage(subheader,subheadertext,textarea) {
-    const response = await fetch("/api/pages/" + subheader, {
+    const response = await fetch("/pages/" + subheader, {
         method: "GET",
         headers: { "Accept": "application/json" }
     });
@@ -251,7 +248,7 @@ async function GetPage(subheader,subheadertext,textarea) {
 }
 
 async function DeletePage(id) {
-    const response = await fetch("/api/pages/" + id, {
+    const response = await fetch("/pages/" + id, {
         method: "DELETE",
         headers: {"Accept":"application/json"}
     });
@@ -281,7 +278,7 @@ infoform.addEventListener("submit", e => {
 });
 
 async function CreatePage(pageheader, pagesubheader, pageinfo) {
-    const response = await fetch("/api/pages", {
+    const response = await fetch("/pages", {
         method: "POST",
         headers: { "Accept": "application/json", "Content-Type": "application/json" },
         body: JSON.stringify({

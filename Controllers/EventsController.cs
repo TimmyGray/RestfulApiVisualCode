@@ -6,11 +6,13 @@ using RestfulApiVisualCode.Models;
 using System.Threading.Tasks;
 using RestfulApiVisualCode.DataBaseContext;
 using System;
-using System.Globalization;
+using Microsoft.AspNetCore.Authorization;
+
 namespace RestfulApiVisualCode.Controllers
 {
+    [Authorize]
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     public class EventsController : ControllerBase
     {
         readonly EventsContext db;
@@ -24,8 +26,8 @@ namespace RestfulApiVisualCode.Controllers
         {
             return await db.Events.ToListAsync();
         }
- 
-        
+
+       
         [HttpGet("{id}")]
         public async Task<ActionResult<Event>> Get(int id)
         {
@@ -34,8 +36,7 @@ namespace RestfulApiVisualCode.Controllers
                 return NotFound();
             return new ObjectResult(evnt);
         }
- 
-       
+
         [HttpPost]
         public async Task<ActionResult<Event>> Post(Event evnt)
         {
@@ -55,8 +56,7 @@ namespace RestfulApiVisualCode.Controllers
             return Ok(evnt);
             
         }
- 
-        
+
         [HttpPut]
         public async Task<ActionResult<Event>> Put(Event evnt)
         {
@@ -73,8 +73,7 @@ namespace RestfulApiVisualCode.Controllers
             await db.SaveChangesAsync();
             return Ok(evnt);
         }
- 
-        
+
         [HttpDelete("{id}")]
         public async Task<ActionResult<Event>> Delete(int id)
         {

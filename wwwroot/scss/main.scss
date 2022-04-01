@@ -232,4 +232,15 @@ svg {
     font:oblique;
 }
 
+.login-border{
+    border:solid;
+    border-width:5px;
+    border-radius:5px;
+    border-color:$darkred;
+}
 
+.without-disc {
+    color: $softpink;
+    list-style:none;
+    list-style-position:inside;
+}

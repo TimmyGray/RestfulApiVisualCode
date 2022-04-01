@@ -6,12 +6,15 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
 using RestfulApiVisualCode.DataBaseContext;
 using RestfulApiVisualCode.Models;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Authentication;
 
 
 namespace RestfulApiVisualCode.Controllers
 {
+    [Authorize]
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     public class PagesController : ControllerBase
     {
         EventsContext db;

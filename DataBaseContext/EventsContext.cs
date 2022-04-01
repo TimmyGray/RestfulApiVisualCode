@@ -30,10 +30,7 @@ namespace RestfulApiVisualCode.DataBaseContext
                     new Page { PageId = 3, Header = "Камеры, CCU и OCP", Subheader = "Камеры", Info = "Вот тут написано о великой полезности камер" },
                     new Page { PageId = 4, Header = "Звуковое оборудование", Subheader = "Микрофоны", Info = "Вот здесь написано про микрофоны и их особенности" }
                 );
-            modelBuilder.Entity<User>().HasData
-                (
-                    new User { UserId = 1, Login = "Timmy", Password = "1234"}
-                );
+            
         }
     }
 }
