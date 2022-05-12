@@ -1,12 +1,14 @@
-using System.Collections.Generic;
-using System.Linq;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.AspNetCore.Mvc;
-using RestfulApiVisualCode.Models;
-using System.Threading.Tasks;
-using RestfulApiVisualCode.DataBaseContext;
-using System;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using RestfulApiVisualCode.DataBaseContext;
+using RestfulApiVisualCode.Models;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace RestfulApiVisualCode.Controllers
 {
@@ -20,10 +22,11 @@ namespace RestfulApiVisualCode.Controllers
         {
             db = context;
         }
- 
+       
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Event>>> Get()
         {
+
             return await db.Events.ToListAsync();
         }
 
@@ -50,11 +53,37 @@ namespace RestfulApiVisualCode.Controllers
             }
             if (!ModelState.IsValid)
                 return BadRequest();
- 
             db.Events.Add(evnt);
             await db.SaveChangesAsync();
-            return Ok(evnt);
+            return Ok();
             
+        }
+
+        
+        [Route("/imageupload")]
+        [HttpPost]
+        public async Task<IActionResult> ImageCreate(IFormFileCollection files)
+        {
+            if (files is null)
+            {
+                return NoContent();
+            }
+            foreach (IFormFile file in files)
+            {
+                await Task.Run(() =>
+                {
+                    byte[] imagedata = null;
+                    using (var binaryreader = new BinaryReader(file.OpenReadStream()))
+                    {
+                        imagedata = binaryreader.ReadBytes((int)file.Length);
+                    }
+                    Image image = new Image {Name=file.Name, ImageByte = imagedata };
+                    db.Images.Add(image);
+                });
+
+            }
+            await db.SaveChangesAsync();
+            return Ok();
         }
 
         [HttpPut]
@@ -74,9 +103,11 @@ namespace RestfulApiVisualCode.Controllers
             return Ok(evnt);
         }
 
+        [Authorize(Roles ="Admin")]
         [HttpDelete("{id}")]
         public async Task<ActionResult<Event>> Delete(int id)
         {
+
             Event evnt = db.Events.FirstOrDefault(x => x.EventId == id);
             if (evnt == null)
             {

@@ -72,7 +72,6 @@
 
         if (list && list.length && validator.errorList.length) {
             list.empty();
-            list.addClass("without-disc")
             container.addClass("validation-summary-errors").removeClass("validation-summary-valid");
 
             $.each(validator.errorList, function () {

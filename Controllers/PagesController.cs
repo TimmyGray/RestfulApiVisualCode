@@ -27,10 +27,7 @@ namespace RestfulApiVisualCode.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Page>>> GetAll()
         {
-            if (!db.Pages.Any())
-            {
-                return NotFound();
-            }
+           
             return await db.Pages.ToListAsync();
         }
 
@@ -83,6 +80,7 @@ namespace RestfulApiVisualCode.Controllers
             return Ok(page);
         }
 
+        [Authorize(Roles ="Admin")]
         [HttpDelete("{id}")]
         public async Task<ActionResult<Page>> DeletePage(int id)
         {

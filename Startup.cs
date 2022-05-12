@@ -31,10 +31,11 @@ namespace RestfulApiVisualCode
                 .AddCookie(options =>
                 {
                     options.LoginPath = new Microsoft.AspNetCore.Http.PathString("/Users/Login");
+                    options.AccessDeniedPath = new Microsoft.AspNetCore.Http.PathString("/Users/Login");
                 });
             services.AddMvc();
             services.AddControllers();
-
+            
         }
 
         public void Configure(IApplicationBuilder app)

@@ -96,6 +96,7 @@ function Activelink(e) {
         subheaderpage.textContent = "";
         const textpage = document.getElementById("PageText");
         textpage.textContent = "";
+        document.getElementById("CreatorRow").classList.add("hide-form");
         const InfoForm = document.getElementById("InfoForm");
         const DelUpdateDiv = document.getElementById("DelUpdateDiv");
         if (curlink.firstElementChild.id == "AddInfo") {
@@ -202,14 +203,14 @@ function SubHeaderSelect(e) {
             DeletePage(textdelete.getAttribute("num"));
         });
         butdelupdate.addEventListener("click", function () {
-            EditPage(curhead, cursub.textContent, textdelupdate);
+            EditPage(curhead, cursub.textContent, textdelupdate, curlogin);
         });
     }
     butdelupdate.classList.remove("hide-form");
 
 }
 
-async function EditPage(pageheader, pagesubheader, textdelupdate) {
+async function EditPage(pageheader, pagesubheader, textdelupdate,pagecreator) {
     const pageid = textdelupdate.getAttribute("num");
     alert(pageid);
     const response = await fetch("/pages", {
@@ -219,7 +220,8 @@ async function EditPage(pageheader, pagesubheader, textdelupdate) {
             pageId: parseInt(pageid,10),
             header: pageheader,
             subheader: pagesubheader,
-            info: textdelupdate.value
+            info: textdelupdate.value,
+            pageCreator:pagecreator
         })
     });
     if (response.ok === true) {
@@ -237,8 +239,11 @@ async function GetPage(subheader,subheadertext,textarea) {
     });
     if (response.ok === true) {
         const page = await response.json();
+
         if (subheadertext != null) {
             subheadertext.textContent = page.subheader;
+            document.getElementById("CreatorRow").classList.remove("hide-form");
+            document.getElementById("PageCreator").textContent = page.pageCreator;
         }
         else {
             textarea.setAttribute("num", page.pageId);
@@ -274,17 +279,18 @@ infoform.addEventListener("submit", e => {
     const headervalue = document.getElementById("HeaderValue").value;
     const subheadervalue = document.getElementById("SubheaderValue").value;
     const infovalue = document.getElementById("InfoValue").value;
-    CreatePage(headervalue, subheadervalue, infovalue);
+    CreatePage(headervalue, subheadervalue, infovalue,curlogin);
 });
 
-async function CreatePage(pageheader, pagesubheader, pageinfo) {
+async function CreatePage(pageheader, pagesubheader, pageinfo,pagecreator) {
     const response = await fetch("/pages", {
         method: "POST",
         headers: { "Accept": "application/json", "Content-Type": "application/json" },
         body: JSON.stringify({
             header: pageheader,
             subheader: pagesubheader,
-            info: pageinfo
+            info: pageinfo,
+            pageCreator: pagecreator
         })
 
     });

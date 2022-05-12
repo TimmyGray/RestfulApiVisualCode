@@ -12,6 +12,7 @@ namespace RestfulApiVisualCode.Models
         public string Header { get; set; }
         public string Subheader { get; set; }      
         public string Info { get; set; }
+       public string PageCreator { get; set; }
 
     }
 }

@@ -27,9 +27,10 @@
                 </div>
 
                 <div class="text-end five-header-btn">
-                    <button type="button" class="btn headerbtn me-2">Войти</button>
+                    <a id="CurrentUser" href="#" class="creambrule-link"></a>
+                    <button type="button" class="btn headerbtn me-2" hidden>Войти</button>
 
-                    <button type="button" class="btn headerbtn">Регистрация</button>
+                    <button type="button" class="btn headerbtn" hidden>Регистрация</button>
                 </div>
             </div>
 
@@ -114,12 +115,14 @@
                     </div>
 
                     <div class="row">
-                        <div class="col-md-7 col-lg-7 col-sm-12 col-12">
+                        <div id="ImageCont" class="col-md-7 col-lg-7 col-sm-12 col-12">
                             <div class="input-group mb-3">
                                 <label for="inputGroupFile">Фотография поломки</label>
                                 <div class="w-100"></div>
-                                <input type="file" class="form-control" id="inputGroupFile" aria-describedby="inputGroupFileAddon" aria-label="Загрузить">
+                                <input type="file" formenctype="multipart/form-data" name="imageFiles"  class="form-control" id="inputGroupFile" aria-describedby="inputGroupFileAddon" multiple aria-label="Загрузить">
                                 <button class="btn btn-outline-softbrown" type="button" id="inputGroupFileAddon">Загрузить</button>
+                                <button class="btn btn-danger" type="button" id="imadedownloadbut">Загрузка фотографии</button>
+                                
                             </div>
                         </div>
 
@@ -231,10 +234,11 @@
                     <thead class="softpinkclass creambrule-text" style="vertical-align:middle">
                         <tr  id="sorttr">
                             <th id="#">#</th>
-                            <th class="pointer" style="cursor:pointer" id="Date">Дата события</th>
-                            <th class="pointer" style="cursor:pointer" id="Number">Номер АСБ</th>
-                            <th class="pointer" style="cursor:pointer" id="Device">Устройство</th>
-                            <th class="pointer" style="cursor:pointer"  id="Serios">Серьезность</th>
+                            <th class="pointer"  id="Date">Дата события</th>
+                            <th class="pointer"  id="Number">Номер АСБ</th>
+                            <th class="pointer"  id="Device">Устройство</th>
+                            <th class="pointer"  id="Serios">Серьезность</th>
+                            <th class="pointer"  id="Creator">Создатель</th>
                             <th id="Delete"></th>
                         </tr>
                     </thead>
@@ -260,6 +264,9 @@
                                     <textarea class="form-control" rows="3" id="fix"></textarea>
                                 </div>
                             </div>
+                            <div id="EventImagesCont" class="img-fluid">
+                            </div>
+
 
                         </div>
                         <div class="modal-footer">
@@ -409,8 +416,12 @@
 
                     <h1 id="ThirdPage" class="darkredtext text-center">Глоссарий</h1>
                     <h2 id="SubHeader" class="darkredtext text-center"></h2>
+                    <div id="CreatorRow" class="row hide-form">
+                        <p class="offset-lg-8 offset-md-6 col-lg-2 col-md-3 col-sm-6 col-6 darkredtext" id="PageCreatorLabel">Написано</p>
+                        <p class="col-lg-2 col-md-3 col-sm-6 col-6 darkredtext" id="PageCreator"></p>
+                    </div>
                     <div id="ForTextDiv" class="container">
-                        <p id="PageText"></p>
+                        <p class="darkredtext" id="PageText"></p>
                         <form id="InfoForm" class="hide-form">
                             <div class="row">
                                 <div class="col-lg-4 mb-3">
@@ -471,6 +482,7 @@
     <script src="myscripts/Pagesscript.js" crossorigin="anonymous"></script>
     <script src="myscripts/Eventsscript.js" crossorigin="anonymous"></script>
     <script src="myscripts/Sortingscripts.js" crossorigin="anonymous"></script>
+    <script src="myscripts/Authorizationscripts.js" crossorigin="anonymous"></script>
     <script src="bootstrap/dist/js/bootstrap.bundle.min.js"  crossorigin="anonymous"></script>
 
 </body>

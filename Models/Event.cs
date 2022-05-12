@@ -1,5 +1,6 @@
 using System;
 using System.ComponentModel.DataAnnotations;
+using System.Collections.Generic;
 namespace RestfulApiVisualCode.Models
 {
     public class Event
@@ -13,5 +14,7 @@ namespace RestfulApiVisualCode.Models
 
         public string Discribeevent{get;set;}
         public string Fixevent{get;set;}
+        public string EventCreator { get; set; }
+        public List<Image> EventImage { get; set; }
     }
 }

@@ -1,5 +1,52 @@
 ﻿const tablinks = document.getElementsByClassName("nav-link creambrule-link px-1");
+const imagecont = document.getElementById("ImageCont");
+const fileinput = document.getElementById("inputGroupFile");
+const testbut = document.getElementById("inputGroupFileAddon");
+testbut.addEventListener("click", DownloadImage);
 
+
+async function DownloadImage() {
+    const eventfiles = fileinput.files;
+    if (eventfiles.length != 0) {
+        const listiimages = new FormData();
+        for (var i = 0; i < eventfiles.length; i++) {
+            listiimages.append(`imageFiles`, eventfiles[i], eventfiles[i].name);
+        }
+    await fetch("/image", {
+        method: "POST",
+        body: listiimages
+    });
+    }
+    
+
+}
+fileinput.addEventListener("change", function () {
+    if (fileinput.files.length > 3) {
+        alert("Можно добавить не более трех фотографий");
+        fileinput.value="";
+        return;
+    }
+    for (var i = 0; i < fileinput.files.length; i++) {
+        if (fileinput.files[i].type != "image/jpeg") {
+            alert("not image");
+            fileinput.value = "";
+            return;
+        }
+
+        const eventimage = document.createElement("img");
+        eventimage.src = window.URL.createObjectURL(fileinput.files[i]);
+        eventimage.onload = function () {
+            window.URL.revokeObjectURL(this.src);
+        }
+        eventimage.className = "eventimage";
+        imagecont.appendChild(eventimage);
+       
+
+    }
+       
+    
+
+});
 function Сhange(event) {
     const maintabs = document.querySelectorAll("main");
     for (var num = 0; num < maintabs.length; num++) {
@@ -58,7 +105,7 @@ document.forms["eventForm"].addEventListener("submit", e => {
     const isserios = form.elements["isserios"].value;
     const discribeevent = form.elements["discribeevent"].value;
     const fixevent = form.elements["fixevent"].value;
-    CreateEvent(dateofevent, nameofasb, nameofdevice, isserios, discribeevent, fixevent);
+    CreateEvent(dateofevent, nameofasb, nameofdevice, isserios, discribeevent, fixevent, curlogin, fileinput);
     form.reset();
 });
 
@@ -116,6 +163,13 @@ function row(event, num) {
     isseriosTd.setAttribute("data-bs-target", "#Modal");
     isseriosTd.append(event.isserios);
     tr.append(isseriosTd);
+
+    const eventcreator = document.createElement("td");
+    eventcreator.setAttribute("name", "eventcreator");
+    eventcreator.setAttribute("data-bs-toggle", "modal");
+    eventcreator.setAttribute("data-bs-target", "#Modal");
+    eventcreator.append(event.eventCreator);
+    tr.append(eventcreator);
 
     const delbutTd = document.createElement("td");
     delbutTd.setAttribute("name", "delbutTd");
@@ -176,8 +230,10 @@ async function EditEvent(eventid, eventDateofevent, eventNameofasb, eventNameofd
 
 }
 
-async function CreateEvent(eventDateofevent, eventNameofasb, eventNameofdevice, eventIsserios, eventDiscribeevent, eventFixevent) {
+async function CreateEvent(eventDateofevent, eventNameofasb, eventNameofdevice, eventIsserios, eventDiscribeevent, eventFixevent, eventcreator) {
+    
     const response = await fetch("/events", {
+        
         method: "POST",
         headers: { "Accept": "application/json", "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -186,10 +242,16 @@ async function CreateEvent(eventDateofevent, eventNameofasb, eventNameofdevice, 
             nameofdevice: eventNameofdevice,
             isserios: eventIsserios,
             discribeevent: eventDiscribeevent,
-            fixevent: eventFixevent
+            fixevent: eventFixevent,
+            eventCreator: eventcreator
         })
+        
     });
     if (response.ok === true) {
+        await fetch("/imageupload", {
+            method: "POST",
+            body: listiimages
+        });
         const event = await response.json();
         const tds = document.getElementsByName("id");
         const num = tds.length + 1;
