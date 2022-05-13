@@ -21,11 +21,15 @@ namespace RestfulApiVisualCode.Controllers
         
         [Route("image")]
         [HttpPost]
-        public IActionResult Create(IFormFileCollection imageFiles)
+        public async Task<ActionResult<Image>> Create(IFormFileCollection imageFiles)
         {
            
             if (imageFiles.Count != 0)
             {
+                List<Image> images = new List<Image>();
+                Event evnt = db.Events.OrderByDescending(e => e.EventId).FirstOrDefault();
+                             
+                evnt.EventImages = images;
                 foreach (IFormFile imageFile in imageFiles)
                 {
                     byte[] imagedata = null;
@@ -33,13 +37,15 @@ namespace RestfulApiVisualCode.Controllers
                     {
                         imagedata = binaryreader.ReadBytes((int)imageFile.Length);
                     }
-                    Image img = new Image { Name=imageFile.Name};
+                    Image img = new Image { Name =imageFile.Headers.ToString() , EventId = Convert.ToInt32(imageFile.FileName) };
                     img.ImageByte = imagedata;
+                    images.Add(img);
+                    
                     db.Images.Add(img);
                 }
-                
-                db.SaveChangesAsync();
-                return Ok("Файлы залиты!");
+                db.Events.Update(evnt);
+                await db.SaveChangesAsync();
+                return Ok(images.Count);
             }
             return NoContent();
             

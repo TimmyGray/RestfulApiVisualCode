@@ -10,7 +10,7 @@ namespace RestfulApiVisualCode.Models
         public int ImageId { get; set; }
         public string Name { get; set; }
         public byte[] ImageByte { get; set; }
-        //public int? EventId { get; set; }
-        //public Event EventforImage { get; set; }
+        public int? EventId { get; set; }
+        public Event EventforImage { get; set; }
     }
 }

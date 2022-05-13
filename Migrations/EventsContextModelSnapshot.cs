@@ -51,7 +51,7 @@ namespace RestfulApiVisualCode.Migrations
                         new
                         {
                             EventId = 1,
-                            Dateofevent = "4/20/2022",
+                            Dateofevent = "5/13/2022",
                             Discribeevent = "ваще коллапс",
                             EventCreator = "Admin",
                             Fixevent = "все пофиксили",
@@ -62,7 +62,7 @@ namespace RestfulApiVisualCode.Migrations
                         new
                         {
                             EventId = 2,
-                            Dateofevent = "4/20/2022",
+                            Dateofevent = "5/13/2022",
                             Discribeevent = "все сломалось",
                             EventCreator = "Admin",
                             Fixevent = "это не",
@@ -73,7 +73,7 @@ namespace RestfulApiVisualCode.Migrations
                         new
                         {
                             EventId = 3,
-                            Dateofevent = "4/20/2022",
+                            Dateofevent = "5/13/2022",
                             Discribeevent = "ваще коллапс",
                             EventCreator = "Admin",
                             Fixevent = "все пофиксили",
@@ -84,7 +84,7 @@ namespace RestfulApiVisualCode.Migrations
                         new
                         {
                             EventId = 4,
-                            Dateofevent = "4/20/2022",
+                            Dateofevent = "5/13/2022",
                             Discribeevent = "жесть какая",
                             EventCreator = "Admin",
                             Fixevent = "это не",
@@ -246,9 +246,11 @@ namespace RestfulApiVisualCode.Migrations
 
             modelBuilder.Entity("RestfulApiVisualCode.Models.Image", b =>
                 {
-                    b.HasOne("RestfulApiVisualCode.Models.Event", null)
-                        .WithMany("EventImage")
+                    b.HasOne("RestfulApiVisualCode.Models.Event", "EventforImage")
+                        .WithMany("EventImages")
                         .HasForeignKey("EventId");
+
+                    b.Navigation("EventforImage");
                 });
 
             modelBuilder.Entity("RestfulApiVisualCode.Models.User", b =>
@@ -262,7 +264,7 @@ namespace RestfulApiVisualCode.Migrations
 
             modelBuilder.Entity("RestfulApiVisualCode.Models.Event", b =>
                 {
-                    b.Navigation("EventImage");
+                    b.Navigation("EventImages");
                 });
 
             modelBuilder.Entity("RestfulApiVisualCode.Models.Role", b =>

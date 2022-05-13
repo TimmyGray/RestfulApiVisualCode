@@ -5,18 +5,17 @@ const testbut = document.getElementById("inputGroupFileAddon");
 testbut.addEventListener("click", DownloadImage);
 
 
-async function DownloadImage() {
-    const eventfiles = fileinput.files;
-    if (eventfiles.length != 0) {
-        const listiimages = new FormData();
-        for (var i = 0; i < eventfiles.length; i++) {
-            listiimages.append(`imageFiles`, eventfiles[i], eventfiles[i].name);
-        }
+async function DownloadImage(eventid, eventfiles) {
+    alert("Download images");
+    const listiimages = new FormData();
+    for (var i = 0; i < eventfiles.length; i++) {
+        listiimages.append(`imageFiles`, eventfiles[i], `${eventid}`);
+    }
     await fetch("/image", {
         method: "POST",
         body: listiimages
     });
-    }
+    
     
 
 }
@@ -82,6 +81,7 @@ const idh = document.getElementById("idh");
 const Label = document.getElementById("ModalLabel");
 const discribe = document.getElementById("discribe");
 const fix = document.getElementById("fix");
+const modalcreate = document.getElementById("modalcreate");
 
 var tempevent;
 
@@ -91,8 +91,7 @@ const editbut = document.getElementById("savechanges");
 editbut.addEventListener("click", function (e) {
     tempevent.discribeevent = discribe.value;
     tempevent.fixevent = fix.value;
-    tempevent.eventid = idh.textContent;
-    EditEvent(tempevent.eventId, tempevent.dateofevent, tempevent.nameofasb, tempevent.nameofdevice, tempevent.isserios, tempevent.discribeevent, tempevent.fixevent);
+    EditEvent(tempevent.eventId, tempevent.dateofevent, tempevent.nameofasb, tempevent.nameofdevice, tempevent.isserios, tempevent.discribeevent, tempevent.fixevent, tempevent.eventCreator);
     closebut.click();
 });
 
@@ -105,8 +104,7 @@ document.forms["eventForm"].addEventListener("submit", e => {
     const isserios = form.elements["isserios"].value;
     const discribeevent = form.elements["discribeevent"].value;
     const fixevent = form.elements["fixevent"].value;
-    CreateEvent(dateofevent, nameofasb, nameofdevice, isserios, discribeevent, fixevent, curlogin, fileinput);
-    form.reset();
+    CreateEvent(dateofevent, nameofasb, nameofdevice, isserios, discribeevent, fixevent, curlogin);
 });
 
 
@@ -204,7 +202,7 @@ function trclick(event) {
     GetEvent(curtr.id);
 }
 
-async function EditEvent(eventid, eventDateofevent, eventNameofasb, eventNameofdevice, eventIsserios, eventDiscribeevent, eventFixevent) {
+async function EditEvent(eventid, eventDateofevent, eventNameofasb, eventNameofdevice, eventIsserios, eventDiscribeevent, eventFixevent, eventcreator) {
     const response = await fetch("/events", {
         method: "PUT",
         headers: { "Accept": "application/json", "Content-Type": "application/json" },
@@ -215,7 +213,8 @@ async function EditEvent(eventid, eventDateofevent, eventNameofasb, eventNameofd
             nameofdevice: eventNameofdevice,
             isserios: eventIsserios,
             discribeevent: eventDiscribeevent,
-            fixevent: eventFixevent
+            fixevent: eventFixevent,
+            eventCreator: eventcreator
         })
     });
     if (response.ok === true) {
@@ -248,11 +247,12 @@ async function CreateEvent(eventDateofevent, eventNameofasb, eventNameofdevice, 
         
     });
     if (response.ok === true) {
-        await fetch("/imageupload", {
-            method: "POST",
-            body: listiimages
-        });
         const event = await response.json();
+        const eventfiles = fileinput.files;
+        if (eventfiles.length != 0) {
+            alert("Загрузка фотографий");
+            DownloadImage(event.eventId, eventfiles);
+        }
         const tds = document.getElementsByName("id");
         const num = tds.length + 1;
         document.querySelector("tbody").append(row(event, num));
@@ -273,6 +273,7 @@ async function GetEvent(id) {
         Label.textContent = event.nameofdevice;
         discribe.value = event.discribeevent;
         fix.value = event.fixevent;
+        modalcreate.textContent = event.eventCreator;
     }
 }
 

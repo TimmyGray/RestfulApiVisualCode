@@ -15,6 +15,6 @@ namespace RestfulApiVisualCode.Models
         public string Discribeevent{get;set;}
         public string Fixevent{get;set;}
         public string EventCreator { get; set; }
-        public List<Image> EventImage { get; set; }
+        public List<Image> EventImages { get; set; }
     }
 }

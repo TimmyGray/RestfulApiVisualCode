@@ -1,4 +1,4 @@
-using Microsoft.AspNetCore.Authorization;
+ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -52,10 +52,10 @@ namespace RestfulApiVisualCode.Controllers
                 ModelState.AddModelError("Dateofevent", "Дата не может быть позднее сегодняшнего числа");
             }
             if (!ModelState.IsValid)
-                return BadRequest();
+                return BadRequest(ModelState);
             db.Events.Add(evnt);
             await db.SaveChangesAsync();
-            return Ok();
+            return Ok(evnt);
             
         }
 
