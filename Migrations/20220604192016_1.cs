@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace RestfulApiVisualCode.Migrations
 {
-    public partial class FirstMigration : Migration
+    public partial class _1 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -100,22 +100,22 @@ namespace RestfulApiVisualCode.Migrations
             migrationBuilder.InsertData(
                 table: "Events",
                 columns: new[] { "EventId", "Dateofevent", "Discribeevent", "EventCreator", "Fixevent", "Isserios", "Nameofasb", "Nameofdevice" },
-                values: new object[] { 1, "5/13/2022", "ваще коллапс", "Admin", "все пофиксили", "серьезно", 1, "SSL" });
+                values: new object[] { 1, "6/4/2022", "ваще коллапс", "Admin", "все пофиксили", "серьезно", 1, "SSL" });
 
             migrationBuilder.InsertData(
                 table: "Events",
                 columns: new[] { "EventId", "Dateofevent", "Discribeevent", "EventCreator", "Fixevent", "Isserios", "Nameofasb", "Nameofdevice" },
-                values: new object[] { 2, "5/13/2022", "все сломалось", "Admin", "это не", "не серьезно", 2, "Karrera" });
+                values: new object[] { 2, "6/4/2022", "все сломалось", "Admin", "это не", "не серьезно", 2, "Karrera" });
 
             migrationBuilder.InsertData(
                 table: "Events",
                 columns: new[] { "EventId", "Dateofevent", "Discribeevent", "EventCreator", "Fixevent", "Isserios", "Nameofasb", "Nameofdevice" },
-                values: new object[] { 3, "5/13/2022", "ваще коллапс", "Admin", "все пофиксили", "не серьезно", 7, "микрофон" });
+                values: new object[] { 3, "6/4/2022", "ваще коллапс", "Admin", "все пофиксили", "не серьезно", 7, "микрофон" });
 
             migrationBuilder.InsertData(
                 table: "Events",
                 columns: new[] { "EventId", "Dateofevent", "Discribeevent", "EventCreator", "Fixevent", "Isserios", "Nameofasb", "Nameofdevice" },
-                values: new object[] { 4, "5/13/2022", "жесть какая", "Admin", "это не", "серьезно", 5, "Karrera" });
+                values: new object[] { 4, "6/4/2022", "жесть какая", "Admin", "это не", "серьезно", 5, "Karrera" });
 
             migrationBuilder.InsertData(
                 table: "Pages",

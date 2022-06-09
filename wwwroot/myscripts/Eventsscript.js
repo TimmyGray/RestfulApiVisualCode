@@ -2,19 +2,21 @@
 const imagecont = document.getElementById("ImageCont");
 const fileinput = document.getElementById("inputGroupFile");
 const testbut = document.getElementById("inputGroupFileAddon");
-testbut.addEventListener("click", DownloadImage);
 
 
 async function DownloadImage(eventid, eventfiles) {
-    alert("Download images");
     const listiimages = new FormData();
     for (var i = 0; i < eventfiles.length; i++) {
         listiimages.append(`imageFiles`, eventfiles[i], `${eventid}`);
     }
-    await fetch("/image", {
+   const response = await fetch("/events/imageupload", {
         method: "POST",
         body: listiimages
-    });
+   });
+    if (response.ok) {
+        const imgcount = await response.text();
+        alert(`${imgcount} фотографий загружено`);
+    }
     
     
 
@@ -219,6 +221,7 @@ async function EditEvent(eventid, eventDateofevent, eventNameofasb, eventNameofd
     });
     if (response.ok === true) {
         const event = await response.json();
+        
         const temptr = document.getElementById(event.eventId);
         const tdupdate = temptr.querySelector("td");
         const num = parseInt(tdupdate.textContent);
@@ -248,11 +251,12 @@ async function CreateEvent(eventDateofevent, eventNameofasb, eventNameofdevice, 
     });
     if (response.ok === true) {
         const event = await response.json();
+
         const eventfiles = fileinput.files;
         if (eventfiles.length != 0) {
-            alert("Загрузка фотографий");
             DownloadImage(event.eventId, eventfiles);
         }
+
         const tds = document.getElementsByName("id");
         const num = tds.length + 1;
         document.querySelector("tbody").append(row(event, num));
@@ -263,6 +267,7 @@ async function CreateEvent(eventDateofevent, eventNameofasb, eventNameofdevice, 
 
 async function GetEvent(id) {
     const response = await fetch("/events/" + id, {
+        mode: "no-cors",
         method: "GET",
         headers: { "Accept": "application/json" }
     });
@@ -274,6 +279,37 @@ async function GetEvent(id) {
         discribe.value = event.discribeevent;
         fix.value = event.fixevent;
         modalcreate.textContent = event.eventCreator;
+        if (event.eventImages != null) {
+            GetImages(id);
+                      
+        }
+        
+    }
+}
+
+async function GetImages(id) {
+    var response = await fetch("/images/"+id);
+    if (response.ok) {
+
+        const res = await response.json();
+        const imagescont = document.getElementById("EventImagesCont");
+        alert(res.length);
+
+        for (var i = 0; i < res.length; i++) {
+            const aimg = document.createElement("a");
+            const eventimg = document.createElement("img");
+            const blob = new Blob([res[i].imageByte], { type: "image/jpeg" });
+            aimg.appendChild(eventimg);
+            imagescont.appendChild(aimg);
+            eventimg.src = window.URL.createObjectURL(blob);
+
+
+        }
+
+        //let reader = new FileReader();
+        //reader.readAsDataURL(res.imageByte);
+        //var url = reader.result;
+
     }
 }
 

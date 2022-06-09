@@ -14,7 +14,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.EntityFrameworkCore;
 using RestfulApiVisualCode.DataBaseContext;
 using RestfulApiVisualCode.Models;
-
+using Microsoft.AspNetCore.Mvc.NewtonsoftJson;
 namespace RestfulApiVisualCode
 {
     public class Startup
@@ -33,7 +33,13 @@ namespace RestfulApiVisualCode
                     options.LoginPath = new Microsoft.AspNetCore.Http.PathString("/Users/Login");
                     options.AccessDeniedPath = new Microsoft.AspNetCore.Http.PathString("/Users/Login");
                 });
-            services.AddMvc();
+            services.AddMvc().AddNewtonsoftJson(options=>
+            {
+                options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+            });
+
+           
+
             services.AddControllers();
             
         }

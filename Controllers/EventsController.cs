@@ -35,6 +35,8 @@ namespace RestfulApiVisualCode.Controllers
         public async Task<ActionResult<Event>> Get(int id)
         {
             Event evnt = await db.Events.FirstOrDefaultAsync(x => x.EventId == id);
+            await db.Images.Where(i=>i.EventId== evnt.EventId).LoadAsync();
+           // throw new Exception($"{evnt.EventImages[0].ImageByte.Length}");
             if (evnt == null)
                 return NotFound();
             return new ObjectResult(evnt);
@@ -60,31 +62,7 @@ namespace RestfulApiVisualCode.Controllers
         }
 
         
-        [Route("/imageupload")]
-        [HttpPost]
-        public async Task<IActionResult> ImageCreate(IFormFileCollection files)
-        {
-            if (files is null)
-            {
-                return NoContent();
-            }
-            foreach (IFormFile file in files)
-            {
-                await Task.Run(() =>
-                {
-                    byte[] imagedata = null;
-                    using (var binaryreader = new BinaryReader(file.OpenReadStream()))
-                    {
-                        imagedata = binaryreader.ReadBytes((int)file.Length);
-                    }
-                    Image image = new Image {Name=file.Name, ImageByte = imagedata };
-                    db.Images.Add(image);
-                });
-
-            }
-            await db.SaveChangesAsync();
-            return Ok();
-        }
+        
 
         [HttpPut]
         public async Task<ActionResult<Event>> Put(Event evnt)
@@ -108,10 +86,16 @@ namespace RestfulApiVisualCode.Controllers
         public async Task<ActionResult<Event>> Delete(int id)
         {
 
-            Event evnt = db.Events.FirstOrDefault(x => x.EventId == id);
+            Event evnt =await db.Events.FirstOrDefaultAsync(x => x.EventId == id);
+
             if (evnt == null)
             {
+
                 return NotFound();
+            }
+            if (true)
+            {
+
             }
             db.Events.Remove(evnt);
             await db.SaveChangesAsync();

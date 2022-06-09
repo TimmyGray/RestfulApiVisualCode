@@ -51,7 +51,7 @@ namespace RestfulApiVisualCode.Migrations
                         new
                         {
                             EventId = 1,
-                            Dateofevent = "5/13/2022",
+                            Dateofevent = "6/4/2022",
                             Discribeevent = "ваще коллапс",
                             EventCreator = "Admin",
                             Fixevent = "все пофиксили",
@@ -62,7 +62,7 @@ namespace RestfulApiVisualCode.Migrations
                         new
                         {
                             EventId = 2,
-                            Dateofevent = "5/13/2022",
+                            Dateofevent = "6/4/2022",
                             Discribeevent = "все сломалось",
                             EventCreator = "Admin",
                             Fixevent = "это не",
@@ -73,7 +73,7 @@ namespace RestfulApiVisualCode.Migrations
                         new
                         {
                             EventId = 3,
-                            Dateofevent = "5/13/2022",
+                            Dateofevent = "6/4/2022",
                             Discribeevent = "ваще коллапс",
                             EventCreator = "Admin",
                             Fixevent = "все пофиксили",
@@ -84,7 +84,7 @@ namespace RestfulApiVisualCode.Migrations
                         new
                         {
                             EventId = 4,
-                            Dateofevent = "5/13/2022",
+                            Dateofevent = "6/4/2022",
                             Discribeevent = "жесть какая",
                             EventCreator = "Admin",
                             Fixevent = "это не",

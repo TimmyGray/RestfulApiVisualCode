@@ -533,3 +533,6 @@ D:\programs\RestfulApiVisualCode\obj\Debug\net5.0\Razor\Views\_ViewStart.cshtml.
 D:\programs\RestfulApiVisualCode\obj\Debug\net5.0\Razor\Views\Users\Login.cshtml.g.cs
 D:\programs\RestfulApiVisualCode\obj\Debug\net5.0\Razor\Views\Users\Register.cshtml.g.cs
 D:\programs\RestfulApiVisualCode\obj\Debug\net5.0\refint\RestfulApiVisualCode.dll
+D:\programs\RestfulApiVisualCode\bin\Debug\net5.0\Microsoft.AspNetCore.JsonPatch.dll
+D:\programs\RestfulApiVisualCode\bin\Debug\net5.0\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
+D:\programs\RestfulApiVisualCode\bin\Debug\net5.0\Newtonsoft.Json.Bson.dll
