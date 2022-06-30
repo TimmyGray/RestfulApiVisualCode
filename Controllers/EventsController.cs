@@ -87,19 +87,24 @@ namespace RestfulApiVisualCode.Controllers
         {
 
             Event evnt =await db.Events.FirstOrDefaultAsync(x => x.EventId == id);
+            await db.Images.Where(i => i.EventId == evnt.EventId).LoadAsync();
 
             if (evnt == null)
             {
 
                 return NotFound();
             }
-            if (true)
-            {
+
+            if (evnt.EventImages!=null)
+            {  
+
+                db.Images.RemoveRange(evnt.EventImages);
 
             }
+            
             db.Events.Remove(evnt);
             await db.SaveChangesAsync();
-            return Ok(evnt);
+            return Ok(evnt.EventId);
         }
     }
 }

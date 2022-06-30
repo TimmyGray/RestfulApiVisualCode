@@ -203,6 +203,7 @@ function SubHeaderSelect(e) {
             DeletePage(textdelete.getAttribute("num"));
         });
         butdelupdate.addEventListener("click", function () {
+            const curlogin = document.getElementById("CurrentUser").textContent;
             EditPage(curhead, cursub.textContent, textdelupdate, curlogin);
         });
     }
@@ -279,6 +280,7 @@ infoform.addEventListener("submit", e => {
     const headervalue = document.getElementById("HeaderValue").value;
     const subheadervalue = document.getElementById("SubheaderValue").value;
     const infovalue = document.getElementById("InfoValue").value;
+    const curlogin = document.getElementById("CurrentUser").textContent;
     CreatePage(headervalue, subheadervalue, infovalue,curlogin);
 });
 

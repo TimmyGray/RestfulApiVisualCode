@@ -14,6 +14,8 @@ using RestfulApiVisualCode.ViewModels;
 
 namespace RestfulApiVisualCode.Controllers
 {
+    [ApiController]
+    [Route("[controller]")]
     public class UsersController:Controller
     {
         EventsContext db;
@@ -22,84 +24,71 @@ namespace RestfulApiVisualCode.Controllers
             db = context;
         }
 
-        
 
-        [Authorize(Roles ="Engeneer,Admin")]
+        [Route("index")]
+        [HttpGet]
+      //  [Authorize(Roles ="Engeneer,Admin")]
         public IActionResult Index()
         {
-          return Redirect("~/ClientView.html");
-        }
 
-        [Route("clientview")]
-        [HttpGet]
-        public IActionResult GetLogin()
-        {
             return Content(User.Identity.Name);
         }
-        
-        [HttpGet]
-        public IActionResult Login()
-        {
-            
-            return View();
-        }
 
+        //[Route("authorize")]
+        //[HttpGet]
+        //public IActionResult Authoirize()
+        //{
+
+        //    return Redirect("~/authorize.html");
+        //}
+
+        [Route("login")]
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Login(LoginModel loginModel)
+        //[ValidateAntiForgeryToken]
+        public async Task<IActionResult> Login(User log)
         {
-            if (ModelState.IsValid)
+            User user = await db.Users
+                   .Include(u => u.Role)
+                   .FirstOrDefaultAsync(u => u.Login == log.Login && u.Password == log.Password);
+            if (user != null)
             {
+                await Authenticate(user);
 
-                User user = await db.Users
-                    .Include(u=>u.Role)
-                    .FirstOrDefaultAsync(u => u.Login == loginModel.Login && u.Password == loginModel.Password);
-                if (user!=null)
-                {
-                    await Authenticate(user);
-                    
-                    return Redirect("~/ClientView.html");
-
-                }
-                ModelState.AddModelError("", "Неправильные логин и(или) пароль");
+                return Ok(user);
 
             }
-            return View(loginModel);
+
+            return BadRequest("Неправильный логин или пароль");
         }
 
-        [HttpGet]
-        public IActionResult Register()
-        {
-            return View();
-        }
+        //[HttpGet]
+        //public IActionResult Register()
+        //{
+        //    return View();
+        //}
 
-
+        [Route("register")]
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Register(AutorizationModel model)
+        //[ValidateAntiForgeryToken]
+        public async Task<IActionResult> Register(User reg)
         {
-            if (ModelState.IsValid)
+            User user = await db.Users.FirstOrDefaultAsync(u => u.Login == reg.Login);
+            if (user == null)
             {
-                User user = await db.Users.FirstOrDefaultAsync(u => u.Login == model.Login);
-                if (user == null)
+                user = new User { Login = reg.Login, Password = reg.Password };
+                Role role = await db.Roles.FirstOrDefaultAsync(r => r.RoleName == "Engeneer");
+                if (role != null)
                 {
-                    user = new User { Login = model.Login, Password = model.Password };
-                    Role role = await db.Roles.FirstOrDefaultAsync(r => r.RoleName == "Engeneer");
-                    if (role != null)
-                    {
-                        user.Role = role;
-                    }
-                    db.Users.Add(user);
-                    await db.SaveChangesAsync();
-
-                    await Authenticate(user); 
-
-                    return Redirect("~/ClientView.html");
+                    user.Role = role;
                 }
-                else
-                    ModelState.AddModelError("", "Некорректные логин и(или) пароль");
+                db.Users.Add(user);
+                await db.SaveChangesAsync();
+
+                await Authenticate(user);
+
+                return Ok();
             }
-            return View(model);
+            return BadRequest("Такой пользователь уже существует");
         }
 
         private async Task Authenticate(User user)
@@ -113,10 +102,12 @@ namespace RestfulApiVisualCode.Controllers
             await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(id));
         }
 
+        [Route("logout")]
         public async Task<IActionResult> Logout()
         {
-            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
-            return RedirectToAction("Login", "Users");
+          await  HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+          return Ok("logout");
+
         }
     }
 }

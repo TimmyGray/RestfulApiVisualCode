@@ -1,5 +1,5 @@
-﻿const tablinks = document.getElementsByClassName("nav-link creambrule-link px-1");
-const imagecont = document.getElementById("ImageCont");
+﻿
+const tablinks = document.getElementsByClassName("nav-link creambrule-link px-1");
 const fileinput = document.getElementById("inputGroupFile");
 const testbut = document.getElementById("inputGroupFileAddon");
 
@@ -9,7 +9,7 @@ async function DownloadImage(eventid, eventfiles) {
     for (var i = 0; i < eventfiles.length; i++) {
         listiimages.append(`imageFiles`, eventfiles[i], `${eventid}`);
     }
-   const response = await fetch("/events/imageupload", {
+   const response = await fetch("/images", {
         method: "POST",
         body: listiimages
    });
@@ -27,6 +27,7 @@ fileinput.addEventListener("change", function () {
         fileinput.value="";
         return;
     }
+    const uploadimagescont = document.getElementById("UploadImagesCont");
     for (var i = 0; i < fileinput.files.length; i++) {
         if (fileinput.files[i].type != "image/jpeg") {
             alert("not image");
@@ -34,13 +35,20 @@ fileinput.addEventListener("change", function () {
             return;
         }
 
-        const eventimage = document.createElement("img");
-        eventimage.src = window.URL.createObjectURL(fileinput.files[i]);
-        eventimage.onload = function () {
+        const uploada = document.createElement("a");
+        uploada.style.display = "flex";
+        uploada.classList.add("mb-1");
+        
+        const uploadimage = document.createElement("img");
+        uploadimage.height = "360";
+        uploadimage.width = "640";
+        uploadimage.src = window.URL.createObjectURL(fileinput.files[i]);
+        uploadimage.onload = function () {
             window.URL.revokeObjectURL(this.src);
         }
-        eventimage.className = "eventimage";
-        imagecont.appendChild(eventimage);
+        uploadimage.className = "eventimage";
+        uploada.appendChild(uploadimage);
+        uploadimagescont.appendChild(uploada);
        
 
     }
@@ -48,14 +56,18 @@ fileinput.addEventListener("change", function () {
     
 
 });
+
 function Сhange(event) {
     const maintabs = document.querySelectorAll("main");
     for (var num = 0; num < maintabs.length; num++) {
         maintabs[num].className = "disactivetab";
     }
-
+    const historybody = document.getElementById("body");
     document.getElementById(event.currentTarget.name).className = "activetab";
-    if (event.currentTarget.id === "HistoryClick" && document.getElementById("body").childElementCount == 0) {
+    if (event.currentTarget.id === "HistoryClick" && historybody.childElementCount <= 1) {
+        if (historybody.childElementCount == 1) {
+            historybody.innerHTML = "";
+        }
         GetEvents();
     }
 
@@ -79,11 +91,6 @@ for (var tabnum = 0; tabnum < tablinks.length; tabnum++) {
     tablinks[tabnum].onclick = Сhange;
 }
 
-const idh = document.getElementById("idh");
-const Label = document.getElementById("ModalLabel");
-const discribe = document.getElementById("discribe");
-const fix = document.getElementById("fix");
-const modalcreate = document.getElementById("modalcreate");
 
 var tempevent;
 
@@ -106,6 +113,7 @@ document.forms["eventForm"].addEventListener("submit", e => {
     const isserios = form.elements["isserios"].value;
     const discribeevent = form.elements["discribeevent"].value;
     const fixevent = form.elements["fixevent"].value;
+    const curlogin = document.getElementById("CurrentUser").textContent;
     CreateEvent(dateofevent, nameofasb, nameofdevice, isserios, discribeevent, fixevent, curlogin);
 });
 
@@ -184,6 +192,7 @@ function row(event, num) {
 
     delbut.append(delbutimg);
     delbut.addEventListener("click", function (e) {
+        e.preventDefault();
         DeleteEvent(event.eventId);
     });
 
@@ -266,6 +275,9 @@ async function CreateEvent(eventDateofevent, eventNameofasb, eventNameofdevice, 
 }
 
 async function GetEvent(id) {
+    const imagescont = document.getElementById("EventImagesCont");
+    imagescont.innerHTML = "";
+
     const response = await fetch("/events/" + id, {
         mode: "no-cors",
         method: "GET",
@@ -274,34 +286,50 @@ async function GetEvent(id) {
     if (response.ok === true) {
         const event = await response.json();
         tempevent = event;
+        const idh = document.getElementById("idh");
+        const Label = document.getElementById("ModalLabel");
+        const discribe = document.getElementById("discribe");
+        const fix = document.getElementById("fix");
+        const modalcreate = document.getElementById("modalcreate");
+
         idh.textContent = event.eventId;
         Label.textContent = event.nameofdevice;
         discribe.value = event.discribeevent;
         fix.value = event.fixevent;
-        modalcreate.textContent = event.eventCreator;
+        modalcreate.textContent = event.eventCreator
+
         if (event.eventImages != null) {
-            GetImages(id);
+            GetImages(id, imagescont);
                       
         }
         
     }
 }
 
-async function GetImages(id) {
+async function GetImages(id,imagescont) {
     var response = await fetch("/images/"+id);
     if (response.ok) {
 
         const res = await response.json();
-        const imagescont = document.getElementById("EventImagesCont");
-        alert(res.length);
 
         for (var i = 0; i < res.length; i++) {
-            const aimg = document.createElement("a");
+
+            const aimg = document.createElement("a");                      //позже переделать под блоб
             const eventimg = document.createElement("img");
-            const blob = new Blob([res[i].imageByte], { type: "image/jpeg" });
+            // const blob = new Blob([res[i].imageByte], { type: "image/jpeg" });
+            
             aimg.appendChild(eventimg);
+            aimg.classList.add("mb-1");
+            aimg.classList.add("justify-content-center")
+            aimg.href = "#";
+            aimg.style.display = "flex";
             imagescont.appendChild(aimg);
-            eventimg.src = window.URL.createObjectURL(blob);
+            eventimg.src = `data:image/jpeg;base64,${res[i].imageByte}`;
+            
+            eventimg.height = "180";
+            eventimg.width = "320";
+           // eventimg.src = window.URL.createObjectURL(blob);
+            
 
 
         }

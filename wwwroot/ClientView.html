@@ -26,8 +26,13 @@
                     </form>
                 </div>
 
-                <div class="text-end five-header-btn">
-                    <a id="CurrentUser" href="#" class="creambrule-link"></a>
+                <div class="dropdown text-end five-header-btn">
+                    <a id="CurrentUser" href="#" class="creambrule-link dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"></a>
+                    <ul id="UserMeny" class="dropdown-menu text-small" aria-labelledby="CurrentUser">
+                        <li>
+                            <a id="ExitLink" class="dropdown-item">Выйти из профиля</a>
+                        </li>
+                    </ul>
                     <button type="button" class="btn headerbtn me-2" hidden>Войти</button>
 
                     <button type="button" class="btn headerbtn" hidden>Регистрация</button>
@@ -119,9 +124,10 @@
                             <div class="input-group mb-3">
                                 <label for="inputGroupFile">Фотография поломки</label>
                                 <div class="w-100"></div>
-                                <input type="file" formenctype="multipart/form-data" name="imageFiles"  class="form-control" id="inputGroupFile" aria-describedby="inputGroupFileAddon" multiple aria-label="Загрузить">
-                                <button class="btn btn-outline-softbrown" type="button" id="inputGroupFileAddon">Загрузить</button>                                
+                                <input type="file" formenctype="multipart/form-data" name="imageFiles" class="form-control" id="inputGroupFile" aria-describedby="inputGroupFileAddon" multiple aria-label="Загрузить">
                             </div>
+                            <div id="UploadImagesCont" class="pt-2 d-block"></div>
+
                         </div>
 
                     </div>
@@ -256,14 +262,14 @@
                         </div>
                         <div class="modal-body">
                             <div class="row">
-                                <div class="col-xs-6">
+                                <div class="col-xs-6 mb-1">
                                     <textarea class="form-control" rows="3" id="discribe"></textarea>
                                 </div>
-                                <div class="col-xs-6">
+                                <div class="col-xs-6 mb-1">
                                     <textarea class="form-control" rows="3" id="fix"></textarea>
                                 </div>
                             </div>
-                            <div id="EventImagesCont" class="img-fluid">
+                            <div id="EventImagesCont" class="pt-2">
                             </div>
 
 
@@ -477,11 +483,10 @@
 
         </div>
     </main>
-
+    <script src="myscripts/CheckLogin.js" crossorigin="anonymous"></script>
     <script src="myscripts/Pagesscript.js" crossorigin="anonymous"></script>
     <script src="myscripts/Eventsscript.js" crossorigin="anonymous"></script>
     <script src="myscripts/Sortingscripts.js" crossorigin="anonymous"></script>
-    <script src="myscripts/Authorizationscripts.js" crossorigin="anonymous"></script>
     <script src="bootstrap/dist/js/bootstrap.bundle.min.js"  crossorigin="anonymous"></script>
 
 </body>

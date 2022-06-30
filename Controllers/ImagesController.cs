@@ -43,9 +43,9 @@ namespace RestfulApiVisualCode.Controllers
 
 
 
-        [Route("imageupload")]
+      //  [Route("imageupload")]
         [HttpPost]
-        public async Task<ActionResult<Image>> ImageCreate(IFormFileCollection imageFiles)
+        public async Task<ActionResult<int>> ImageCreate(IFormFileCollection imageFiles)
         {
 
             if (imageFiles.Count != 0)

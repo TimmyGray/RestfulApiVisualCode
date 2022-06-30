@@ -15,6 +15,9 @@ using Microsoft.EntityFrameworkCore;
 using RestfulApiVisualCode.DataBaseContext;
 using RestfulApiVisualCode.Models;
 using Microsoft.AspNetCore.Mvc.NewtonsoftJson;
+using Microsoft.AspNetCore.Routing;
+using Microsoft.AspNetCore.Http;
+
 namespace RestfulApiVisualCode
 {
     public class Startup
@@ -30,8 +33,8 @@ namespace RestfulApiVisualCode
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
                 .AddCookie(options =>
                 {
-                    options.LoginPath = new Microsoft.AspNetCore.Http.PathString("/Users/Login");
-                    options.AccessDeniedPath = new Microsoft.AspNetCore.Http.PathString("/Users/Login");
+                    options.LoginPath = new Microsoft.AspNetCore.Http.PathString("/authorize.html");
+                    options.AccessDeniedPath = new Microsoft.AspNetCore.Http.PathString("/authorize.html");
                 });
             services.AddMvc().AddNewtonsoftJson(options=>
             {
@@ -48,21 +51,28 @@ namespace RestfulApiVisualCode
         {
             DataBaseExtention.CreateDataBase(app);
             app.UseDeveloperExceptionPage();
-            //DefaultFilesOptions options = new DefaultFilesOptions();
-            //options.DefaultFileNames.Clear();
-            //options.DefaultFileNames.Add("ClientView.html");
-            //app.UseDefaultFiles(options);
+            DefaultFilesOptions options = new DefaultFilesOptions();
+            options.DefaultFileNames.Clear();
+            options.DefaultFileNames.Add("authorize.html");
+            app.UseDefaultFiles(options);
             app.UseStaticFiles();
             app.UseRouting();
             app.UseAuthentication();
             app.UseAuthorization();
- 
+
+            //app.UseEndpoints(endpoints =>
+            //{
+            //    endpoints.MapDefaultControllerRoute();
+            //});
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
-                    name:"default",
-                    pattern:"{controller=Users}/{action=Index}/{id?}");
+                    name: "default",
+                    pattern: "{controller=Users}/{action=Index}/{id?}");
             });
         }
+
+       
     }
 }
