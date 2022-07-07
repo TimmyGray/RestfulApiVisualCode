@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace RestfulApiVisualCode.Migrations
 {
-    public partial class _1 : Migration
+    public partial class addmigrationfirst : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -19,7 +19,8 @@ namespace RestfulApiVisualCode.Migrations
                     Isserios = table.Column<string>(type: "TEXT", nullable: true),
                     Discribeevent = table.Column<string>(type: "TEXT", nullable: true),
                     Fixevent = table.Column<string>(type: "TEXT", nullable: true),
-                    EventCreator = table.Column<string>(type: "TEXT", nullable: true)
+                    EventCreator = table.Column<string>(type: "TEXT", nullable: true),
+                    tags = table.Column<string>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -35,7 +36,8 @@ namespace RestfulApiVisualCode.Migrations
                     Header = table.Column<string>(type: "TEXT", nullable: true),
                     Subheader = table.Column<string>(type: "TEXT", nullable: true),
                     Info = table.Column<string>(type: "TEXT", nullable: true),
-                    PageCreator = table.Column<string>(type: "TEXT", nullable: true)
+                    PageCreator = table.Column<string>(type: "TEXT", nullable: true),
+                    tags = table.Column<string>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -99,43 +101,43 @@ namespace RestfulApiVisualCode.Migrations
 
             migrationBuilder.InsertData(
                 table: "Events",
-                columns: new[] { "EventId", "Dateofevent", "Discribeevent", "EventCreator", "Fixevent", "Isserios", "Nameofasb", "Nameofdevice" },
-                values: new object[] { 1, "6/4/2022", "ваще коллапс", "Admin", "все пофиксили", "серьезно", 1, "SSL" });
+                columns: new[] { "EventId", "Dateofevent", "Discribeevent", "EventCreator", "Fixevent", "Isserios", "Nameofasb", "Nameofdevice", "tags" },
+                values: new object[] { 1, "7/1/2022", "ваще коллапс", "Admin", "все пофиксили", "серьезно", 1, "SSL", "7/1/2022,ваще коллапс,Admin,все пофиксили,серьезно,1, SSL" });
 
             migrationBuilder.InsertData(
                 table: "Events",
-                columns: new[] { "EventId", "Dateofevent", "Discribeevent", "EventCreator", "Fixevent", "Isserios", "Nameofasb", "Nameofdevice" },
-                values: new object[] { 2, "6/4/2022", "все сломалось", "Admin", "это не", "не серьезно", 2, "Karrera" });
+                columns: new[] { "EventId", "Dateofevent", "Discribeevent", "EventCreator", "Fixevent", "Isserios", "Nameofasb", "Nameofdevice", "tags" },
+                values: new object[] { 2, "7/1/2022", "все сломалось", "Admin", "это не", "не серьезно", 2, "Karrera", "7/1/2022,все сломалось,Admin,это не,не серьезно,2, Karrera" });
 
             migrationBuilder.InsertData(
                 table: "Events",
-                columns: new[] { "EventId", "Dateofevent", "Discribeevent", "EventCreator", "Fixevent", "Isserios", "Nameofasb", "Nameofdevice" },
-                values: new object[] { 3, "6/4/2022", "ваще коллапс", "Admin", "все пофиксили", "не серьезно", 7, "микрофон" });
+                columns: new[] { "EventId", "Dateofevent", "Discribeevent", "EventCreator", "Fixevent", "Isserios", "Nameofasb", "Nameofdevice", "tags" },
+                values: new object[] { 3, "7/1/2022", "ваще коллапс", "Admin", "все пофиксили", "не серьезно", 7, "микрофон", null });
 
             migrationBuilder.InsertData(
                 table: "Events",
-                columns: new[] { "EventId", "Dateofevent", "Discribeevent", "EventCreator", "Fixevent", "Isserios", "Nameofasb", "Nameofdevice" },
-                values: new object[] { 4, "6/4/2022", "жесть какая", "Admin", "это не", "серьезно", 5, "Karrera" });
+                columns: new[] { "EventId", "Dateofevent", "Discribeevent", "EventCreator", "Fixevent", "Isserios", "Nameofasb", "Nameofdevice", "tags" },
+                values: new object[] { 4, "7/1/2022", "жесть какая", "Admin", "это не", "серьезно", 5, "Dalet", "7/1/2022,жесть какая,Admin,это не,серьезн,5, Dalet" });
 
             migrationBuilder.InsertData(
                 table: "Pages",
-                columns: new[] { "PageId", "Header", "Info", "PageCreator", "Subheader" },
-                values: new object[] { 1, "Видеопульт", "Вот тут написано как делать окна и всякие эффекты", "Admin", "Эффекты, окна" });
+                columns: new[] { "PageId", "Header", "Info", "PageCreator", "Subheader", "tags" },
+                values: new object[] { 1, "Видеопульт", "Вот тут написано как делать окна и всякие эффекты", "Admin", "Эффекты, окна", null });
 
             migrationBuilder.InsertData(
                 table: "Pages",
-                columns: new[] { "PageId", "Header", "Info", "PageCreator", "Subheader" },
-                values: new object[] { 2, "Видеопульт", "Вот тут сбор всяких поломок", "Admin", "Разного рода поломки" });
+                columns: new[] { "PageId", "Header", "Info", "PageCreator", "Subheader", "tags" },
+                values: new object[] { 2, "Видеопульт", "Вот тут сбор всяких поломок", "Admin", "Разного рода поломки", null });
 
             migrationBuilder.InsertData(
                 table: "Pages",
-                columns: new[] { "PageId", "Header", "Info", "PageCreator", "Subheader" },
-                values: new object[] { 3, "Камеры, CCU и OCP", "Вот тут написано о великой полезности камер", "Admin", "Камеры" });
+                columns: new[] { "PageId", "Header", "Info", "PageCreator", "Subheader", "tags" },
+                values: new object[] { 3, "Камеры, CCU и OCP", "Вот тут написано о великой полезности камер", "Admin", "Камеры", null });
 
             migrationBuilder.InsertData(
                 table: "Pages",
-                columns: new[] { "PageId", "Header", "Info", "PageCreator", "Subheader" },
-                values: new object[] { 4, "Звуковое оборудование", "Вот здесь написано про микрофоны и их особенности", "Admin", "Микрофоны" });
+                columns: new[] { "PageId", "Header", "Info", "PageCreator", "Subheader", "tags" },
+                values: new object[] { 4, "Звуковое оборудование", "Вот здесь написано про микрофоны и их особенности", "Admin", "Микрофоны", null });
 
             migrationBuilder.InsertData(
                 table: "Roles",

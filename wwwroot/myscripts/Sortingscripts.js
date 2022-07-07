@@ -8,6 +8,35 @@ devicesort.addEventListener("click", Sorting);
 seriossort.addEventListener("click", Sorting);
 datesort.addEventListener("click", Sorting);
 
+const SearchInput = document.getElementById("searchinput");
+const cancelsearchbut = document.getElementById("cancelsearchbut");
+const searchbut = document.getElementById("searchbut");
+searchbut.addEventListener("click", Search);
+cancelsearchbut.addEventListener("click", CancelSearch);
+
+function Search() {
+    const findword = SearchInput.value;
+    reg = new RegExp(`\w{0,}${findword}\w{0,}`,"gi")
+    const alltags = document.querySelectorAll('td[name=tags]');
+    alltags.forEach(t => {
+        if (t.textContent.match(reg))
+            t.parentElement.hidden = false;
+
+        else {
+            t.parentElement.hidden = true;
+          
+        }
+    });
+}
+
+function CancelSearch() {
+    SearchInput.value = "";
+    const alltags = document.querySelectorAll('td[name=tags]');
+    alltags.forEach(t => {
+        t.parentElement.hidden = false;
+    })
+
+}
 
 function Sorting(event) {
 

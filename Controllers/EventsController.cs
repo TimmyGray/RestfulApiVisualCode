@@ -36,7 +36,6 @@ namespace RestfulApiVisualCode.Controllers
         {
             Event evnt = await db.Events.FirstOrDefaultAsync(x => x.EventId == id);
             await db.Images.Where(i=>i.EventId== evnt.EventId).LoadAsync();
-           // throw new Exception($"{evnt.EventImages[0].ImageByte.Length}");
             if (evnt == null)
                 return NotFound();
             return new ObjectResult(evnt);
@@ -54,7 +53,9 @@ namespace RestfulApiVisualCode.Controllers
                 ModelState.AddModelError("Dateofevent", "Дата не может быть позднее сегодняшнего числа");
             }
             if (!ModelState.IsValid)
-                return BadRequest(ModelState);
+            { return BadRequest(ModelState); }
+
+            evnt.tags = $"{evnt.Dateofevent},{evnt.Discribeevent},{evnt.EventCreator},{evnt.Fixevent},{evnt.Isserios},{evnt.Nameofasb},{evnt.Nameofdevice}";
             db.Events.Add(evnt);
             await db.SaveChangesAsync();
             return Ok(evnt);

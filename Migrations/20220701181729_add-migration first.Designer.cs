@@ -9,8 +9,8 @@ using RestfulApiVisualCode.DataBaseContext;
 namespace RestfulApiVisualCode.Migrations
 {
     [DbContext(typeof(EventsContext))]
-    [Migration("20220604192016_1")]
-    partial class _1
+    [Migration("20220701181729_add-migration first")]
+    partial class addmigrationfirst
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -45,6 +45,9 @@ namespace RestfulApiVisualCode.Migrations
                     b.Property<string>("Nameofdevice")
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("tags")
+                        .HasColumnType("TEXT");
+
                     b.HasKey("EventId");
 
                     b.ToTable("Events");
@@ -53,29 +56,31 @@ namespace RestfulApiVisualCode.Migrations
                         new
                         {
                             EventId = 1,
-                            Dateofevent = "6/4/2022",
+                            Dateofevent = "7/1/2022",
                             Discribeevent = "ваще коллапс",
                             EventCreator = "Admin",
                             Fixevent = "все пофиксили",
                             Isserios = "серьезно",
                             Nameofasb = 1,
-                            Nameofdevice = "SSL"
+                            Nameofdevice = "SSL",
+                            tags = "7/1/2022,ваще коллапс,Admin,все пофиксили,серьезно,1, SSL"
                         },
                         new
                         {
                             EventId = 2,
-                            Dateofevent = "6/4/2022",
+                            Dateofevent = "7/1/2022",
                             Discribeevent = "все сломалось",
                             EventCreator = "Admin",
                             Fixevent = "это не",
                             Isserios = "не серьезно",
                             Nameofasb = 2,
-                            Nameofdevice = "Karrera"
+                            Nameofdevice = "Karrera",
+                            tags = "7/1/2022,все сломалось,Admin,это не,не серьезно,2, Karrera"
                         },
                         new
                         {
                             EventId = 3,
-                            Dateofevent = "6/4/2022",
+                            Dateofevent = "7/1/2022",
                             Discribeevent = "ваще коллапс",
                             EventCreator = "Admin",
                             Fixevent = "все пофиксили",
@@ -86,13 +91,14 @@ namespace RestfulApiVisualCode.Migrations
                         new
                         {
                             EventId = 4,
-                            Dateofevent = "6/4/2022",
+                            Dateofevent = "7/1/2022",
                             Discribeevent = "жесть какая",
                             EventCreator = "Admin",
                             Fixevent = "это не",
                             Isserios = "серьезно",
                             Nameofasb = 5,
-                            Nameofdevice = "Karrera"
+                            Nameofdevice = "Dalet",
+                            tags = "7/1/2022,жесть какая,Admin,это не,серьезн,5, Dalet"
                         });
                 });
 
@@ -134,6 +140,9 @@ namespace RestfulApiVisualCode.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Subheader")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("tags")
                         .HasColumnType("TEXT");
 
                     b.HasKey("PageId");

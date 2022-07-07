@@ -10,9 +10,11 @@ namespace RestfulApiVisualCode.Models
     {
         public int PageId { get; set; }
         public string Header { get; set; }
-        public string Subheader { get; set; }      
+        public string Subheader { get; set; }
         public string Info { get; set; }
-       public string PageCreator { get; set; }
+        public string PageCreator { get; set; }
+        public string tags { get; set; }
+
 
     }
 }

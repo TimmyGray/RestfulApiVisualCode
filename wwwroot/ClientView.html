@@ -20,13 +20,19 @@
                     <li><a href="#" name="Faq" class="nav-link creambrule-link px-1" id="FaqClick">Глоссарий</a></li>
                 </ul>
 
-                <div class="col-lg-auto mb-lg-0 mb-3 mb-md-0 me-lg-3 col-12 five-header-search">
-                    <form>
-                        <input type="search" class="form-control form-control-dark" placeholder="Искать..." aria-label="Search">
+                <div class="mb-lg-0 mb-3 mb-md-0 me-lg-3 col-lg-3">
+                    <form class="d-inline-flex">
+                        <input id="searchinput" type="search" class="form-control form-control-dark" placeholder="Искать..." aria-label="Search">
+                        <input type="button" id="searchbut" class="btn headerbtn" value="Найти" input>
+                        <a id="cancelsearchbut" href="#">
+                            <img src="Resources/closeicon.png" width="24" height="24" class="mt-2" />
+                        </a>
+
                     </form>
+                    
                 </div>
 
-                <div class="dropdown text-end five-header-btn">
+                <div class="offset-sm-1 offset-md-0 col-auto dropdown text-end five-header-btn">
                     <a id="CurrentUser" href="#" class="creambrule-link dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"></a>
                     <ul id="UserMeny" class="dropdown-menu text-small" aria-labelledby="CurrentUser">
                         <li>
@@ -487,6 +493,7 @@
     <script src="myscripts/Pagesscript.js" crossorigin="anonymous"></script>
     <script src="myscripts/Eventsscript.js" crossorigin="anonymous"></script>
     <script src="myscripts/Sortingscripts.js" crossorigin="anonymous"></script>
+    <script src="myscripts/SearchScript.js" crossorigin="anonymous"></script>
     <script src="bootstrap/dist/js/bootstrap.bundle.min.js"  crossorigin="anonymous"></script>
 
 </body>

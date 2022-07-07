@@ -114,6 +114,7 @@ document.forms["eventForm"].addEventListener("submit", e => {
     const discribeevent = form.elements["discribeevent"].value;
     const fixevent = form.elements["fixevent"].value;
     const curlogin = document.getElementById("CurrentUser").textContent;
+
     CreateEvent(dateofevent, nameofasb, nameofdevice, isserios, discribeevent, fixevent, curlogin);
 });
 
@@ -201,8 +202,14 @@ function row(event, num) {
 
     tr.appendChild(delbutTd);
 
-    tr.addEventListener("click", trclick);
+    const tagsTd = document.createElement("td");
+    tagsTd.setAttribute("name", "tags");
+    tagsTd.hidden = true;
+    tagsTd.append(event.tags);
+    tr.appendChild(tagsTd);
 
+
+    tr.addEventListener("click", trclick);
 
 
     return tr;

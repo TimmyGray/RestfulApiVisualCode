@@ -30,20 +30,12 @@ namespace RestfulApiVisualCode.Controllers
             List<Image> images = await db.Images.Where(i=>i.EventId==id).ToListAsync();
             if (images.Count == 0 || images == null)
             { return BadRequest(); }
-            //foreach (Image image in images)
-            //{
-            //    using (FileStream writer = new FileStream("Resources\\"+image.ImageId+".jpeg", FileMode.CreateNew, FileAccess.Write))
-            //    {
-            //       await writer.WriteAsync(image.ImageByte, 0, image.ImageByte.Length);
-            //    }
-            //}
             return new ObjectResult(images);
             
         }
 
 
 
-      //  [Route("imageupload")]
         [HttpPost]
         public async Task<ActionResult<int>> ImageCreate(IFormFileCollection imageFiles)
         {
