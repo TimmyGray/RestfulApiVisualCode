@@ -227,10 +227,10 @@ svg:hover {
 }
 
 .modalevent {
-  max-width: 1000px;
+  max-width: 1300px;
 }
 
-@media (max-width: 999px) {
+@media (max-width: 990px) {
   .modalimgcont {
     display: block;
   }

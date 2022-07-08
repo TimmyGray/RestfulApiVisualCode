@@ -350,13 +350,22 @@ async function GetImages(id,imagescont) {
 
 function FullScreenImage(e) {
     if (window.screen.width > 500) {
+        
         const curimg = e.currentTarget.firstChild;
         if (curimg.height == "180") {
+            if (window.screen.width > 990) {
+                const EventImagesCont = document.getElementById("EventImagesCont");
+                EventImagesCont.style.display = "block";
+            }
             curimg.height = "720";
             curimg.width = "1280";
 
         }
         else {
+            if (window.screen.width > 990) {
+                const EventImagesCont = document.getElementById("EventImagesCont");
+                EventImagesCont.style.display = "";
+            }
             curimg.height = "180";
             curimg.width = "320";
         }
