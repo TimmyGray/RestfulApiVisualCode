@@ -80,7 +80,8 @@ function Сhange(event) {
                 break;
             }
         }
-        if (!pagehave) {
+        if (!pagehave) { 
+            GetLogin();
             GetPages();
         }
 
@@ -180,27 +181,31 @@ function row(event, num) {
     eventcreator.append(event.eventCreator);
     tr.append(eventcreator);
 
-    const delbutTd = document.createElement("td");
-    delbutTd.setAttribute("name", "delbutTd");
-    const delbut = document.createElement("a");
-    delbut.href = "#";
-    delbut.className = "d-flex align-items-center mb-2 mb-lg-0";
-    const delbutimg = document.createElement("img");
-    delbutimg.src = "Resources/recyclebin.png";
-    delbutimg.alt = "";
-    delbutimg.height = "35";
-    delbutimg.width = "35";
+    if (document.getElementById("CurrentUser").textContent == "Admin") {
+        
+        const delbutTd = document.createElement("td");
+        delbutTd.setAttribute("name", "delbutTd");
+        const delbut = document.createElement("a");
+        delbut.href = "#";
+        delbut.className = "d-flex align-items-center mb-2 mb-lg-0";
+        const delbutimg = document.createElement("img");
+        delbutimg.src = "Resources/recyclebin.png";
+        delbutimg.alt = "";
+        delbutimg.height = "35";
+        delbutimg.width = "35";
 
-    delbut.append(delbutimg);
-    delbut.addEventListener("click", function (e) {
-        e.preventDefault();
-        DeleteEvent(event.eventId);
-    });
+        delbut.append(delbutimg);
+        delbut.addEventListener("click", function (e) {
+            e.preventDefault();
+            DeleteEvent(event.eventId);
+        });
 
 
-    delbutTd.append(delbut);
+        delbutTd.append(delbut);
 
-    tr.appendChild(delbutTd);
+        tr.appendChild(delbutTd);
+    }
+   
 
     const tagsTd = document.createElement("td");
     tagsTd.setAttribute("name", "tags");
@@ -323,7 +328,6 @@ async function GetImages(id,imagescont) {
 
             const aimg = document.createElement("a");                      //позже переделать под блоб
             const eventimg = document.createElement("img");
-            // const blob = new Blob([res[i].imageByte], { type: "image/jpeg" });
             
             aimg.appendChild(eventimg);
             aimg.classList.add("mb-1");
@@ -335,17 +339,30 @@ async function GetImages(id,imagescont) {
             
             eventimg.height = "180";
             eventimg.width = "320";
-           // eventimg.src = window.URL.createObjectURL(blob);
+
+            aimg.addEventListener("click", FullScreenImage);
             
 
+           
+        }
+    }
+}
+
+function FullScreenImage(e) {
+    if (window.screen.width > 500) {
+        const curimg = e.currentTarget.firstChild;
+        if (curimg.height == "180") {
+            curimg.height = "720";
+            curimg.width = "1280";
 
         }
-
-        //let reader = new FileReader();
-        //reader.readAsDataURL(res.imageByte);
-        //var url = reader.result;
-
+        else {
+            curimg.height = "180";
+            curimg.width = "320";
+        }
     }
+    
+
 }
 
 async function GetEvents() {

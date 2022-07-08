@@ -65,7 +65,6 @@ async function LogButClick() {
         const user = loginform.elements["logininput"].value;
         const pass = loginform.elements["passinput"].value;
         const passrep = loginform.elements["passrep"].value;
-        alert(pass);
 
         if (user != "" && pass != "" && pass === passrep) {
             const response = await fetch("/users/register", {
