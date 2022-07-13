@@ -353,12 +353,20 @@ function FullScreenImage(e) {
         
         const curimg = e.currentTarget.firstChild;
         if (curimg.height == "180") {
-            if (window.screen.width > 990) {
+            if (window.screen.width < 1100) {
+                var width = window.screen.width - 25;
+                var height = width * 9 / 16;
+                curimg.height = `${height}`;
+                curimg.width = `${width}`;
+
+            }
+            else {
                 const EventImagesCont = document.getElementById("EventImagesCont");
                 EventImagesCont.style.display = "block";
+                curimg.height = "720";
+                curimg.width = "1280";
+
             }
-            curimg.height = "720";
-            curimg.width = "1280";
 
         }
         else {

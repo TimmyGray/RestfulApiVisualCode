@@ -257,7 +257,8 @@ svg {
 }
 
 .modalimgcont {
-    @media(max-width:990px) {
+    display:flex;
+    @media(max-width:1200px) {
         display:block;
     }
 }
