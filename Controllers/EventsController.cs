@@ -9,6 +9,8 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using RestfulApiVisualCode.EmailClass;
+using System.Text;
 
 namespace RestfulApiVisualCode.Controllers
 {
@@ -54,6 +56,11 @@ namespace RestfulApiVisualCode.Controllers
             }
             if (!ModelState.IsValid)
             { return BadRequest(ModelState); }
+            if (evnt.Isserios == "Серьезное происшествие")
+            {
+                await SendEmailMessage(evnt);
+            }
+
 
             evnt.tags = $"{evnt.Dateofevent},{evnt.Discribeevent},{evnt.EventCreator},{evnt.Fixevent},{evnt.Isserios},{evnt.Nameofasb},{evnt.Nameofdevice}";
             db.Events.Add(evnt);
@@ -107,5 +114,24 @@ namespace RestfulApiVisualCode.Controllers
             await db.SaveChangesAsync();
             return Ok(evnt.EventId);
         }
+
+        public async Task SendEmailMessage(Event evnt)
+        {
+            StringBuilder emailtext = new StringBuilder();
+            emailtext.AppendLine($"Сегодня в {DateTime.Now.ToShortTimeString()}, было зафиксировано серьзное происшествие:");
+            emailtext.AppendLine($"Номер асб - {evnt.Nameofasb}");
+            emailtext.AppendLine($"Что сломалось - {evnt.Nameofdevice}");
+            emailtext.AppendLine($"Характер поломки, причины произошедшего:");
+            emailtext.AppendLine(evnt.Discribeevent);
+            if (evnt.Fixevent!=null)
+            {
+                emailtext.AppendLine("Поломку устранили следущим образом:");
+                emailtext.AppendLine(evnt.Fixevent);
+
+            }
+            EmailService emailService = new EmailService();
+           await emailService.SendEmailAsync("timmygray@yandex.ru", "Серьезное происшествие", emailtext.ToString());
+        }
     }
+
 }

@@ -522,3 +522,6 @@ D:\programs\RestfulApiVisualCode\obj\Debug\net5.0\refint\RestfulApiVisualCode.dl
 D:\programs\RestfulApiVisualCode\bin\Debug\net5.0\Microsoft.AspNetCore.JsonPatch.dll
 D:\programs\RestfulApiVisualCode\bin\Debug\net5.0\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
 D:\programs\RestfulApiVisualCode\bin\Debug\net5.0\Newtonsoft.Json.Bson.dll
+D:\programs\RestfulApiVisualCode\bin\Debug\net5.0\MailKit.dll
+D:\programs\RestfulApiVisualCode\bin\Debug\net5.0\MimeKit.dll
+D:\programs\RestfulApiVisualCode\bin\Debug\net5.0\BouncyCastle.Crypto.dll
