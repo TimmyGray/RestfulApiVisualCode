@@ -153,7 +153,6 @@ D:\programs\RestfulApiVisualCode\bin\Release\net5.0\RestfulApiVisualCode.deps.js
 D:\programs\RestfulApiVisualCode\bin\Release\net5.0\RestfulApiVisualCode.runtimeconfig.json
 D:\programs\RestfulApiVisualCode\bin\Release\net5.0\RestfulApiVisualCode.runtimeconfig.dev.json
 D:\programs\RestfulApiVisualCode\bin\Release\net5.0\RestfulApiVisualCode.dll
-D:\programs\RestfulApiVisualCode\bin\Release\net5.0\ref\RestfulApiVisualCode.dll
 D:\programs\RestfulApiVisualCode\bin\Release\net5.0\RestfulApiVisualCode.pdb
 D:\programs\RestfulApiVisualCode\bin\Release\net5.0\Humanizer.dll
 D:\programs\RestfulApiVisualCode\bin\Release\net5.0\Microsoft.AspNetCore.Razor.Language.dll
@@ -265,7 +264,6 @@ D:\programs\RestfulApiVisualCode\obj\Release\net5.0\RestfulApiVisualCode.Assembl
 D:\programs\RestfulApiVisualCode\obj\Release\net5.0\RestfulApiVisualCode.csproj.CoreCompileInputs.cache
 D:\programs\RestfulApiVisualCode\obj\Release\net5.0\RestfulApiVisualCode.MvcApplicationPartsAssemblyInfo.cache
 D:\programs\RestfulApiVisualCode\obj\Release\net5.0\staticwebassets\RestfulApiVisualCode.StaticWebAssets.Manifest.cache
-D:\programs\RestfulApiVisualCode\obj\Release\net5.0\staticwebassets\RestfulApiVisualCode.StaticWebAssets.xml
 D:\programs\RestfulApiVisualCode\obj\Release\net5.0\scopedcss\bundle\RestfulApiVisualCode.styles.css
 D:\programs\RestfulApiVisualCode\obj\Release\net5.0\RestfulApiVisualCode.RazorTargetAssemblyInfo.cache
 D:\programs\RestfulApiVisualCode\obj\Release\net5.0\RestfulApiVisualCode.csproj.CopyComplete
@@ -273,3 +271,10 @@ D:\programs\RestfulApiVisualCode\obj\Release\net5.0\RestfulApiVisualCode.dll
 D:\programs\RestfulApiVisualCode\obj\Release\net5.0\ref\RestfulApiVisualCode.dll
 D:\programs\RestfulApiVisualCode\obj\Release\net5.0\RestfulApiVisualCode.pdb
 D:\programs\RestfulApiVisualCode\obj\Release\net5.0\RestfulApiVisualCode.genruntimeconfig.cache
+D:\programs\RestfulApiVisualCode\bin\Release\net5.0\MailKit.dll
+D:\programs\RestfulApiVisualCode\bin\Release\net5.0\Microsoft.AspNetCore.JsonPatch.dll
+D:\programs\RestfulApiVisualCode\bin\Release\net5.0\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
+D:\programs\RestfulApiVisualCode\bin\Release\net5.0\MimeKit.dll
+D:\programs\RestfulApiVisualCode\bin\Release\net5.0\Newtonsoft.Json.Bson.dll
+D:\programs\RestfulApiVisualCode\bin\Release\net5.0\BouncyCastle.Crypto.dll
+D:\programs\RestfulApiVisualCode\obj\Release\net5.0\refint\RestfulApiVisualCode.dll

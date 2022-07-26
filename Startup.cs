@@ -33,8 +33,8 @@ namespace RestfulApiVisualCode
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
                 .AddCookie(options =>
                 {
-                    options.LoginPath = new Microsoft.AspNetCore.Http.PathString("/authorize.html");
-                    options.AccessDeniedPath = new Microsoft.AspNetCore.Http.PathString("/authorize.html");
+                    options.LoginPath = new PathString("/authorize.html");
+                    options.AccessDeniedPath = new PathString("/authorize.html");
                 });
             services.AddMvc().AddNewtonsoftJson(options=>
             {

@@ -49,55 +49,6 @@ namespace RestfulApiVisualCode.Migrations
                     b.HasKey("EventId");
 
                     b.ToTable("Events");
-
-                    b.HasData(
-                        new
-                        {
-                            EventId = 1,
-                            Dateofevent = "7/1/2022",
-                            Discribeevent = "ваще коллапс",
-                            EventCreator = "Admin",
-                            Fixevent = "все пофиксили",
-                            Isserios = "серьезно",
-                            Nameofasb = 1,
-                            Nameofdevice = "SSL",
-                            tags = "7/1/2022,ваще коллапс,Admin,все пофиксили,серьезно,1, SSL"
-                        },
-                        new
-                        {
-                            EventId = 2,
-                            Dateofevent = "7/1/2022",
-                            Discribeevent = "все сломалось",
-                            EventCreator = "Admin",
-                            Fixevent = "это не",
-                            Isserios = "не серьезно",
-                            Nameofasb = 2,
-                            Nameofdevice = "Karrera",
-                            tags = "7/1/2022,все сломалось,Admin,это не,не серьезно,2, Karrera"
-                        },
-                        new
-                        {
-                            EventId = 3,
-                            Dateofevent = "7/1/2022",
-                            Discribeevent = "ваще коллапс",
-                            EventCreator = "Admin",
-                            Fixevent = "все пофиксили",
-                            Isserios = "не серьезно",
-                            Nameofasb = 7,
-                            Nameofdevice = "микрофон"
-                        },
-                        new
-                        {
-                            EventId = 4,
-                            Dateofevent = "7/1/2022",
-                            Discribeevent = "жесть какая",
-                            EventCreator = "Admin",
-                            Fixevent = "это не",
-                            Isserios = "серьезно",
-                            Nameofasb = 5,
-                            Nameofdevice = "Dalet",
-                            tags = "7/1/2022,жесть какая,Admin,это не,серьезн,5, Dalet"
-                        });
                 });
 
             modelBuilder.Entity("RestfulApiVisualCode.Models.Image", b =>
@@ -146,40 +97,6 @@ namespace RestfulApiVisualCode.Migrations
                     b.HasKey("PageId");
 
                     b.ToTable("Pages");
-
-                    b.HasData(
-                        new
-                        {
-                            PageId = 1,
-                            Header = "Видеопульт",
-                            Info = "Вот тут написано как делать окна и всякие эффекты",
-                            PageCreator = "Admin",
-                            Subheader = "Эффекты, окна"
-                        },
-                        new
-                        {
-                            PageId = 2,
-                            Header = "Видеопульт",
-                            Info = "Вот тут сбор всяких поломок",
-                            PageCreator = "Admin",
-                            Subheader = "Разного рода поломки"
-                        },
-                        new
-                        {
-                            PageId = 3,
-                            Header = "Камеры, CCU и OCP",
-                            Info = "Вот тут написано о великой полезности камер",
-                            PageCreator = "Admin",
-                            Subheader = "Камеры"
-                        },
-                        new
-                        {
-                            PageId = 4,
-                            Header = "Звуковое оборудование",
-                            Info = "Вот здесь написано про микрофоны и их особенности",
-                            PageCreator = "Admin",
-                            Subheader = "Микрофоны"
-                        });
                 });
 
             modelBuilder.Entity("RestfulApiVisualCode.Models.Role", b =>
@@ -236,20 +153,6 @@ namespace RestfulApiVisualCode.Migrations
                             Login = "Admin",
                             Password = "Admin",
                             RoleId = 1
-                        },
-                        new
-                        {
-                            UserId = 2,
-                            Login = "asb6",
-                            Password = "asb6",
-                            RoleId = 2
-                        },
-                        new
-                        {
-                            UserId = 3,
-                            Login = "asb4",
-                            Password = "asb4",
-                            RoleId = 2
                         });
                 });
 
