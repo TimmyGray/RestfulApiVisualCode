@@ -17,57 +17,62 @@ namespace RestfulApiVisualCode.EmailClass
 
             string path = $"{Directory.GetCurrentDirectory()}\\ForEmailSending\\Email.txt";
 
-            try
+
+            using (StreamReader stream = new StreamReader(path))
             {
-                using (StreamReader stream = new StreamReader(path))
+                emailsender = stream.ReadLine();
+                passwordsender = stream.ReadLine();
+            }
+            MimeMessage emailmessage = new MimeMessage();
+
+            emailmessage.Subject = subject;
+            emailmessage.From.Add(new MailboxAddress("Автоматическое оповещение", emailsender));
+            emailmessage.To.Add(new MailboxAddress("", email));
+            emailmessage.Body = new TextPart(TextFormat.Text)
+            {
+                Text = message
+            };
+
+            string proxyip = null;
+            int proxyport = 0;
+            string pathproxy = $"{Directory.GetCurrentDirectory()}\\ForEmailSending\\Proxy.txt";
+
+            using (StreamReader stream = new StreamReader(pathproxy))
+            {
+                int enableproxy;
+                int.TryParse(stream.ReadLine(), out enableproxy);
+                if (enableproxy == 1)
                 {
-                    emailsender = stream.ReadLine();
-                    passwordsender = stream.ReadLine();
+                    proxyip = stream.ReadLine();
+                    proxyport = Convert.ToInt32(stream.ReadLine());
+
                 }
-                MimeMessage emailmessage = new MimeMessage();
+            }
 
-                emailmessage.Subject = subject;
-                emailmessage.From.Add(new MailboxAddress("Автоматическое оповещение", emailsender));
-                emailmessage.To.Add(new MailboxAddress("", email));
-                emailmessage.Body = new TextPart(TextFormat.Text)
+            using (var client = new SmtpClient())
+            {
+                
+                if (proxyip != null)
                 {
-                    Text = message
-                };
-                string proxyip = null;
-                int proxyport = 0;
-                string pathproxy = $"{Directory.GetCurrentDirectory()}\\ForEmailSending\\Proxy.txt";
-
-                using (StreamReader stream = new StreamReader(pathproxy))
-                {
-                    int enableproxy = Convert.ToInt32(stream.ReadLine());
-                    if (enableproxy == 1)
-                    {
-                        proxyip = stream.ReadLine();
-                        proxyport = Convert.ToInt32(stream.ReadLine());
-
-                    }
-                }
-
-                using (var client = new SmtpClient())
-                {
-                    if (proxyip == null)
+                    try
                     {
                         client.ProxyClient = new HttpsProxyClient(proxyip, proxyport);
 
                     }
-                    await client.ConnectAsync("smtp.yandex.ru", 587, MailKit.Security.SecureSocketOptions.StartTls);
-                    await client.AuthenticateAsync(emailsender, passwordsender);
-                    await client.SendAsync(emailmessage);
-                    await client.DisconnectAsync(true);
-                }
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
+                    catch (Exception)
+                    {
 
-                return;
+                        Console.WriteLine("Invalid proxy");
+                        return;
+                    }
+
+                }
+                await client.ConnectAsync("smtp.yandex.ru", 587, MailKit.Security.SecureSocketOptions.StartTls);
+                await client.AuthenticateAsync(emailsender, passwordsender);
+                await client.SendAsync(emailmessage);
+                await client.DisconnectAsync(true);
             }
-           
+
         }
     }
 }

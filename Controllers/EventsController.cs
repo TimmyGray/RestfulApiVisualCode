@@ -58,7 +58,16 @@ namespace RestfulApiVisualCode.Controllers
             { return BadRequest(ModelState); }
             if (evnt.Isserios == "Серьезное происшествие")
             {
-                await SendEmailMessage(evnt);
+                try
+                {
+                    await SendEmailMessage(evnt);
+
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine($"Email not send. exception - {e.Message}");
+                    
+                }
             }
 
 
@@ -130,7 +139,7 @@ namespace RestfulApiVisualCode.Controllers
 
             }
             EmailService emailService = new EmailService();
-           await emailService.SendEmailAsync("timmygray@yandex.ru", "Серьезное происшествие", emailtext.ToString());
+            await emailService.SendEmailAsync("timmygray@yandex.ru", "Серьезное происшествие", emailtext.ToString());
         }
     }
 
