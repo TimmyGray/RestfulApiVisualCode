@@ -58,7 +58,7 @@ public class ControllerBehaviorTests
         await using var context = CreateContext();
         var controller = new UsersController(context);
 
-        var result = await controller.Login(new User
+        var result = await controller.Login(new LoginRequest
         {
             Login = "missing",
             Password = "missing"

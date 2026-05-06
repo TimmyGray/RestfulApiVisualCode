@@ -11,6 +11,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using RestfulApiVisualCode.EmailClass;
 using System.Text;
+using System.Globalization;
 
 namespace RestfulApiVisualCode.Controllers
 {
@@ -54,11 +55,11 @@ namespace RestfulApiVisualCode.Controllers
                 return BadRequest();
             }
 
-            if (!DateTime.TryParse(evnt.Dateofevent, out var eventDate))
+            if (!DateTime.TryParse(evnt.Dateofevent, CultureInfo.InvariantCulture, DateTimeStyles.None, out var eventDate))
             {
                 ModelState.AddModelError("Dateofevent", "Неверный формат даты");
             }
-            else if (eventDate.Date > DateTime.UtcNow.Date)
+            else if (eventDate.Date > DateTime.Today)
             {
                 ModelState.AddModelError("Dateofevent", "Дата не может быть позднее сегодняшнего числа");
             }
@@ -79,7 +80,7 @@ namespace RestfulApiVisualCode.Controllers
             }
 
 
-            evnt.tags = $"{evnt.Dateofevent},{evnt.Discribeevent},{evnt.EventCreator},{evnt.Fixevent},{evnt.Isserios},{evnt.Nameofasb},{evnt.Nameofdevice}";
+            evnt.Tags = $"{evnt.Dateofevent},{evnt.Discribeevent},{evnt.EventCreator},{evnt.Fixevent},{evnt.Isserios},{evnt.Nameofasb},{evnt.Nameofdevice}";
             db.Events.Add(evnt);
             await db.SaveChangesAsync();
             return Ok(evnt);
@@ -100,7 +101,7 @@ namespace RestfulApiVisualCode.Controllers
             {
                 return NotFound();
             }
-            evnt.tags = $"{evnt.Dateofevent},{evnt.Discribeevent},{evnt.EventCreator},{evnt.Fixevent},{evnt.Isserios},{evnt.Nameofasb},{evnt.Nameofdevice}";
+            evnt.Tags = $"{evnt.Dateofevent},{evnt.Discribeevent},{evnt.EventCreator},{evnt.Fixevent},{evnt.Isserios},{evnt.Nameofasb},{evnt.Nameofdevice}";
             db.Update(evnt);
             await db.SaveChangesAsync();
             return Ok(evnt);

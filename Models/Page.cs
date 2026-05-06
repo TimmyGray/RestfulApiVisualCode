@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
+using Newtonsoft.Json;
 
 namespace RestfulApiVisualCode.Models
 {
@@ -13,7 +14,8 @@ namespace RestfulApiVisualCode.Models
         public string Subheader { get; set; } = string.Empty;
         public string Info { get; set; } = string.Empty;
         public string PageCreator { get; set; } = string.Empty;
-        public string tags { get; set; } = string.Empty;
+        [JsonProperty("tags")]
+        public string Tags { get; set; } = string.Empty;
 
 
     }

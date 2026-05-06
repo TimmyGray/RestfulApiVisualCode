@@ -54,7 +54,7 @@ namespace RestfulApiVisualCode.Controllers
                 int count = 0;
                 foreach (IFormFile imageFile in imageFiles)
                 {
-                    Image img = new Image { Name = imageFile.FileName, EventId = evnt.EventId, EventforImage = evnt };
+                    Image img = new Image { Name = imageFile.FileName, EventId = evnt.EventId };
                     using (var binaryreader = new BinaryReader(imageFile.OpenReadStream()))
                     {
                         img.ImageByte = binaryreader.ReadBytes((int)imageFile.Length);

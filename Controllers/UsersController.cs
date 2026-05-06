@@ -44,17 +44,17 @@ namespace RestfulApiVisualCode.Controllers
         [HttpPost]
         [AllowAnonymous]
         //[ValidateAntiForgeryToken]
-        public async Task<IActionResult> Login(User log)
+        public async Task<IActionResult> Login(LoginRequest log)
         {
-            if (log == null || string.IsNullOrWhiteSpace(log.Login) || string.IsNullOrWhiteSpace(log.Password))
+            if (!ModelState.IsValid)
             {
-                return BadRequest("Логин и пароль обязательны");
+                return ValidationProblem(ModelState);
             }
 
             User? user = await db.Users
-                   .Include(u => u.Role)
-                   .FirstOrDefaultAsync(u => u.Login == log.Login && u.Password == log.Password);
-            if (user != null)
+                    .Include(u => u.Role)
+                    .FirstOrDefaultAsync(u => u.Login == log.Login);
+            if (user != null && user.Password == log.Password)
             {
                 await Authenticate(user);
 
@@ -80,11 +80,11 @@ namespace RestfulApiVisualCode.Controllers
         [HttpPost]
         [AllowAnonymous]
         //[ValidateAntiForgeryToken]
-        public async Task<IActionResult> Register(User reg)
+        public async Task<IActionResult> Register(RegisterRequest reg)
         {
-            if (reg == null || string.IsNullOrWhiteSpace(reg.Login) || string.IsNullOrWhiteSpace(reg.Password))
+            if (!ModelState.IsValid)
             {
-                return BadRequest("Логин и пароль обязательны");
+                return ValidationProblem(ModelState);
             }
 
             User? user = await db.Users.FirstOrDefaultAsync(u => u.Login == reg.Login);

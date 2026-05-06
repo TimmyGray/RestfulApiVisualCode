@@ -1,6 +1,7 @@
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.Collections.Generic;
+using Newtonsoft.Json;
 namespace RestfulApiVisualCode.Models
 {
     public class Event
@@ -19,6 +20,7 @@ namespace RestfulApiVisualCode.Models
         [Required]
         public string EventCreator { get; set; } = string.Empty;
         public List<Image> EventImages { get; set; } = new List<Image>();
-        public string tags { get; set; } = string.Empty;
+        [JsonProperty("tags")]
+        public string Tags { get; set; } = string.Empty;
     }
 }
