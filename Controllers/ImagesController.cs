@@ -86,16 +86,18 @@ namespace RestfulApiVisualCode.Controllers
                     return BadRequest("Неподдерживаемый тип файла");
                 }
 
-                if (!await HasValidImageSignatureAsync(imageFile))
+                Image img = new Image { Name = imageFile.FileName, EventId = evnt.EventId };
+                using var inputStream = imageFile.OpenReadStream();
+                using MemoryStream memoryStream = new MemoryStream();
+                await inputStream.CopyToAsync(memoryStream);
+                byte[] imageBytes = memoryStream.ToArray();
+
+                if (!HasValidImageSignature(imageBytes))
                 {
                     return BadRequest("Файл не является корректным изображением");
                 }
 
-                Image img = new Image { Name = imageFile.FileName, EventId = evnt.EventId };
-                using var inputStream = imageFile.OpenReadStream();
-                using MemoryStream memoryStream = new MemoryStream((int)imageFile.Length);
-                await inputStream.CopyToAsync(memoryStream);
-                img.ImageByte = memoryStream.ToArray();
+                img.ImageByte = imageBytes;
                 db.Images.Add(img);
                 count++;
             }
@@ -105,11 +107,11 @@ namespace RestfulApiVisualCode.Controllers
 
         }
 
-        private static async Task<bool> HasValidImageSignatureAsync(IFormFile file)
+        private static bool HasValidImageSignature(byte[] fileBytes)
         {
-            using var stream = file.OpenReadStream();
             byte[] header = new byte[12];
-            int bytesRead = await stream.ReadAsync(header, 0, header.Length);
+            int bytesRead = Math.Min(fileBytes.Length, header.Length);
+            Array.Copy(fileBytes, header, bytesRead);
             if (bytesRead < 3)
             {
                 return false;

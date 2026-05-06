@@ -11,6 +11,8 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using RestfulApiVisualCode.Security;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace RestfulApiVisualCode.Controllers
 {
@@ -61,7 +63,7 @@ namespace RestfulApiVisualCode.Controllers
 
                 if (!isPasswordValid && !PasswordHasher.IsHashFormat(user.Password))
                 {
-                    isPasswordValid = string.Equals(user.Password, log.Password, StringComparison.Ordinal);
+                    isPasswordValid = FixedTimeEquals(user.Password, log.Password);
                     if (isPasswordValid)
                     {
                         user.Password = PasswordHasher.Hash(log.Password);
@@ -138,6 +140,13 @@ namespace RestfulApiVisualCode.Controllers
             };
             ClaimsIdentity id = new ClaimsIdentity(claims, "ApplicationCookie", ClaimsIdentity.DefaultNameClaimType, ClaimsIdentity.DefaultRoleClaimType);
             await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(id));
+        }
+
+        private static bool FixedTimeEquals(string left, string right)
+        {
+            byte[] leftHash = SHA256.HashData(Encoding.UTF8.GetBytes(left));
+            byte[] rightHash = SHA256.HashData(Encoding.UTF8.GetBytes(right));
+            return CryptographicOperations.FixedTimeEquals(leftHash, rightHash);
         }
 
         [Route("logout")]
