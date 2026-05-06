@@ -13,6 +13,10 @@ builder.Services
     {
         options.LoginPath = "/authorize.html";
         options.AccessDeniedPath = "/authorize.html";
+        options.Cookie.HttpOnly = true;
+        options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
+        options.Cookie.SameSite = SameSiteMode.Lax;
+        options.SlidingExpiration = true;
     });
 
 builder.Services.AddAuthorization();

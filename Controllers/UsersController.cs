@@ -10,6 +10,7 @@ using System.Security.Claims;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using RestfulApiVisualCode.Security;
 
 namespace RestfulApiVisualCode.Controllers
 {
@@ -54,8 +55,14 @@ namespace RestfulApiVisualCode.Controllers
             User? user = await db.Users
                     .Include(u => u.Role)
                     .FirstOrDefaultAsync(u => u.Login == log.Login);
-            if (user != null && user.Password == log.Password)
+            if (user != null && (PasswordHasher.Verify(log.Password, user.Password) || user.Password == log.Password))
             {
+                if (user.Password == log.Password)
+                {
+                    user.Password = PasswordHasher.Hash(log.Password);
+                    await db.SaveChangesAsync();
+                }
+
                 await Authenticate(user);
 
                 return Ok(new
@@ -90,7 +97,7 @@ namespace RestfulApiVisualCode.Controllers
             User? user = await db.Users.FirstOrDefaultAsync(u => u.Login == reg.Login);
             if (user == null)
             {
-                user = new User { Login = reg.Login, Password = reg.Password };
+                user = new User { Login = reg.Login, Password = PasswordHasher.Hash(reg.Password) };
                 Role? role = await db.Roles.FirstOrDefaultAsync(r => r.RoleName == "Engeneer");
                 if (role != null)
                 {

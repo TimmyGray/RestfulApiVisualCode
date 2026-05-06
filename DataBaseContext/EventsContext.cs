@@ -1,8 +1,9 @@
-﻿using RestfulApiVisualCode.Models;
+using RestfulApiVisualCode.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using RestfulApiVisualCode.Security;
 
 namespace RestfulApiVisualCode.DataBaseContext
 {
@@ -115,7 +116,7 @@ namespace RestfulApiVisualCode.DataBaseContext
                     {
                         UserId = 1,
                         Login = "Admin",
-                        Password = "Admin",
+                        Password = PasswordHasher.Hash("Admin"),
                         RoleId = 1
                     }
                     

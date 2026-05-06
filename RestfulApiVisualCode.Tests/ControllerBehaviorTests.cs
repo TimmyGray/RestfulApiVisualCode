@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using RestfulApiVisualCode.Controllers;
 using RestfulApiVisualCode.DataBaseContext;
 using RestfulApiVisualCode.Models;
+using RestfulApiVisualCode.Security;
 
 namespace RestfulApiVisualCode.Tests;
 
@@ -91,6 +92,23 @@ public class ControllerBehaviorTests
         var result = await controller.ImageCreate(files, eventId: 12345);
 
         Assert.IsType<BadRequestObjectResult>(result.Result);
+    }
+
+    [Fact]
+    public void PasswordHasher_HashAndVerify_WorksForValidPassword()
+    {
+        var password = "StrongPassword!123";
+        var hash = PasswordHasher.Hash(password);
+
+        Assert.True(PasswordHasher.Verify(password, hash));
+    }
+
+    [Fact]
+    public void PasswordHasher_Verify_ReturnsFalseForInvalidPassword()
+    {
+        var hash = PasswordHasher.Hash("CorrectPassword");
+
+        Assert.False(PasswordHasher.Verify("WrongPassword", hash));
     }
 
     private static EventsContext CreateContext()
