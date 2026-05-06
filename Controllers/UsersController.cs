@@ -55,12 +55,23 @@ namespace RestfulApiVisualCode.Controllers
             User? user = await db.Users
                     .Include(u => u.Role)
                     .FirstOrDefaultAsync(u => u.Login == log.Login);
-            if (user != null && (PasswordHasher.Verify(log.Password, user.Password) || user.Password == log.Password))
+            if (user != null)
             {
-                if (user.Password == log.Password)
+                bool isPasswordValid = PasswordHasher.Verify(log.Password, user.Password);
+
+                if (!isPasswordValid && !PasswordHasher.IsHashFormat(user.Password))
                 {
-                    user.Password = PasswordHasher.Hash(log.Password);
-                    await db.SaveChangesAsync();
+                    isPasswordValid = string.Equals(user.Password, log.Password, StringComparison.Ordinal);
+                    if (isPasswordValid)
+                    {
+                        user.Password = PasswordHasher.Hash(log.Password);
+                        await db.SaveChangesAsync();
+                    }
+                }
+
+                if (!isPasswordValid)
+                {
+                    return BadRequest("Неправильный логин или пароль");
                 }
 
                 await Authenticate(user);

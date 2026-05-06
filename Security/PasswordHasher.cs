@@ -37,29 +37,48 @@ namespace RestfulApiVisualCode.Security
                 return false;
             }
 
+            if (!TryParseHash(storedHash, out int iterations, out byte[] salt, out byte[] expectedKey))
+            {
+                return false;
+            }
+
+            byte[] key = Rfc2898DeriveBytes.Pbkdf2(
+                password,
+                salt,
+                iterations,
+                HashAlgorithmName.SHA256,
+                expectedKey.Length);
+
+            return CryptographicOperations.FixedTimeEquals(key, expectedKey);
+        }
+
+        public static bool IsHashFormat(string value)
+        {
+            return TryParseHash(value, out _, out _, out _);
+        }
+
+        private static bool TryParseHash(string storedHash, out int iterations, out byte[] salt, out byte[] expectedKey)
+        {
+            iterations = 0;
+            salt = Array.Empty<byte>();
+            expectedKey = Array.Empty<byte>();
+
             string[] parts = storedHash.Split(Delimiter, StringSplitOptions.RemoveEmptyEntries);
             if (parts.Length != 4 || !string.Equals(parts[0], Prefix, StringComparison.Ordinal))
             {
                 return false;
             }
 
-            if (!int.TryParse(parts[1], out int iterations) || iterations <= 0)
-            {
-                return false;
-            }
-
             try
             {
-                byte[] salt = Convert.FromBase64String(parts[2]);
-                byte[] expectedKey = Convert.FromBase64String(parts[3]);
-                byte[] key = Rfc2898DeriveBytes.Pbkdf2(
-                    password,
-                    salt,
-                    iterations,
-                    HashAlgorithmName.SHA256,
-                    expectedKey.Length);
+                if (!int.TryParse(parts[1], out iterations) || iterations <= 0)
+                {
+                    return false;
+                }
 
-                return CryptographicOperations.FixedTimeEquals(key, expectedKey);
+                salt = Convert.FromBase64String(parts[2]);
+                expectedKey = Convert.FromBase64String(parts[3]);
+                return salt.Length > 0 && expectedKey.Length > 0;
             }
             catch (FormatException)
             {

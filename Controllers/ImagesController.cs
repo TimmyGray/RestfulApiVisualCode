@@ -8,7 +8,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using RestfulApiVisualCode.DataBaseContext;
 using Microsoft.EntityFrameworkCore;
-using System.Reflection.Metadata;
 using Microsoft.AspNetCore.Authorization;
 
 namespace RestfulApiVisualCode.Controllers
@@ -26,6 +25,11 @@ namespace RestfulApiVisualCode.Controllers
             "image/gif",
             "image/webp"
         };
+        private static readonly byte[] JpegHeader = [0xFF, 0xD8, 0xFF];
+        private static readonly byte[] PngHeader = [0x89, 0x50, 0x4E, 0x47];
+        private static readonly byte[] Gif87aHeader = [0x47, 0x49, 0x46, 0x38, 0x37, 0x61];
+        private static readonly byte[] Gif89aHeader = [0x47, 0x49, 0x46, 0x38, 0x39, 0x61];
+        private static readonly byte[] WebPHeader = [0x57, 0x45, 0x42, 0x50];
 
         EventsContext db;
         public ImagesController(EventsContext _db)
@@ -82,9 +86,15 @@ namespace RestfulApiVisualCode.Controllers
                     return BadRequest("Неподдерживаемый тип файла");
                 }
 
+                if (!await HasValidImageSignatureAsync(imageFile))
+                {
+                    return BadRequest("Файл не является корректным изображением");
+                }
+
                 Image img = new Image { Name = imageFile.FileName, EventId = evnt.EventId };
-                using MemoryStream memoryStream = new MemoryStream();
-                await imageFile.CopyToAsync(memoryStream);
+                using var inputStream = imageFile.OpenReadStream();
+                using MemoryStream memoryStream = new MemoryStream((int)imageFile.Length);
+                await inputStream.CopyToAsync(memoryStream);
                 img.ImageByte = memoryStream.ToArray();
                 db.Images.Add(img);
                 count++;
@@ -95,6 +105,54 @@ namespace RestfulApiVisualCode.Controllers
 
         }
 
+        private static async Task<bool> HasValidImageSignatureAsync(IFormFile file)
+        {
+            using var stream = file.OpenReadStream();
+            byte[] header = new byte[12];
+            int bytesRead = await stream.ReadAsync(header, 0, header.Length);
+            if (bytesRead < 3)
+            {
+                return false;
+            }
+
+            if (StartsWith(header, bytesRead, JpegHeader) || StartsWith(header, bytesRead, PngHeader))
+            {
+                return true;
+            }
+
+            if (StartsWith(header, bytesRead, Gif87aHeader) || StartsWith(header, bytesRead, Gif89aHeader))
+            {
+                return true;
+            }
+
+            return bytesRead >= 12
+                   && header[0] == 0x52
+                   && header[1] == 0x49
+                   && header[2] == 0x46
+                   && header[3] == 0x46
+                   && header[8] == WebPHeader[0]
+                   && header[9] == WebPHeader[1]
+                   && header[10] == WebPHeader[2]
+                   && header[11] == WebPHeader[3];
+        }
+
+        private static bool StartsWith(byte[] source, int sourceLength, byte[] prefix)
+        {
+            if (sourceLength < prefix.Length)
+            {
+                return false;
+            }
+
+            for (int i = 0; i < prefix.Length; i++)
+            {
+                if (source[i] != prefix[i])
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
 
     }
 }
