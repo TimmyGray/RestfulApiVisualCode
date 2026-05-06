@@ -10,6 +10,9 @@ using System.Security.Claims;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using RestfulApiVisualCode.Security;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace RestfulApiVisualCode.Controllers
 {
@@ -29,8 +32,7 @@ namespace RestfulApiVisualCode.Controllers
       //  [Authorize(Roles ="Engeneer,Admin")]
         public IActionResult Index()
         {
-
-            return Content(User.Identity.Name);
+            return Content(User.Identity?.Name ?? string.Empty);
         }
 
         //[Route("authorize")]
@@ -43,17 +45,45 @@ namespace RestfulApiVisualCode.Controllers
 
         [Route("login")]
         [HttpPost]
+        [AllowAnonymous]
         //[ValidateAntiForgeryToken]
-        public async Task<IActionResult> Login(User log)
+        public async Task<IActionResult> Login(LoginRequest log)
         {
-            User user = await db.Users
-                   .Include(u => u.Role)
-                   .FirstOrDefaultAsync(u => u.Login == log.Login && u.Password == log.Password);
+            if (!ModelState.IsValid)
+            {
+                return ValidationProblem(ModelState);
+            }
+
+            User? user = await db.Users
+                    .Include(u => u.Role)
+                    .FirstOrDefaultAsync(u => u.Login == log.Login);
             if (user != null)
             {
+                bool isPasswordValid = PasswordHasher.Verify(log.Password, user.Password);
+
+                if (!isPasswordValid && !PasswordHasher.IsHashFormat(user.Password))
+                {
+                    isPasswordValid = FixedTimeEquals(user.Password, log.Password);
+                    if (isPasswordValid)
+                    {
+                        user.Password = PasswordHasher.Hash(log.Password);
+                        await db.SaveChangesAsync();
+                    }
+                }
+
+                if (!isPasswordValid)
+                {
+                    return BadRequest("Неправильный логин или пароль");
+                }
+
                 await Authenticate(user);
 
-                return Ok(user);
+                return Ok(new
+                {
+                    user.UserId,
+                    user.Login,
+                    Role = user.Role?.RoleName
+                });
 
             }
 
@@ -68,14 +98,20 @@ namespace RestfulApiVisualCode.Controllers
 
         [Route("register")]
         [HttpPost]
+        [AllowAnonymous]
         //[ValidateAntiForgeryToken]
-        public async Task<IActionResult> Register(User reg)
+        public async Task<IActionResult> Register(RegisterRequest reg)
         {
-            User user = await db.Users.FirstOrDefaultAsync(u => u.Login == reg.Login);
+            if (!ModelState.IsValid)
+            {
+                return ValidationProblem(ModelState);
+            }
+
+            User? user = await db.Users.FirstOrDefaultAsync(u => u.Login == reg.Login);
             if (user == null)
             {
-                user = new User { Login = reg.Login, Password = reg.Password };
-                Role role = await db.Roles.FirstOrDefaultAsync(r => r.RoleName == "Engeneer");
+                user = new User { Login = reg.Login, Password = PasswordHasher.Hash(reg.Password) };
+                Role? role = await db.Roles.FirstOrDefaultAsync(r => r.RoleName == "Engeneer");
                 if (role != null)
                 {
                     user.Role = role;
@@ -85,7 +121,12 @@ namespace RestfulApiVisualCode.Controllers
 
                 await Authenticate(user);
 
-                return Ok();
+                return Ok(new
+                {
+                    user.UserId,
+                    user.Login,
+                    Role = user.Role?.RoleName
+                });
             }
             return BadRequest("Такой пользователь уже существует");
         }
@@ -95,10 +136,17 @@ namespace RestfulApiVisualCode.Controllers
             var claims = new List<Claim>
             {
                 new Claim(ClaimsIdentity.DefaultNameClaimType, user.Login),
-                new Claim(ClaimsIdentity.DefaultRoleClaimType, user.Role?.RoleName)
+                new Claim(ClaimsIdentity.DefaultRoleClaimType, user.Role?.RoleName ?? string.Empty)
             };
             ClaimsIdentity id = new ClaimsIdentity(claims, "ApplicationCookie", ClaimsIdentity.DefaultNameClaimType, ClaimsIdentity.DefaultRoleClaimType);
             await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(id));
+        }
+
+        private static bool FixedTimeEquals(string left, string right)
+        {
+            byte[] leftHash = SHA256.HashData(Encoding.UTF8.GetBytes(left));
+            byte[] rightHash = SHA256.HashData(Encoding.UTF8.GetBytes(right));
+            return CryptographicOperations.FixedTimeEquals(leftHash, rightHash);
         }
 
         [Route("logout")]

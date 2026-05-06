@@ -1,4 +1,4 @@
- using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -11,6 +11,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using RestfulApiVisualCode.EmailClass;
 using System.Text;
+using System.Globalization;
 
 namespace RestfulApiVisualCode.Controllers
 {
@@ -36,10 +37,13 @@ namespace RestfulApiVisualCode.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Event>> Get(int id)
         {
-            Event evnt = await db.Events.FirstOrDefaultAsync(x => x.EventId == id);
-            await db.Images.Where(i=>i.EventId== evnt.EventId).LoadAsync();
+            Event? evnt = await db.Events
+                .Include(x => x.EventImages)
+                .FirstOrDefaultAsync(x => x.EventId == id);
             if (evnt == null)
+            {
                 return NotFound();
+            }
             return new ObjectResult(evnt);
         }
 
@@ -50,7 +54,12 @@ namespace RestfulApiVisualCode.Controllers
             {
                 return BadRequest();
             }
-            if (Convert.ToDateTime(evnt.Dateofevent)>DateTime.Now)
+
+            if (!DateTime.TryParse(evnt.Dateofevent, CultureInfo.InvariantCulture, DateTimeStyles.None, out var eventDate))
+            {
+                ModelState.AddModelError("Dateofevent", "Неверный формат даты");
+            }
+            else if (eventDate.Date > DateTime.Today)
             {
                 ModelState.AddModelError("Dateofevent", "Дата не может быть позднее сегодняшнего числа");
             }
@@ -71,7 +80,7 @@ namespace RestfulApiVisualCode.Controllers
             }
 
 
-            evnt.tags = $"{evnt.Dateofevent},{evnt.Discribeevent},{evnt.EventCreator},{evnt.Fixevent},{evnt.Isserios},{evnt.Nameofasb},{evnt.Nameofdevice}";
+            evnt.Tags = $"{evnt.Dateofevent},{evnt.Discribeevent},{evnt.EventCreator},{evnt.Fixevent},{evnt.Isserios},{evnt.Nameofasb},{evnt.Nameofdevice}";
             db.Events.Add(evnt);
             await db.SaveChangesAsync();
             return Ok(evnt);
@@ -92,7 +101,7 @@ namespace RestfulApiVisualCode.Controllers
             {
                 return NotFound();
             }
- 
+            evnt.Tags = $"{evnt.Dateofevent},{evnt.Discribeevent},{evnt.EventCreator},{evnt.Fixevent},{evnt.Isserios},{evnt.Nameofasb},{evnt.Nameofdevice}";
             db.Update(evnt);
             await db.SaveChangesAsync();
             return Ok(evnt);
@@ -102,23 +111,20 @@ namespace RestfulApiVisualCode.Controllers
         [HttpDelete("{id}")]
         public async Task<ActionResult<Event>> Delete(int id)
         {
-
-            Event evnt =await db.Events.FirstOrDefaultAsync(x => x.EventId == id);
-            await db.Images.Where(i => i.EventId == evnt.EventId).LoadAsync();
+            Event? evnt = await db.Events
+                .Include(x => x.EventImages)
+                .FirstOrDefaultAsync(x => x.EventId == id);
 
             if (evnt == null)
             {
-
                 return NotFound();
             }
 
-            if (evnt.EventImages!=null)
-            {  
-
+            if (evnt.EventImages != null)
+            {
                 db.Images.RemoveRange(evnt.EventImages);
-
             }
-            
+
             db.Events.Remove(evnt);
             await db.SaveChangesAsync();
             return Ok(evnt.EventId);
