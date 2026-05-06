@@ -34,7 +34,12 @@ namespace RestfulApiVisualCode.Controllers
         [HttpGet("{subheader}")]
         public async Task<ActionResult<Page>> GetOne(string subheader)
         {
-            Page page = await db.Pages.FirstOrDefaultAsync(p => p.Subheader == subheader);
+            if (string.IsNullOrWhiteSpace(subheader))
+            {
+                return BadRequest("Подзаголовок обязателен");
+            }
+
+            Page? page = await db.Pages.FirstOrDefaultAsync(p => p.Subheader == subheader);
             if (page == null)
             {
                 return NotFound();
@@ -49,7 +54,7 @@ namespace RestfulApiVisualCode.Controllers
             {
                 return BadRequest("Ничего не передалось");
             }
-            Page testpage = await db.Pages.FirstOrDefaultAsync(p => p.PageId == page.PageId);
+            Page? testpage = await db.Pages.FirstOrDefaultAsync(p => p.PageId == page.PageId);
             if (testpage == null)
             {
                 db.Pages.Add(page);
@@ -84,7 +89,7 @@ namespace RestfulApiVisualCode.Controllers
         [HttpDelete("{id}")]
         public async Task<ActionResult<Page>> DeletePage(int id)
         {
-            Page delpage = await db.Pages.FirstOrDefaultAsync(p=>p.PageId==id);
+            Page? delpage = await db.Pages.FirstOrDefaultAsync(p => p.PageId == id);
             if(delpage == null)
             {
                 return NotFound();

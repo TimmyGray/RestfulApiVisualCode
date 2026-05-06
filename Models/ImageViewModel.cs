@@ -8,7 +8,7 @@ namespace RestfulApiVisualCode.Models
 {
     public class ImageViewModel
     {
-        public string Name { get; set; }
-        public IFormFile imageFile { get; set; }
+        public string Name { get; set; } = string.Empty;
+        public IFormFile? imageFile { get; set; }
     }
 }

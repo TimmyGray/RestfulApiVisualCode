@@ -27,33 +27,38 @@ namespace RestfulApiVisualCode.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Image>> GetImages(int id)
         {
-            List<Image> images = await db.Images.Where(i=>i.EventId==id).ToListAsync();
-            if (images.Count == 0 || images == null)
-            { return BadRequest(); }
+            List<Image> images = await db.Images.Where(i => i.EventId == id).ToListAsync();
+            if (images.Count == 0)
+            {
+                return NotFound();
+            }
             return new ObjectResult(images);
-            
         }
 
 
 
         [HttpPost]
-        public async Task<ActionResult<int>> ImageCreate(IFormFileCollection imageFiles)
+        public async Task<ActionResult<int>> ImageCreate([FromForm] IFormFileCollection imageFiles, [FromForm] int? eventId)
         {
-
             if (imageFiles.Count != 0)
             {
-                Event evnt = db.Events.OrderByDescending(e => e.EventId).FirstOrDefault();
+                Event? evnt = eventId.HasValue
+                    ? await db.Events.FirstOrDefaultAsync(e => e.EventId == eventId.Value)
+                    : await db.Events.OrderByDescending(e => e.EventId).FirstOrDefaultAsync();
+
+                if (evnt == null)
+                {
+                    return BadRequest("Событие для изображения не найдено");
+                }
+
                 int count = 0;
                 foreach (IFormFile imageFile in imageFiles)
                 {
-                    Image img = new Image { Name = imageFile.Headers.ToString(), EventId = evnt.EventId, EventforImage = evnt };
+                    Image img = new Image { Name = imageFile.FileName, EventId = evnt.EventId, EventforImage = evnt };
                     using (var binaryreader = new BinaryReader(imageFile.OpenReadStream()))
                     {
                         img.ImageByte = binaryreader.ReadBytes((int)imageFile.Length);
-                        
                     }
-
-
                     db.Images.Add(img);
                     count++;
                 }

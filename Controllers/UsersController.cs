@@ -29,8 +29,7 @@ namespace RestfulApiVisualCode.Controllers
       //  [Authorize(Roles ="Engeneer,Admin")]
         public IActionResult Index()
         {
-
-            return Content(User.Identity.Name);
+            return Content(User.Identity?.Name ?? string.Empty);
         }
 
         //[Route("authorize")]
@@ -43,17 +42,28 @@ namespace RestfulApiVisualCode.Controllers
 
         [Route("login")]
         [HttpPost]
+        [AllowAnonymous]
         //[ValidateAntiForgeryToken]
         public async Task<IActionResult> Login(User log)
         {
-            User user = await db.Users
+            if (log == null || string.IsNullOrWhiteSpace(log.Login) || string.IsNullOrWhiteSpace(log.Password))
+            {
+                return BadRequest("Логин и пароль обязательны");
+            }
+
+            User? user = await db.Users
                    .Include(u => u.Role)
                    .FirstOrDefaultAsync(u => u.Login == log.Login && u.Password == log.Password);
             if (user != null)
             {
                 await Authenticate(user);
 
-                return Ok(user);
+                return Ok(new
+                {
+                    user.UserId,
+                    user.Login,
+                    Role = user.Role?.RoleName
+                });
 
             }
 
@@ -68,14 +78,20 @@ namespace RestfulApiVisualCode.Controllers
 
         [Route("register")]
         [HttpPost]
+        [AllowAnonymous]
         //[ValidateAntiForgeryToken]
         public async Task<IActionResult> Register(User reg)
         {
-            User user = await db.Users.FirstOrDefaultAsync(u => u.Login == reg.Login);
+            if (reg == null || string.IsNullOrWhiteSpace(reg.Login) || string.IsNullOrWhiteSpace(reg.Password))
+            {
+                return BadRequest("Логин и пароль обязательны");
+            }
+
+            User? user = await db.Users.FirstOrDefaultAsync(u => u.Login == reg.Login);
             if (user == null)
             {
                 user = new User { Login = reg.Login, Password = reg.Password };
-                Role role = await db.Roles.FirstOrDefaultAsync(r => r.RoleName == "Engeneer");
+                Role? role = await db.Roles.FirstOrDefaultAsync(r => r.RoleName == "Engeneer");
                 if (role != null)
                 {
                     user.Role = role;
@@ -85,7 +101,12 @@ namespace RestfulApiVisualCode.Controllers
 
                 await Authenticate(user);
 
-                return Ok();
+                return Ok(new
+                {
+                    user.UserId,
+                    user.Login,
+                    Role = user.Role?.RoleName
+                });
             }
             return BadRequest("Такой пользователь уже существует");
         }
@@ -95,7 +116,7 @@ namespace RestfulApiVisualCode.Controllers
             var claims = new List<Claim>
             {
                 new Claim(ClaimsIdentity.DefaultNameClaimType, user.Login),
-                new Claim(ClaimsIdentity.DefaultRoleClaimType, user.Role?.RoleName)
+                new Claim(ClaimsIdentity.DefaultRoleClaimType, user.Role?.RoleName ?? string.Empty)
             };
             ClaimsIdentity id = new ClaimsIdentity(claims, "ApplicationCookie", ClaimsIdentity.DefaultNameClaimType, ClaimsIdentity.DefaultRoleClaimType);
             await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(id));
